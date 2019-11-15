@@ -1,0 +1,16 @@
+\\vmware-host\Shared Folders\BECKHOFF\02 TwinCAT\07 Automation Interface\AutomationInterface Testing\AutomationInterface\AutomationInterface\bin\Debug\AutomationInterface.exe.config
+\\vmware-host\Shared Folders\BECKHOFF\02 TwinCAT\07 Automation Interface\AutomationInterface Testing\AutomationInterface\AutomationInterface\bin\Debug\AutomationInterface.exe
+\\vmware-host\Shared Folders\BECKHOFF\02 TwinCAT\07 Automation Interface\AutomationInterface Testing\AutomationInterface\AutomationInterface\bin\Debug\AutomationInterface.pdb
+\\vmware-host\Shared Folders\BECKHOFF\02 TwinCAT\07 Automation Interface\AutomationInterface Testing\AutomationInterface\AutomationInterface\obj\Debug\AutomationInterface.csprojResolveAssemblyReference.cache
+\\vmware-host\Shared Folders\BECKHOFF\02 TwinCAT\07 Automation Interface\AutomationInterface Testing\AutomationInterface\AutomationInterface\obj\Debug\AutomationInterface.Properties.Resources.resources
+\\vmware-host\Shared Folders\BECKHOFF\02 TwinCAT\07 Automation Interface\AutomationInterface Testing\AutomationInterface\AutomationInterface\obj\Debug\AutomationInterface.csproj.GenerateResource.Cache
+\\vmware-host\Shared Folders\BECKHOFF\02 TwinCAT\07 Automation Interface\AutomationInterface Testing\AutomationInterface\AutomationInterface\obj\Debug\AutomationInterface.exe
+\\vmware-host\Shared Folders\BECKHOFF\02 TwinCAT\07 Automation Interface\AutomationInterface Testing\AutomationInterface\AutomationInterface\obj\Debug\AutomationInterface.pdb
+\\vmware-host\Shared Folders\BECKHOFF\01 Admin\03 Projects\_90007_AutoInterfaceInternal\02 Repo\AutomationInterface\AutomationInterface\bin\Debug\AutomationInterface.exe.config
+\\vmware-host\Shared Folders\BECKHOFF\01 Admin\03 Projects\_90007_AutoInterfaceInternal\02 Repo\AutomationInterface\AutomationInterface\bin\Debug\AutomationInterface.exe
+\\vmware-host\Shared Folders\BECKHOFF\01 Admin\03 Projects\_90007_AutoInterfaceInternal\02 Repo\AutomationInterface\AutomationInterface\bin\Debug\AutomationInterface.pdb
+\\vmware-host\Shared Folders\BECKHOFF\01 Admin\03 Projects\_90007_AutoInterfaceInternal\02 Repo\AutomationInterface\AutomationInterface\obj\Debug\AutomationInterface.csprojResolveAssemblyReference.cache
+\\vmware-host\Shared Folders\BECKHOFF\01 Admin\03 Projects\_90007_AutoInterfaceInternal\02 Repo\AutomationInterface\AutomationInterface\obj\Debug\AutomationInterface.Properties.Resources.resources
+\\vmware-host\Shared Folders\BECKHOFF\01 Admin\03 Projects\_90007_AutoInterfaceInternal\02 Repo\AutomationInterface\AutomationInterface\obj\Debug\AutomationInterface.csproj.GenerateResource.Cache
+\\vmware-host\Shared Folders\BECKHOFF\01 Admin\03 Projects\_90007_AutoInterfaceInternal\02 Repo\AutomationInterface\AutomationInterface\obj\Debug\AutomationInterface.exe
+\\vmware-host\Shared Folders\BECKHOFF\01 Admin\03 Projects\_90007_AutoInterfaceInternal\02 Repo\AutomationInterface\AutomationInterface\obj\Debug\AutomationInterface.pdb
