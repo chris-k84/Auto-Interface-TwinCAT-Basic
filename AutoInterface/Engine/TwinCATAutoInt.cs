@@ -15,7 +15,7 @@ namespace Engine
     {
 
         #region Fields Region
-        ITcSysManager2 sysMan; //be careful with ITcSysManager(X) it has multi layered interfaces
+        ITcSysManager3 sysMan; //be careful with ITcSysManager(X) it has multi layered interfaces
         ITcSmTreeItem _plcProj;
         ITcSmTreeItem _gvlFolder;
         ITcSmTreeItem _gvlList;
@@ -202,7 +202,7 @@ namespace Engine
             }
             catch (Exception e)
             {
-                MessageBox.Show("PRocess error - Link error" + e.Message);
+                MessageBox.Show("Process error - Link error" + e.Message);
             }
         }
 
@@ -216,6 +216,31 @@ namespace Engine
             try
             {
                 sysMan.SetTargetNetId(amsNetId);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
+
+        public void GetMappings()
+        {
+            try
+            {
+                string mappingInfo = sysMan.ProduceMappingInfo();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
+
+        public void LoadMappings(string mappingInfo)
+        {
+            try
+            {
+                sysMan.ConsumeMappingInfo(mappingInfo);
+               
             }
             catch (Exception e)
             {

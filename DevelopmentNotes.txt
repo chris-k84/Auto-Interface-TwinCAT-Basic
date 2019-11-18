@@ -1,0 +1,20 @@
+ToDo list in project
+
+need to look at breaking out class into smaller units.
+
+TwinCATAutoInt Class
+Methods Implemented
+-Set deployment environment (Visual Studio)		//Done
+-Create project directory				//Done
+-Create VS solution 					//Done
+-Create a TC project					//Done
+-Save Solution						//Under modification
+-Create PLC project					//Done
+-Scan ADS devices					//under modification
+-Add GVL list to PLC					//Under modification
+-Scan IO 						//Under Test
+-Create PD links					//Done
+-Assign Cores 						//Not Started
+-Set an AMS net id as target device			//Done
+-get current mappings					//Done
+-load mapping set					//Done

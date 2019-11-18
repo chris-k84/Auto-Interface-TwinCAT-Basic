@@ -47,7 +47,7 @@ namespace QuickTest
             Console.ReadLine();
 
             newClass.ScanIO();
-            //TODO Check fish
+           
 
 
             //newClass.CreatePLCProj("PLC1");
