@@ -247,6 +247,51 @@ namespace Engine
                 MessageBox.Show(e.Message);
             }
         }
+
+        public void CreateTask(string taskName)
+        {
+            try
+            {
+                ITcSmTreeItem tasks = sysMan.LookupTreeItem("TIRT");
+                ITcSmTreeItem tTask = tasks.CreateChild(taskName, 0, null, null);
+            }
+            catch (Exception c)
+            {
+                MessageBox.Show(c.Message);
+            }
+        }
+
+        public void CreateTask(string taskName, int taskPriority)
+        {
+            try
+            {
+                ITcSmTreeItem tasks = sysMan.LookupTreeItem("TIRT");
+                ITcSmTreeItem tTask = tasks.CreateChild(taskName, 0, null, null);
+                string xmlPriority = String.Format("<TreeItem><TaskDef><Priority>{0}</Priority></TaskDef></TreeItem>", taskPriority.ToString());
+                tTask.ConsumeXml(xmlPriority);
+            }
+            catch (Exception c)
+            {
+                MessageBox.Show(c.Message);
+            }
+        }
+
+        public void CreateTask(string taskName, int taskPriority, int taskCycleTime) //TODO add reference to task to main class
+        {
+            try
+            {
+                ITcSmTreeItem tasks = sysMan.LookupTreeItem("TIRT");
+                ITcSmTreeItem tTask = tasks.CreateChild(taskName, 0, null, null);
+                string xmlPriority = String.Format("<TreeItem><TaskDef><Priority>{0}</Priority></TaskDef></TreeItem>", taskPriority.ToString());
+                string xmlCycle = String.Format("<TreeItem><TaskDef><CycleTime>{0}</CycleTime></TaskDef></TreeItem>", taskCycleTime.ToString());
+                tTask.ConsumeXml(xmlPriority);
+                tTask.ConsumeXml(xmlCycle); //defined in 100s of ns so 10000 = 1ms
+            }
+            catch (Exception c)
+            {
+                MessageBox.Show(c.Message);
+            }
+        }
         #endregion
     }
 }

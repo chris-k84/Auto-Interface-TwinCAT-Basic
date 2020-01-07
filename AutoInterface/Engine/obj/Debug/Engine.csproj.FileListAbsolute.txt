@@ -15,3 +15,9 @@ E:\BECKHOFF\01 Admin\03 Projects\_90007_AutoInterfaceInternal\02 Repo\Automation
 E:\BECKHOFF\01 Admin\03 Projects\_90007_AutoInterfaceInternal\02 Repo\AutomationInterface\Engine\obj\Debug\Engine.csproj.ResolveComReference.cache
 E:\BECKHOFF\01 Admin\03 Projects\_90007_AutoInterfaceInternal\02 Repo\AutomationInterface\Engine\obj\Debug\Engine.dll
 E:\BECKHOFF\01 Admin\03 Projects\_90007_AutoInterfaceInternal\02 Repo\AutomationInterface\Engine\obj\Debug\Engine.pdb
+E:\11 Development\_0004_C# Automation Interface\AutoInterface\Engine\obj\Debug\Engine.csprojAssemblyReference.cache
+E:\11 Development\_0004_C# Automation Interface\AutoInterface\Engine\obj\Debug\Engine.csproj.ResolveComReference.cache
+E:\11 Development\_0004_C# Automation Interface\AutoInterface\Engine\obj\Debug\Engine.dll
+E:\11 Development\_0004_C# Automation Interface\AutoInterface\Engine\obj\Debug\Engine.pdb
+E:\11 Development\_0004_C# Automation Interface\AutoInterface\Engine\bin\Debug\Engine.dll
+E:\11 Development\_0004_C# Automation Interface\AutoInterface\Engine\bin\Debug\Engine.pdb

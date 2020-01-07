@@ -26,3 +26,12 @@ E:\BECKHOFF\01 Admin\03 Projects\_90007_AutoInterfaceInternal\02 Repo\Automation
 E:\BECKHOFF\01 Admin\03 Projects\_90007_AutoInterfaceInternal\02 Repo\AutomationInterface\QuickTest\obj\Debug\QuickTest.csproj.CopyComplete
 E:\BECKHOFF\01 Admin\03 Projects\_90007_AutoInterfaceInternal\02 Repo\AutomationInterface\QuickTest\obj\Debug\QuickTest.exe
 E:\BECKHOFF\01 Admin\03 Projects\_90007_AutoInterfaceInternal\02 Repo\AutomationInterface\QuickTest\obj\Debug\QuickTest.pdb
+E:\11 Development\_0004_C# Automation Interface\AutoInterface\QuickTest\obj\Debug\QuickTest.csprojAssemblyReference.cache
+E:\11 Development\_0004_C# Automation Interface\AutoInterface\QuickTest\obj\Debug\QuickTest.exe
+E:\11 Development\_0004_C# Automation Interface\AutoInterface\QuickTest\obj\Debug\QuickTest.pdb
+E:\11 Development\_0004_C# Automation Interface\AutoInterface\QuickTest\bin\Debug\QuickTest.exe.config
+E:\11 Development\_0004_C# Automation Interface\AutoInterface\QuickTest\bin\Debug\QuickTest.exe
+E:\11 Development\_0004_C# Automation Interface\AutoInterface\QuickTest\bin\Debug\QuickTest.pdb
+E:\11 Development\_0004_C# Automation Interface\AutoInterface\QuickTest\bin\Debug\Engine.dll
+E:\11 Development\_0004_C# Automation Interface\AutoInterface\QuickTest\bin\Debug\Engine.pdb
+E:\11 Development\_0004_C# Automation Interface\AutoInterface\QuickTest\obj\Debug\QuickTest.csproj.CopyComplete

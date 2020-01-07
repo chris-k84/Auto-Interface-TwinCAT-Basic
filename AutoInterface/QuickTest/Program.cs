@@ -43,12 +43,15 @@ namespace QuickTest
             //newClass.SetAMSNET("169.254.153.178.1.1");
             //newClass.SetAMSNET("5.67.156.222.1.1");
 
-            Console.WriteLine("Scan IO");
-            Console.ReadLine();
+            //Console.WriteLine("Scan IO");
+            //Console.ReadLine();
 
-            newClass.ScanIO();
-           
+            //newClass.ScanIO();
 
+            Console.WriteLine("Add Task");
+            string task1 = Console.ReadLine();
+            newClass.CreateTask(task1);
+            
 
             //newClass.CreatePLCProj("PLC1");
 
