@@ -34,6 +34,8 @@ namespace QuickTest
             Console.WriteLine("Creating PLC Rroject");
             newPLC = new PLCHandler(newVisualStudio.SysMan);
             newPLC.CreatePLCProj("Testing");
+            Console.WriteLine("Checking ADS routes");
+            newTwinCAT.ScanADSDevices();
             Console.ReadLine();
         }
     }

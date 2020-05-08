@@ -39,7 +39,7 @@ namespace Engine
                 MessageBox.Show("Process Error - PLC Creation - " + e.Message);
             }
         }
-        public void AddGVL() //TODO extend to return the iterface to the GVL declaration area
+        public void AddGVL()
         {
             try
             {

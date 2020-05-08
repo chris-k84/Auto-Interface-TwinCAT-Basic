@@ -55,7 +55,7 @@ namespace Engine
                 MessageBox.Show(c.Message);
             }
         }
-        public void CreateTask(string taskName, int taskPriority, int taskCycleTime) //TODO add reference to task to main class
+        public void CreateTask(string taskName, int taskPriority, int taskCycleTime) 
         {
             try
             {
@@ -86,7 +86,7 @@ namespace Engine
                 MessageBox.Show(e.Message);
             }
         }
-        public string ScanADSDevices() //TODO to return pointer to xml
+        public string ScanADSDevices()
         {
             try
             {
@@ -96,7 +96,7 @@ namespace Engine
             }
             catch (Exception e)
             {
-                MessageBox.Show("Process Error - PLC Creation - " + e.Message);
+                MessageBox.Show("Process Error - ADS Error - " + e.Message);
                 _routes = "";
             }
             return _routes;
