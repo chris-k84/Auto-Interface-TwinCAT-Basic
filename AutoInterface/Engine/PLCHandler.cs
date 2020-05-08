@@ -11,18 +11,27 @@ namespace Engine
     public class PLCHandler
     {
         #region Fields
-        ITcSysManager3 sysMan;
+        ITcSysManager3 _sysMan;
         ITcSmTreeItem _plcProj;
         ITcSmTreeItem _gvlFolder;
         ITcSmTreeItem _gvlList;
         ITcPlcDeclaration _itcGvlList;
         #endregion
+        #region Constructor
+        public PLCHandler()
+        { }
+        public PLCHandler(ITcSysManager3 sysManager)
+        {
+            _sysMan = sysManager;
+        }
+        #endregion
+
         #region Methods
         public void CreatePLCProj(string name)
         {
             try
             {
-                ITcSmTreeItem plc = sysMan.LookupTreeItem("TIPC");
+                ITcSmTreeItem plc = _sysMan.LookupTreeItem("TIPC");
                 _plcProj = plc.CreateChild(name, 0, "", $@"Standard PLC Template.plcproj");
             }
             catch (Exception e)
@@ -34,7 +43,7 @@ namespace Engine
         {
             try
             {
-                _gvlFolder = sysMan.LookupTreeItem("TIPC^" + _plcProj.Name + "^" + _plcProj.Name + " Project^GVLs");
+                _gvlFolder = _sysMan.LookupTreeItem("TIPC^" + _plcProj.Name + "^" + _plcProj.Name + " Project^GVLs");
                 _gvlList = _gvlFolder.CreateChild("Global_IO", 615, "", IECLANGUAGETYPES.IECLANGUAGE_ST);
                 _itcGvlList = (ITcPlcDeclaration)_gvlList;
             }

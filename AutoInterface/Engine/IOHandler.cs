@@ -12,17 +12,27 @@ namespace Engine
     public class IOHandler
     {
         #region Fields
-        List<ITcSmTreeItem> devices;
-        ITcSysManager3 sysMan;
+        List<ITcSmTreeItem> _devices;
+        ITcSysManager3 _sysMan;
+        #endregion
+        #region Constructors
+        public IOHandler()
+        {
+
+        }
+        public IOHandler(ITcSysManager3 sysManager)
+        {
+            _sysMan = sysManager;
+        }
         #endregion
         #region Methods
         public void ScanIO() //TODO still working on this - add ams net id to the method call
         {
             XmlDocument xmlDoc = new XmlDocument();
             int deviceCount = 0;
-            devices = new List<ITcSmTreeItem>();
+            _devices = new List<ITcSmTreeItem>();
             string xml;
-            ITcSmTreeItem ioDevicesItem = sysMan.LookupTreeItem("TIID");
+            ITcSmTreeItem ioDevicesItem = _sysMan.LookupTreeItem("TIID");
             string scannedXml = ioDevicesItem.ProduceXml(false);
             xmlDoc.LoadXml(scannedXml);
             XmlNodeList xmlDeviceList = xmlDoc.SelectNodes("TreeItem/DeviceGrpDef/FoundDevices/Device");
@@ -37,10 +47,10 @@ namespace Engine
                     ITcSmTreeItem device = ioDevicesItem.CreateChild(string.Format("Device_{0}", ++deviceCount, typeName), itemSubType, string.Empty, null);
                     xml = string.Format("<TreeItem><DeviceDef>{0}</DeviceDef></TreeItem>", xmlAddress.OuterXml);
                     device.ConsumeXml(xml);
-                    devices.Add(device);
+                    _devices.Add(device);
                 }
             }
-            foreach (ITcSmTreeItem device in devices)
+            foreach (ITcSmTreeItem device in _devices)
             {
                 xml = "<TreeItem><DeviceDef><ScanBoxes>1</ScanBoxes></DeviceDef></TreeItem>";
                 try

@@ -15,32 +15,25 @@ namespace QuickTest
     {
         static void Main(string[] args)
         {
-
             VisualStudioHandler newVisualStudio = new VisualStudioHandler();
             TwinCATHandler newTwinCAT;
-
-            Console.ReadLine();
+            PLCHandler newPLC;
             
+            Console.WriteLine("Initialising environment.............");
             newVisualStudio.SetVSDevEnv();
-
+            Console.WriteLine("Environment Ready");
             Console.WriteLine("Enter File Path");
             string pathway = Console.ReadLine();
-            
             newVisualStudio.CreateDirectory(pathway);
-
-            Console.WriteLine("Enter Project Name");
+            Console.WriteLine("Enter Solution Name");
             string solName = Console.ReadLine();
-
             newVisualStudio.CreateSolution(solName);
+            Console.WriteLine("Creating TwinCAT PRoject");
             newVisualStudio.CreateTCProj();
-
-            Console.WriteLine("creating TwinCAT handler");
-            Console.ReadLine();
-
             newTwinCAT = new TwinCATHandler(newVisualStudio.SysMan);
-
-            newTwinCAT.CreateTask("Bob", 23);
-
+            Console.WriteLine("Creating PLC Rroject");
+            newPLC = new PLCHandler(newVisualStudio.SysMan);
+            newPLC.CreatePLCProj("Testing");
             Console.ReadLine();
         }
     }
