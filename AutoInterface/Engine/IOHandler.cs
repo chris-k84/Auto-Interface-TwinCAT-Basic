@@ -71,5 +71,22 @@ namespace Engine
             }
             #endregion
         }
+        public void AddSyncUnit() //TODO check code function, pass string into function
+        {
+            ITcSmTreeItem ITrItm = _sysMan.LookupTreeItem("TIID^Device 1 (EtherCAT)^Term 1 (EK1100)^Term 4 (EL2008)");
+            string xmlDescr = ITrItm.ProduceXml();
+
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(xmlDescr);
+            XmlNode EtherCatSlave = xmlDoc.SelectSingleNode("//EtherCAT/Slave");
+
+            XmlElement SyncUnit = xmlDoc.CreateElement("SyncUnits");
+            SyncUnit.InnerXml = "<SyncUnit RepeatSupport = \"true\">meineSyncUnit</SyncUnit>";
+            EtherCatSlave.AppendChild(SyncUnit);
+
+            xmlDescr = xmlDoc.InnerXml;
+            ITrItm.ConsumeXml(xmlDescr);
+
+        }
     }
 }

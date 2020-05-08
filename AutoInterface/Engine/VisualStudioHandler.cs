@@ -34,7 +34,11 @@ namespace Engine
         {
             try
             {
-                Type t = System.Type.GetTypeFromProgID("VisualStudio.DTE");
+                Type t = System.Type.GetTypeFromProgID("VisualStudio.DTE.15.0");
+                //Type VsVer = System.Type.GetTypeFromProgID("VisualStudio.DTE.11.0"); //VS2012
+                //Type VsVer = System.Type.GetTypeFromProgID("VisualStudio.DTE.12.0"); //VS2013
+                //Type VsVer = System.Type.GetTypeFromProgID("VisualStudio.DTE.14.0"); //VS2015
+                //Type VsVer = System.Type.GetTypeFromProgID("VisualStudio.DTE.15.0"); //VS2017
                 //Type VsVer = System.Type.GetTypeFromProgID("TcXaeShell.DTE.15.0"); //allows to set shell
                 _dte = (EnvDTE.DTE)System.Activator.CreateInstance(t);
                 _dte.SuppressUI = false;

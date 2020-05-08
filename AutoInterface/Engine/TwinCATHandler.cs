@@ -135,6 +135,18 @@ namespace Engine
                 MessageBox.Show(e.Message);
             }
         }
+        public void SetIsolatedCores()
+        {
+            ITcSmTreeItem ITrItm = _sysMan.LookupTreeItem("TIRS");
+            string sCpuConfig = ITrItm.ProduceXml();
+            sCpuConfig = sCpuConfig.Replace("<MaxCPUs NonWindowsCPUs=\"2\">5</MaxCPUs>", "<MaxCPUs NonWindowsCPUs=\"4\">5</MaxCPUs>");
+            ITrItm.ConsumeXml(sCpuConfig);
+        }
+        public void ActivateSolution()
+        {
+            _sysMan.ActivateConfiguration();
+            _sysMan.StartRestartTwinCAT();
+        }
         #endregion
     }
 }
