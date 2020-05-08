@@ -46,7 +46,6 @@
   <ItemGroup>
     <Compile Include="IOHandler.cs" />
     <Compile Include="PLCHandler.cs" />
-    <Compile Include="TwinCATAutoInt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TwinCATHandler.cs" />
     <Compile Include="VisualStudioHandler.cs" />

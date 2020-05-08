@@ -6,17 +6,27 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using EnvDTE;
 using System.IO;
+using TCatSysManagerLib;
 
 namespace Engine
 {
-    class VisualStudioHandler
+    public class VisualStudioHandler
     {
         #region Fields
-        EnvDTE.DTE dte;
+        EnvDTE.DTE _dte;
         string _dirPath;
-        dynamic solution;
+        dynamic _solution;
         string _solName;
-        dynamic tcProject;
+        dynamic _tcProject;
+        string _tcTemplate = @"C:\TwinCAT\3.1\Components\Base\PrjTemplate\TwinCAT Project.tsproj";
+        ITcSysManager3 _sysMan;
+        #endregion
+
+        #region Properties
+        public ITcSysManager3 SysMan 
+        {
+            get { return _sysMan; }
+        }
         #endregion
 
         #region Methods
@@ -26,9 +36,9 @@ namespace Engine
             {
                 Type t = System.Type.GetTypeFromProgID("VisualStudio.DTE");
                 //Type VsVer = System.Type.GetTypeFromProgID("TcXaeShell.DTE.15.0"); //allows to set shell
-                dte = (EnvDTE.DTE)System.Activator.CreateInstance(t);
-                dte.SuppressUI = false;
-                dte.MainWindow.Visible = true;
+                _dte = (EnvDTE.DTE)System.Activator.CreateInstance(t);
+                _dte.SuppressUI = false;
+                _dte.MainWindow.Visible = true;
             }
             catch (Exception e)
             {
@@ -56,8 +66,8 @@ namespace Engine
             try
             {
                 Directory.CreateDirectory(Path.Combine(_dirPath, name));
-                solution = dte.Solution;
-                solution.Create(_dirPath, name);
+                _solution = _dte.Solution;
+                _solution.Create(_dirPath, name);
                 _solName = name;
             }
             catch (Exception e)
@@ -68,9 +78,21 @@ namespace Engine
         public void SaveAll()
         {
             string slnName = _solName + ".sln";
-            solution.SaveAs(Path.Combine(_dirPath, slnName));
-            tcProject.Save();
+            _solution.SaveAs(Path.Combine(_dirPath, slnName));
+            _tcProject.Save();
         } //TODO save all save project and solution, need to check this
+        public void CreateTCProj()
+        {
+            try
+            {
+                _tcProject = _solution.AddFromTemplate(_tcTemplate, Path.Combine(_dirPath, _solName), _solName);
+                _sysMan = _tcProject.Object;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Process Error - TC Project Creation - " + e.Message);
+            }
+        }
         #endregion
     }
 }

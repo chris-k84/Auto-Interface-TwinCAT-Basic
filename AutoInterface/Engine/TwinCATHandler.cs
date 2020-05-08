@@ -9,37 +9,31 @@ using System.Windows.Forms;
 
 namespace Engine
 {
-    class TwinCATHandler
+    public class TwinCATHandler
     {
         #region Fields
-        ITcSysManager3 sysMan;
-        string tcTemplate = @"C:\TwinCAT\3.1\Components\Base\PrjTemplate\TwinCAT Project.tsproj";
-        string _dirPath;
-        dynamic solution;
-        string _solName;
-        dynamic tcProject;
-        string xmlRouteString = "<TreeItem><RoutePrj><TargetList><BroadcastSearch>true</BroadcastSearch></TargetList></RoutePrj></TreeItem>";
+        ITcSysManager3 _sysMan;
+        string _xmlRouteString = "<TreeItem><RoutePrj><TargetList><BroadcastSearch>true</BroadcastSearch></TargetList></RoutePrj></TreeItem>";
         string _routes;
         #endregion
 
-        #region Methods
-        public void CreateTCProj()
+        #region Constructors
+        public TwinCATHandler()
         {
-            try
-            {
-                tcProject = solution.AddFromTemplate(tcTemplate, Path.Combine(_dirPath, _solName), _solName);
-                sysMan = tcProject.Object;
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Process Error - TC Project Creation - " + e.Message);
-            }
+
         }
+        public TwinCATHandler(ITcSysManager3 sysManager)
+        {
+            _sysMan = sysManager;
+        }
+        #endregion
+
+        #region Methods
         public void CreateTask(string taskName)
         {
             try
             {
-                ITcSmTreeItem tasks = sysMan.LookupTreeItem("TIRT");
+                ITcSmTreeItem tasks = _sysMan.LookupTreeItem("TIRT");
                 ITcSmTreeItem tTask = tasks.CreateChild(taskName, 0, null, null);
             }
             catch (Exception c)
@@ -51,7 +45,7 @@ namespace Engine
         {
             try
             {
-                ITcSmTreeItem tasks = sysMan.LookupTreeItem("TIRT");
+                ITcSmTreeItem tasks = _sysMan.LookupTreeItem("TIRT");
                 ITcSmTreeItem tTask = tasks.CreateChild(taskName, 0, null, null);
                 string xmlPriority = String.Format("<TreeItem><TaskDef><Priority>{0}</Priority></TaskDef></TreeItem>", taskPriority.ToString());
                 tTask.ConsumeXml(xmlPriority);
@@ -65,7 +59,7 @@ namespace Engine
         {
             try
             {
-                ITcSmTreeItem tasks = sysMan.LookupTreeItem("TIRT");
+                ITcSmTreeItem tasks = _sysMan.LookupTreeItem("TIRT");
                 ITcSmTreeItem tTask = tasks.CreateChild(taskName, 0, null, null);
                 string xmlPriority = String.Format("<TreeItem><TaskDef><Priority>{0}</Priority></TaskDef></TreeItem>", taskPriority.ToString());
                 string xmlCycle = String.Format("<TreeItem><TaskDef><CycleTime>{0}</CycleTime></TaskDef></TreeItem>", taskCycleTime.ToString());
@@ -85,7 +79,7 @@ namespace Engine
         {
             try
             {
-                sysMan.SetTargetNetId(amsNetId);
+                _sysMan.SetTargetNetId(amsNetId);
             }
             catch (Exception e)
             {
@@ -96,8 +90,8 @@ namespace Engine
         {
             try
             {
-                ITcSmTreeItem routes = sysMan.LookupTreeItem("TIRR");
-                routes.ConsumeXml(xmlRouteString);
+                ITcSmTreeItem routes = _sysMan.LookupTreeItem("TIRR");
+                routes.ConsumeXml(_xmlRouteString);
                 _routes = routes.ProduceXml();
             }
             catch (Exception e)
@@ -111,7 +105,7 @@ namespace Engine
         {
             try
             {
-                sysMan.LinkVariables(source, destination);
+                _sysMan.LinkVariables(source, destination);
             }
             catch (Exception e)
             {
@@ -122,7 +116,7 @@ namespace Engine
         {
             try
             {
-                string mappingInfo = sysMan.ProduceMappingInfo();
+                string mappingInfo = _sysMan.ProduceMappingInfo();
             }
             catch (Exception e)
             {
@@ -133,7 +127,7 @@ namespace Engine
         {
             try
             {
-                sysMan.ConsumeMappingInfo(mappingInfo);
+                _sysMan.ConsumeMappingInfo(mappingInfo);
 
             }
             catch (Exception e)

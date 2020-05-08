@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Engine
 {
-    class PLCHandler
+    public class PLCHandler
     {
         #region Fields
         ITcSysManager3 sysMan;

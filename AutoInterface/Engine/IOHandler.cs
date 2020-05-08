@@ -9,7 +9,7 @@ using System.Xml;
 
 namespace Engine
 {
-    class IOHandler
+    public class IOHandler
     {
         #region Fields
         List<ITcSmTreeItem> devices;

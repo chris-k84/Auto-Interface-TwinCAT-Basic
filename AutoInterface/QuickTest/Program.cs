@@ -7,6 +7,7 @@ using Engine;
 using System.IO;
 using System.Xml;
 using System.Windows.Forms;
+using TCatSysManagerLib;
 
 namespace QuickTest
 {
@@ -14,61 +15,31 @@ namespace QuickTest
     {
         static void Main(string[] args)
         {
-            
-            TwinCATAutoInt newClass = new TwinCATAutoInt();
+
+            VisualStudioHandler newVisualStudio = new VisualStudioHandler();
+            TwinCATHandler newTwinCAT;
 
             Console.ReadLine();
-
             
-
-            newClass.SetVSDevEnv();
+            newVisualStudio.SetVSDevEnv();
 
             Console.WriteLine("Enter File Path");
             string pathway = Console.ReadLine();
             
-            newClass.CreateDirectory(pathway);
+            newVisualStudio.CreateDirectory(pathway);
 
             Console.WriteLine("Enter Project Name");
             string solName = Console.ReadLine();
 
-            newClass.CreateSolution(solName);
+            newVisualStudio.CreateSolution(solName);
+            newVisualStudio.CreateTCProj();
 
-            Console.WriteLine("Create TC PRoj");
-            newClass.CreateTCProj();
+            Console.WriteLine("creating TwinCAT handler");
+            Console.ReadLine();
 
-            //Console.WriteLine("Set AMS Net");
-            //Console.ReadLine();
+            newTwinCAT = new TwinCATHandler(newVisualStudio.SysMan);
 
-            newClass.SetAMSNET("5.52.64.65.1.1");
-            //newClass.SetAMSNET("169.254.153.178.1.1");
-            //newClass.SetAMSNET("5.67.156.222.1.1");
-
-            //Console.WriteLine("Scan IO");
-            //Console.ReadLine();
-
-            //newClass.ScanIO();
-
-            Console.WriteLine("Add Task");
-            string task1 = Console.ReadLine();
-            newClass.CreateTask(task1);
-            
-
-            //newClass.CreatePLCProj("PLC1");
-
-            //Console.WriteLine("Scan for devices?");
-            //Console.ReadLine();
-
-            //string routes = newClass.ScanADSDevices();
-            //XmlDocument xmlDocument = new XmlDocument();
-            //xmlDocument.LoadXml(routes);
-            //xmlDocument.Save(Console.Out);
-
-            //Console.WriteLine("Add GVL");
-            //Console.ReadLine();
-
-            //newClass.AddGVL();
-
-            //newClass.SaveAll();
+            newTwinCAT.CreateTask("Bob", 23);
 
             Console.ReadLine();
         }
