@@ -13,14 +13,14 @@ namespace Engine
     {
         #region Fields
         List<ITcSmTreeItem> _devices;
-        ITcSysManager3 _sysMan;
+        ITcSysManager13 _sysMan;
         #endregion
         #region Constructors
         public IOHandler()
         {
 
         }
-        public IOHandler(ITcSysManager3 sysManager)
+        public IOHandler(ITcSysManager13 sysManager)
         {
             _sysMan = sysManager;
         }
@@ -69,7 +69,6 @@ namespace Engine
                     //TODO: try pathName
                 }
             }
-            #endregion
         }
         public void AddSyncUnit() //TODO check code function, pass string into function
         {
@@ -88,5 +87,7 @@ namespace Engine
             ITrItm.ConsumeXml(xmlDescr);
 
         }
+
+        #endregion
     }
 }

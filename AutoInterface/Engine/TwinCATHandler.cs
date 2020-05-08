@@ -6,15 +6,17 @@ using System.Threading.Tasks;
 using TCatSysManagerLib;
 using System.IO;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace Engine
 {
     public class TwinCATHandler
     {
         #region Fields
-        ITcSysManager3 _sysMan;
+        ITcSysManager13 _sysMan;
         string _xmlRouteString = "<TreeItem><RoutePrj><TargetList><BroadcastSearch>true</BroadcastSearch></TargetList></RoutePrj></TreeItem>";
         string _routes;
+        XmlDocument _routeXml = new XmlDocument();
         #endregion
 
         #region Constructors
@@ -22,7 +24,7 @@ namespace Engine
         {
 
         }
-        public TwinCATHandler(ITcSysManager3 sysManager)
+        public TwinCATHandler(ITcSysManager13 sysManager)
         {
             _sysMan = sysManager;
         }
@@ -93,6 +95,14 @@ namespace Engine
                 ITcSmTreeItem routes = _sysMan.LookupTreeItem("TIRR");
                 routes.ConsumeXml(_xmlRouteString);
                 _routes = routes.ProduceXml();
+
+                _routeXml.LoadXml(_routes);
+            
+                XmlNodeList xmlDeviceList = _routeXml.SelectNodes("TreeItem/RoutePrj/TargetList/Target");
+                foreach (XmlNode node in xmlDeviceList) //TODO handle choosing the right target
+                {
+                    return node.SelectSingleNode("NetId").InnerText;
+                }
             }
             catch (Exception e)
             {

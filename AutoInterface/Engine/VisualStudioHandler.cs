@@ -19,11 +19,11 @@ namespace Engine
         string _solName;
         dynamic _tcProject;
         string _tcTemplate = @"C:\TwinCAT\3.1\Components\Base\PrjTemplate\TwinCAT Project.tsproj";
-        ITcSysManager3 _sysMan;
+        ITcSysManager13 _sysMan;
         #endregion
 
         #region Properties
-        public ITcSysManager3 SysMan 
+        public ITcSysManager13 SysMan 
         {
             get { return _sysMan; }
         }
@@ -41,8 +41,9 @@ namespace Engine
                 //Type VsVer = System.Type.GetTypeFromProgID("VisualStudio.DTE.15.0"); //VS2017
                 //Type VsVer = System.Type.GetTypeFromProgID("TcXaeShell.DTE.15.0"); //allows to set shell
                 _dte = (EnvDTE.DTE)System.Activator.CreateInstance(t);
-                _dte.SuppressUI = false;
+                _dte.SuppressUI = true;
                 _dte.MainWindow.Visible = true;
+                _dte.UserControl = false;
             }
             catch (Exception e)
             {

@@ -26,7 +26,7 @@ namespace QuickTest
             string pathway = Console.ReadLine();
             newVisualStudio.CreateDirectory(pathway);
             Console.WriteLine("Enter Solution Name");
-            string solName = Console.ReadLine();
+            string solName = Console.ReadLine();    
             newVisualStudio.CreateSolution(solName);
             Console.WriteLine("Creating TwinCAT PRoject");
             newVisualStudio.CreateTCProj();
@@ -35,7 +35,10 @@ namespace QuickTest
             newPLC = new PLCHandler(newVisualStudio.SysMan);
             newPLC.CreatePLCProj("Testing");
             Console.WriteLine("Checking ADS routes");
-            newTwinCAT.ScanADSDevices();
+            string route = newTwinCAT.ScanADSDevices();
+            newTwinCAT.SetAMSNET(route);
+            Console.WriteLine("Activating config");
+            newTwinCAT.ActivateSolution();
             Console.ReadLine();
         }
     }
