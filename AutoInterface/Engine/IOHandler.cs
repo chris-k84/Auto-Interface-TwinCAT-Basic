@@ -13,6 +13,7 @@ namespace Engine
     {
         #region Fields
         List<ITcSmTreeItem> _devices;
+        List<String> _slaveDevicePaths = new List<string>();
         ITcSysManager13 _sysMan;
         #endregion
         #region Constructors
@@ -26,8 +27,14 @@ namespace Engine
         }
         #endregion
 
+        #region Properties
+        public List<string> SlaveDevicePaths
+        {
+            get { return _slaveDevicePaths; }
+        }
+        #endregion
         #region Methods
-        public void ScanIO() //TODO still working on this - add ams net id to the method call
+        public void ScanIO() //TODO - refactor this code
         {
             XmlDocument xmlDoc = new XmlDocument();
             int deviceCount = 0;
@@ -64,9 +71,7 @@ namespace Engine
                 }
                 for (int i = 1; i < device.ChildCount; i++)
                 {
-                    //Console.WriteLine(device.Child[i].Name);
-                    Console.WriteLine(device.Child[i].PathName);
-                    //TODO: try pathName
+                    _slaveDevicePaths.Add(device.Child[i].PathName);
                 }
             }
         }

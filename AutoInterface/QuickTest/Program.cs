@@ -18,6 +18,7 @@ namespace QuickTest
             VisualStudioHandler newVisualStudio = new VisualStudioHandler();
             TwinCATHandler newTwinCAT;
             PLCHandler newPLC;
+            IOHandler newIO;
             
             Console.WriteLine("Initialising environment.............");
             newVisualStudio.SetVSDevEnv();
@@ -31,14 +32,18 @@ namespace QuickTest
             Console.WriteLine("Creating TwinCAT PRoject");
             newVisualStudio.CreateTCProj();
             newTwinCAT = new TwinCATHandler(newVisualStudio.SysMan);
+            newIO = new IOHandler(newVisualStudio.SysMan);
             Console.WriteLine("Creating PLC Rroject");
             newPLC = new PLCHandler(newVisualStudio.SysMan);
             newPLC.CreatePLCProj("Testing");
             Console.WriteLine("Checking ADS routes");
             string route = newTwinCAT.ScanADSDevices();
             newTwinCAT.SetAMSNET(route);
-            Console.WriteLine("Activating config");
-            newTwinCAT.ActivateSolution();
+            Console.WriteLine("Scanning IO........");
+            newIO.ScanIO();
+
+            //Console.WriteLine("Activating config");
+            //newTwinCAT.ActivateSolution();
             Console.ReadLine();
         }
     }

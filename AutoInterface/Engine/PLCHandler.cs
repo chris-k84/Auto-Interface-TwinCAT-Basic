@@ -39,6 +39,18 @@ namespace Engine
                 MessageBox.Show("Process Error - PLC Creation - " + e.Message);
             }
         }
+        public void AddPLCProj(string pathToProjectFile, string name)
+        {
+            try
+            {
+                ITcSmTreeItem plc = _sysMan.LookupTreeItem("TIPC");
+                ITcSmTreeItem newProject = plc.CreateChild("NameOfProject", 0, "", pathToProjectFile);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Process Error - PLC project failed to add - " + e.Message);
+            }
+        }
         public void AddGVL()
         {
             try
