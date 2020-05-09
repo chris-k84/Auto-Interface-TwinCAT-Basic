@@ -41,7 +41,9 @@ namespace QuickTest
             newTwinCAT.SetAMSNET(route);
             Console.WriteLine("Scanning IO........");
             newIO.ScanIO();
-
+            Console.WriteLine("Ading to PLC......");
+            newPLC.CreateGVL();
+            newPLC.AddDeclarationToGVL(newIO.SlaveDevicePaths);
             //Console.WriteLine("Activating config");
             //newTwinCAT.ActivateSolution();
             Console.ReadLine();

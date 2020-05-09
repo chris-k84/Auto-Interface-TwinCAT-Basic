@@ -51,7 +51,7 @@ namespace Engine
                 MessageBox.Show("Process Error - PLC project failed to add - " + e.Message);
             }
         }
-        public void AddGVL()
+        public void CreateGVL()
         {
             try
             {
@@ -64,6 +64,20 @@ namespace Engine
                 MessageBox.Show("Process Error - GVL Creation" + e.Message);
             }
 
+        }
+        public void AddDeclarationToGVL(List<string> slaves)
+        {
+            try
+            {
+                foreach (string slave in slaves)
+                {
+                    _itcGvlList.DeclarationText = slave;
+                } 
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Process Error - Writing GVL failed - " + e.Message);
+            }
         }
         #endregion
     }
