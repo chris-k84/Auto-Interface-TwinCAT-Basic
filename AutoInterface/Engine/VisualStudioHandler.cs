@@ -10,7 +10,15 @@ using TCatSysManagerLib;
 
 namespace Engine
 {
-    public class VisualStudioHandler
+    public interface IVisualStudioHandler
+    {
+        void SetVSDevEnv();
+        void CreateDirectory(string path);
+        void CreateSolution(string name);
+        void SaveAll();
+        void CreateTCProj();
+    }
+    public class VisualStudioHandler : IVisualStudioHandler
     {
         #region Fields
         EnvDTE.DTE _dte;

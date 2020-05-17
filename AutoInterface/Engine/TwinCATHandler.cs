@@ -10,7 +10,35 @@ using System.Xml;
 
 namespace Engine
 {
-    public class TwinCATHandler
+    public interface ITwinCATHandler
+    {
+        void CreateTask(string taskName);
+        
+        void CreateTask(string taskName, int taskPriority);
+        
+        void CreateTask(string taskName, int taskPriority, int taskCycleTime);
+        
+        void AssignCores();
+   
+        void SetAMSNET(string amsNetId);
+        
+        string ScanADSDevices();
+
+
+        void CreateLink(string source, string destination);
+
+
+        void GetMappings();
+
+
+        void LoadMappings(string mappingInfo);
+
+
+        void SetIsolatedCores();
+        
+        void ActivateSolution();
+    }
+    public class TwinCATHandler : ITwinCATHandler
     {
         #region Fields
         ITcSysManager13 _sysMan;

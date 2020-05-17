@@ -9,7 +9,12 @@ using System.Xml;
 
 namespace Engine
 {
-    public class IOHandler
+    public interface IIOHandler
+    {
+        void ScanIO();
+        void AddSyncUnit();
+    }
+    public class IOHandler : IIOHandler
     {
         #region Fields
         List<ITcSmTreeItem> _devices;

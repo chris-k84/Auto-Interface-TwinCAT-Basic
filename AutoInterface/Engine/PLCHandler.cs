@@ -8,7 +8,14 @@ using System.Windows.Forms;
 
 namespace Engine
 {
-    public class PLCHandler
+    public interface IPLCHandler
+    {
+        void CreatePLCProj(string name);
+        void AddPLCProj(string pathToProjectFile, string name);
+        void CreateGVL();
+        void AddDeclarationToGVL(List<string> slaves);
+    }
+    public class PLCHandler : IPLCHandler
     {
         #region Fields
         ITcSysManager13 _sysMan;
