@@ -97,6 +97,64 @@ namespace Engine
             ITrItm.ConsumeXml(xmlDescr);
 
         }
+        
+        public void EditIoXml()//Todo pass reference to node for edits
+        {
+            ITcSmTreeItem _devices = _sysMan.LookupTreeItem("TIID");
+            ITcSmTreeItem newEtherCatMaster = _devices.CreateChild("EtherCAT Master", 111, null, null);
+            ITcSmTreeItem newEk1100 = newEtherCatMaster.CreateChild("EK1100", 9099, "", "EK1100-0000-0001");
+            ITcSmTreeItem el1004 = newEk1100.CreateChild("EL1004", 9099, "", "EL1004-0000-0000");
+            string xml = el1004.ProduceXml();
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(xml);
+            // get element in xml by tag name
+            XmlNode itemName = xmlDoc.GetElementsByTagName("ItemName")[0];
+            // change inner text of tag
+            if (itemName != null)
+            {
+                itemName.InnerText = "ChangedByAi";
+            }
+            el1004.ConsumeXml(xmlDoc.InnerXml);
+        }
+        
+        public void CreateCanInterface()//todo pass template directory
+        {
+            ITcSmTreeItem _devices = _sysMan.LookupTreeItem("TIID");
+            ITcSmTreeItem CANMaster = _devices.CreateChild("CanDevice", 87, null, null);
+            string templateDir = @"C:\Users\chrisk\Desktop\Box 27 (CAN Interface).xti";
+            ManipulateXml(templateDir);
+            ITcSmTreeItem CanInterface = CANMaster.ImportChild(templateDir, "", true, "CAN Interface");                           
+        }
+
+        private void ManipulateXml(string templateDir)//todo can you get at GUIDs
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+            XmlTextReader reader = new XmlTextReader(templateDir);
+            reader.WhitespaceHandling = WhitespaceHandling.None;
+            reader.MoveToContent();
+            //reader.Read();
+            while (reader.Read())
+            {
+                switch (reader.NodeType)
+                {
+                    case XmlNodeType.Element:
+                        Console.WriteLine(reader.Name);
+                    break;
+                    case XmlNodeType.Text:
+                        Console.WriteLine("Text Node: {0}", reader.Value);
+                    break;
+                    case XmlNodeType.EndElement:
+                        Console.WriteLine("End Element {0}", reader.Name);
+                    break;
+                    default:
+                        Console.WriteLine("Other node {0} with value {1}", reader.NodeType, reader.Value);
+                    break;
+                }
+            }
+        }
+            // xmlDoc.Load(reader);
+            //xmlDoc.Save(Console.Out);
+        
         #endregion
     }
 }

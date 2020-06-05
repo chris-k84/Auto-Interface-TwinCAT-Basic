@@ -50,7 +50,7 @@ namespace Engine
                 //Type VsVer = System.Type.GetTypeFromProgID("TcXaeShell.DTE.15.0"); //allows to set shell
                 _dte = (EnvDTE.DTE)System.Activator.CreateInstance(t);
                 _dte.SuppressUI = true;
-                _dte.MainWindow.Visible = true;
+                _dte.MainWindow.Visible = false;
                 _dte.UserControl = false;
             }
             catch (Exception e)
