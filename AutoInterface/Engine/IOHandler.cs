@@ -117,44 +117,43 @@ namespace Engine
             el1004.ConsumeXml(xmlDoc.InnerXml);
         }
         
-        public void CreateCanInterface()//todo pass template directory
+        public void CreateCanInterface(int NoOfMessages)
         {
             ITcSmTreeItem _devices = _sysMan.LookupTreeItem("TIID");
             ITcSmTreeItem CANMaster = _devices.CreateChild("CanDevice", 87, null, null);
             string templateDir = @"C:\Users\chrisk\Desktop\Box 27 (CAN Interface).xti";
-            ManipulateXml(templateDir);
+            ManipulateXml(templateDir, NoOfMessages.ToString());
             ITcSmTreeItem CanInterface = CANMaster.ImportChild(templateDir, "", true, "CAN Interface");                           
         }
 
-        private void ManipulateXml(string templateDir)//todo can you get at GUIDs
+        private void ManipulateXml(string templateDir, string NoPdos)//todo can you get at GUIDs
         {
             XmlDocument xmlDoc = new XmlDocument();
-            XmlTextReader reader = new XmlTextReader(templateDir);
-            reader.WhitespaceHandling = WhitespaceHandling.None;
-            reader.MoveToContent();
-            //reader.Read();
-            while (reader.Read())
+            xmlDoc.Load(templateDir);
+            XmlNodeList nodes = xmlDoc.GetElementsByTagName("Name");
+            var guids = new List<string>();
+            foreach(XmlNode node in nodes)
             {
-                switch (reader.NodeType)
+                if ((node.Attributes.Count != 0) & (node.InnerText.Contains(NoPdos)))
                 {
-                    case XmlNodeType.Element:
-                        Console.WriteLine(reader.Name);
-                    break;
-                    case XmlNodeType.Text:
-                        Console.WriteLine("Text Node: {0}", reader.Value);
-                    break;
-                    case XmlNodeType.EndElement:
-                        Console.WriteLine("End Element {0}", reader.Name);
-                    break;
-                    default:
-                        Console.WriteLine("Other node {0} with value {1}", reader.NodeType, reader.Value);
-                    break;
-                }
+                    guids.Add(node.Attributes["GUID"].Value);
+                }                
             }
+            nodes = xmlDoc.GetElementsByTagName("Vars");
+            foreach (XmlNode node in nodes)
+            {
+                XmlNode var = node.ChildNodes[1];
+                if (var.ChildNodes[0].InnerText.Contains("Rx"))
+                {
+                    var.ChildNodes[1].Attributes["GUID"].Value = guids[0].ToString();
+                }
+                else
+                {
+                    var.ChildNodes[1].Attributes["GUID"].Value = guids[1].ToString();
+                }             
+            }
+            xmlDoc.Save(templateDir);
         }
-            // xmlDoc.Load(reader);
-            //xmlDoc.Save(Console.Out);
-        
         #endregion
     }
 }

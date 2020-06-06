@@ -31,15 +31,13 @@ namespace QuickTest
             newVisualStudio.CreateSolution(solName);
             Console.WriteLine("Creating TwinCAT PRoject");
             newVisualStudio.CreateTCProj();
-            newTwinCAT = new TwinCATHandler(newVisualStudio.SysMan);
+            //newTwinCAT = new TwinCATHandler(newVisualStudio.SysMan);
             newIO = new IOHandler(newVisualStudio.SysMan);
-            newIO.CreateCanInterface();
-            //Console.WriteLine("Activating config");
-            //newTwinCAT.ActivateSolution();
+            newIO.CreateCanInterface(4);
+            ////Console.WriteLine("Activating config");
+            ////newTwinCAT.ActivateSolution();
             Console.ReadLine();
             newVisualStudio.SaveAll();
-
-
 
         }
     }
