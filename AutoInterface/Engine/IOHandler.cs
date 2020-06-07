@@ -117,24 +117,32 @@ namespace Engine
             el1004.ConsumeXml(xmlDoc.InnerXml);
         }
         
-        public void CreateCanInterface(int NoOfMessages)
+        public void CreateCanInterface(int NoOfMessages, int CobIdLength)
         {
             ITcSmTreeItem _devices = _sysMan.LookupTreeItem("TIID");
             ITcSmTreeItem CANMaster = _devices.CreateChild("CanDevice", 87, null, null);
-            string templateDir = @"C:\Users\chrisk\Desktop\Box 27 (CAN Interface).xti";
-            ManipulateXml(templateDir, NoOfMessages.ToString());
+            string templateDir;
+            if (CobIdLength == 29)
+            {
+                templateDir = @"C:\Users\chrisk\Desktop\Box 1 (29 bit CAN Interface).xti";
+            }
+            else
+            {
+                templateDir = @"C:\Users\chrisk\Desktop\Box 1 (11 bit CAN Interface).xti";
+            }
+            ManipulateCanInterfaceXti(templateDir, NoOfMessages);
             ITcSmTreeItem CanInterface = CANMaster.ImportChild(templateDir, "", true, "CAN Interface");                           
         }
 
-        private void ManipulateXml(string templateDir, string NoPdos)//todo can you get at GUIDs
+        private void ManipulateCanInterfaceXti(string templateDir, int NoPdos)//todo can you get at GUIDs
         {
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(templateDir);
             XmlNodeList nodes = xmlDoc.GetElementsByTagName("Name");
             var guids = new List<string>();
             foreach(XmlNode node in nodes)
-            {
-                if ((node.Attributes.Count != 0) & (node.InnerText.Contains(NoPdos)))
+            { 
+                if ((node.Attributes.Count != 0) & (node.InnerText.Contains(NoPdos.ToString())))
                 {
                     guids.Add(node.Attributes["GUID"].Value);
                 }                
@@ -149,7 +157,14 @@ namespace Engine
                 }
                 else
                 {
-                    var.ChildNodes[1].Attributes["GUID"].Value = guids[1].ToString();
+                    if (NoPdos ==1)
+                    {
+                        var.ChildNodes[1].Attributes["GUID"].Value = guids[2].ToString();
+                    }
+                    else
+                    {
+                        var.ChildNodes[1].Attributes["GUID"].Value = guids[1].ToString();
+                    }
                 }             
             }
             xmlDoc.Save(templateDir);

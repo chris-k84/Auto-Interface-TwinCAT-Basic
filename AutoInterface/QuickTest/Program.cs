@@ -33,7 +33,7 @@ namespace QuickTest
             newVisualStudio.CreateTCProj();
             //newTwinCAT = new TwinCATHandler(newVisualStudio.SysMan);
             newIO = new IOHandler(newVisualStudio.SysMan);
-            newIO.CreateCanInterface(4);
+            newIO.CreateCanInterface(6, 29);
             ////Console.WriteLine("Activating config");
             ////newTwinCAT.ActivateSolution();
             Console.ReadLine();
