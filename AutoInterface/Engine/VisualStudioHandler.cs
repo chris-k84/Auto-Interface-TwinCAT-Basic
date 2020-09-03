@@ -18,14 +18,14 @@ namespace Engine
         void SaveAll();
         void CreateTCProj();
     }
-    public class VisualStudioHandler : IVisualStudioHandler
+    public class VisualStudioHandler
     {
         #region Fields
         EnvDTE.DTE _dte;
         string _dirPath;
-        dynamic _solution;
+        Solution _solution;
         string _solName;
-        dynamic _tcProject;
+        Project _tcProject;
         string _tcTemplate = @"C:\TwinCAT\3.1\Components\Base\PrjTemplate\TwinCAT Project.tsproj";
         ITcSysManager13 _sysMan;
         #endregion
@@ -38,26 +38,29 @@ namespace Engine
         #endregion
 
         #region Methods
-        public void SetVSDevEnv() //TODO : make able to use different VS versions
+        public void InitialiseVSEnv()
         {
             try
             {
-                Type t = System.Type.GetTypeFromProgID("VisualStudio.DTE.15.0");
-                //Type VsVer = System.Type.GetTypeFromProgID("VisualStudio.DTE.11.0"); //VS2012
-                //Type VsVer = System.Type.GetTypeFromProgID("VisualStudio.DTE.12.0"); //VS2013
-                //Type VsVer = System.Type.GetTypeFromProgID("VisualStudio.DTE.14.0"); //VS2015
-                //Type VsVer = System.Type.GetTypeFromProgID("VisualStudio.DTE.15.0"); //VS2017
-                //Type VsVer = System.Type.GetTypeFromProgID("TcXaeShell.DTE.15.0"); //allows to set shell
-                _dte = (EnvDTE.DTE)System.Activator.CreateInstance(t);
-                _dte.SuppressUI = true;
-                _dte.MainWindow.Visible = false;
-                _dte.UserControl = false;
+                List<Type> vsVer = GetInstalledVersions();   
+                _dte = (EnvDTE.DTE)System.Activator.CreateInstance(vsVer.Last());  
             }
             catch (Exception e)
             {
                 MessageBox.Show("Process Error - Failed Environment Creation" + e.Message);
             }      
         }
+
+        public void SetEnvVisability(bool UI, bool mainVisible)
+        {
+            if (_dte != null)
+            {
+                _dte.SuppressUI = UI;
+                _dte.MainWindow.Visible = mainVisible;
+                _dte.UserControl = false;
+            }
+        }
+
         public void CreateDirectory(string path)
         {
             try
@@ -74,6 +77,7 @@ namespace Engine
                 MessageBox.Show("Process Error - Directory Path Creation - " + e.Message);
             }
         }
+
         public void CreateSolution(string name)
         {
             try
@@ -81,19 +85,27 @@ namespace Engine
                 Directory.CreateDirectory(Path.Combine(_dirPath, name));
                 _solution = _dte.Solution;
                 _solution.Create(_dirPath, name);
-                _solName = name;
+                _solName = name + ".sln"; ;
             }
             catch (Exception e)
             {
                 MessageBox.Show("Process Error - Solution Creation - " + e.Message);
             }
         }
-        public void SaveAll()
+
+        public void Save()
         {
-            string slnName = _solName + ".sln";
-            _solution.SaveAs(Path.Combine(_dirPath, slnName));
-            _tcProject.Save();
-        } //TODO save all save project and solution, need to check this
+            if (_solution != null)
+            {
+                _solution.SaveAs(Path.Combine(_dirPath, _solName));
+            }
+            
+            if (_tcProject != null)
+            {
+                _tcProject.Save();
+            }
+        } 
+
         public void CreateTCProj()
         {
             try
@@ -106,6 +118,30 @@ namespace Engine
                 MessageBox.Show("Process Error - TC Project Creation - " + e.Message);
             }
         }
+
+        List<Type> GetInstalledVersions()
+        {
+            string[] vsVersions = { "11.0", "12.0", "14.0", "15.0" };
+            
+            List<Type> installedVers = new List<Type>();
+            
+            for (int runs = 0; runs < vsVersions.Length; runs++)
+            {
+                Type vsVer = System.Type.GetTypeFromProgID("VisualStudio.DTE." + vsVersions[runs]);
+                if (vsVer != null)
+                {
+                    installedVers.Add(vsVer);
+                }
+            }
+
+            return installedVers;
+            //Type VsVer = System.Type.GetTypeFromProgID("VisualStudio.DTE.11.0"); //VS2012
+            //Type VsVer = System.Type.GetTypeFromProgID("VisualStudio.DTE.12.0"); //VS2013
+            //Type VsVer = System.Type.GetTypeFromProgID("VisualStudio.DTE.14.0"); //VS2015
+            //Type VsVer = System.Type.GetTypeFromProgID("VisualStudio.DTE.15.0"); //VS2017
+            //Type VsVer = System.Type.GetTypeFromProgID("TcXaeShell.DTE.15.0"); //allows to set shell
+        }
+
         #endregion
     }
 }

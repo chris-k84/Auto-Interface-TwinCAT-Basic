@@ -16,29 +16,7 @@ namespace QuickTest
         static void Main(string[] args)
         {
             VisualStudioHandler newVisualStudio = new VisualStudioHandler();
-            TwinCATHandler newTwinCAT;
-
-            IOHandler newIO = new IOHandler();
-
-            Console.WriteLine("Initialising environment.............");
-            newVisualStudio.SetVSDevEnv();
-            Console.WriteLine("Environment Ready");
-            Console.WriteLine("Enter File Path");
-            string pathway = Console.ReadLine();
-            newVisualStudio.CreateDirectory(pathway);
-            Console.WriteLine("Enter Solution Name");
-            string solName = Console.ReadLine();
-            newVisualStudio.CreateSolution(solName);
-            Console.WriteLine("Creating TwinCAT PRoject");
-            newVisualStudio.CreateTCProj();
-            //newTwinCAT = new TwinCATHandler(newVisualStudio.SysMan);
-            newIO = new IOHandler(newVisualStudio.SysMan);
-            newIO.CreateCanInterface(6, 29);
-            ////Console.WriteLine("Activating config");
-            ////newTwinCAT.ActivateSolution();
-            Console.ReadLine();
-            newVisualStudio.SaveAll();
-
+            
         }
     }
 }
