@@ -106,11 +106,12 @@ namespace Engine
             }
         } 
 
-        public void CreateTCProj()
+        public void CreateTCProj(string name)
         {
             try
             {
-                _tcProject = _solution.AddFromTemplate(_tcTemplate, Path.Combine(_dirPath, _solName), _solName);
+                _tcProject = _solution.AddFromTemplate(_tcTemplate, Path.Combine(_dirPath, name), name);
+                
                 _sysMan = _tcProject.Object;
             }
             catch (Exception e)

@@ -17,6 +17,22 @@ namespace QuickTest
         {
             VisualStudioHandler newVisualStudio = new VisualStudioHandler();
             
+            newVisualStudio.InitialiseVSEnv();
+            newVisualStudio.CreateDirectory(@"C:\Users\ChrisK\Desktop\mike");
+            newVisualStudio.CreateSolution("Test");
+
+            newVisualStudio.CreateTCProj("Test");
+
+            TwinCATHandler TcHandler = new TwinCATHandler(newVisualStudio.SysMan);
+
+            newVisualStudio.Save();
+
+            TcHandler.LoadTcCOM("test");
+            TcHandler.AddTcCOM("walalalalalala", TcHandler.LookUpNode("test"));
+
+            newVisualStudio.Save();
+
+            Console.ReadLine();
         }
     }
 }

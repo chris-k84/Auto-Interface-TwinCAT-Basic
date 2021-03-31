@@ -45,6 +45,8 @@ namespace Engine
         string _xmlRouteString = "<TreeItem><RoutePrj><TargetList><BroadcastSearch>true</BroadcastSearch></TargetList></RoutePrj></TreeItem>";
         string _routes;
         XmlDocument _routeXml = new XmlDocument();
+        Dictionary<string, Guid> _tcomModuleTable = new Dictionary<string, Guid>();
+        
         #endregion
 
         #region Constructors
@@ -185,6 +187,34 @@ namespace Engine
             _sysMan.ActivateConfiguration();
             _sysMan.StartRestartTwinCAT();
         }
+        public ITcSmTreeItem LookUpNode(string node)
+        {
+            return _sysMan.LookupTreeItem("TIRC^TcCOM Objects");
+        }
+        public void LoadTcCOM(string tcCOM)
+        {
+            try
+            {
+                _tcomModuleTable.Add("TctSmplTempCtrl", Guid.Parse("{2462082a-5901-4cf0-b10d-4f472a5918d4}"));
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
+        public void AddTcCOM(string Module, ITcSmTreeItem TcCom)
+        {
+            try
+            {
+                ITcSmTreeItem tempController = TcCom.CreateChild(Module, 0, "", _tcomModuleTable["TctSmplTempCtrl"]);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            
+        }
+
         #endregion
     }
 }
