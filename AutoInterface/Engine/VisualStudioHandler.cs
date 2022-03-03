@@ -21,7 +21,7 @@ namespace Engine
     public class VisualStudioHandler
     {
         #region Fields
-        EnvDTE.DTE _dte;
+        DTE _dte;
         string _dirPath;
         Solution _solution;
         string _solName;
@@ -111,7 +111,7 @@ namespace Engine
             try
             {
                 _tcProject = _solution.AddFromTemplate(_tcTemplate, Path.Combine(_dirPath, name), name);
-                
+                System.Threading.Thread.Sleep(2000);
                 _sysMan = _tcProject.Object;
             }
             catch (Exception e)
@@ -122,7 +122,7 @@ namespace Engine
 
         List<Type> GetInstalledVersions()
         {
-            string[] vsVersions = { "11.0", "12.0", "14.0", "15.0" };
+            string[] vsVersions = { "11.0", "12.0", "14.0", "15.0", "16.0" };
             
             List<Type> installedVers = new List<Type>();
             
@@ -142,7 +142,6 @@ namespace Engine
             //Type VsVer = System.Type.GetTypeFromProgID("VisualStudio.DTE.15.0"); //VS2017
             //Type VsVer = System.Type.GetTypeFromProgID("TcXaeShell.DTE.15.0"); //allows to set shell
         }
-
         #endregion
     }
 }

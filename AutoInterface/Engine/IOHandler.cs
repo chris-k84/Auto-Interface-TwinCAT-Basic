@@ -97,7 +97,6 @@ namespace Engine
             ITrItm.ConsumeXml(xmlDescr);
 
         }
-        
         public void EditIoXml()//Todo pass reference to node for edits
         {
             ITcSmTreeItem _devices = _sysMan.LookupTreeItem("TIID");
@@ -116,7 +115,6 @@ namespace Engine
             }
             el1004.ConsumeXml(xmlDoc.InnerXml);
         }
-        
         public void CreateCanInterface(int NoOfMessages, int CobIdLength)
         {
             ITcSmTreeItem _devices = _sysMan.LookupTreeItem("TIID");
@@ -133,7 +131,6 @@ namespace Engine
             ManipulateCanInterfaceXti(templateDir, NoOfMessages);
             ITcSmTreeItem CanInterface = CANMaster.ImportChild(templateDir, "", true, "CAN Interface");                           
         }
-
         private void ManipulateCanInterfaceXti(string templateDir, int NoPdos)//todo can you get at GUIDs
         {
             XmlDocument xmlDoc = new XmlDocument();
@@ -168,6 +165,21 @@ namespace Engine
                 }             
             }
             xmlDoc.Save(templateDir);
+        }
+        public ITcSmTreeItem CreateEcMaster(ITcSmTreeItem devices)
+        {
+            return devices.CreateChild("EtherCAT Masrter", 111, null, null);
+        }
+        public ITcSmTreeItem CreateChildDevice(ITcSmTreeItem device, string name, int type)
+        {
+            return device.CreateChild(name, type, null, null);
+            
+        }
+        public ITcSmTreeItem AddRtUdpModule(ITcSmTreeItem device, string name)
+        {
+            Dictionary<string, Guid> tcomModuleTable = new Dictionary<string, Guid>();
+            tcomModuleTable.Add("TCP/UDP RT", Guid.Parse("{080D0399-6A65-408D-80E1-18D8F699496A}"));
+            return device.CreateChild(name, 0, "", tcomModuleTable["TCP/UDP RT"]);
         }
         #endregion
     }

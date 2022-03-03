@@ -187,7 +187,7 @@ namespace Engine
             _sysMan.ActivateConfiguration();
             _sysMan.StartRestartTwinCAT();
         }
-        public ITcSmTreeItem LookUpNode(string node)
+        public ITcSmTreeItem LookUpTcCOM()
         {
             return _sysMan.LookupTreeItem("TIRC^TcCOM Objects");
         }
@@ -207,6 +207,7 @@ namespace Engine
             try
             {
                 ITcSmTreeItem tempController = TcCom.CreateChild(Module, 0, "", _tcomModuleTable["TctSmplTempCtrl"]);
+                tempController.Name = "Onat";
             }
             catch (Exception e)
             {
@@ -214,7 +215,18 @@ namespace Engine
             }
             
         }
-
+        public ITcSmTreeItem LookUpNode(string node)
+        {
+            return _sysMan.LookupTreeItem(node);
+        }
+        public string GetTreeItemXml(ITcSmTreeItem node)
+        {
+            return node.ProduceXml();
+        }
+        public void DeployTreeItemXml(ITcSmTreeItem node,string xml)
+        {
+            node.ConsumeXml(xml);
+        }
         #endregion
     }
 }
