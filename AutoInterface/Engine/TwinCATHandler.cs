@@ -227,6 +227,11 @@ namespace Engine
         {
             node.ConsumeXml(xml);
         }
+
+        public void GetTreeItemXti(ITcSmTreeItem node, string child, string file)
+        {
+            node.ExportChild(child, file);
+        }
         #endregion
     }
 }

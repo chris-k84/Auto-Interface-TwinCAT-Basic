@@ -120,6 +120,16 @@ namespace Engine
             }
         }
 
+        public void LoadTcProject(string solutionPath)
+        {
+            _solution = _dte.Solution;
+            _solution.Open(solutionPath);
+            System.Threading.Thread.Sleep(2000);
+            _tcProject = _solution.Projects.Item(1);
+            System.Threading.Thread.Sleep(2000);
+            _sysMan = _tcProject.Object;
+        }
+
         List<Type> GetInstalledVersions()
         {
             string[] vsVersions = { "11.0", "12.0", "14.0", "15.0", "16.0" };
