@@ -1,4 +1,4 @@
-Wrapper class library for the Automation Interface
+Project: This project is to create a wrapper class to help simplify the Automation Interface for use deploying TwinCAT projects to targets. It also contains a set of samples for implementing these features as a base guideline for new users.
 
 Requirements: TwinCAT 3 4022 or higher
 

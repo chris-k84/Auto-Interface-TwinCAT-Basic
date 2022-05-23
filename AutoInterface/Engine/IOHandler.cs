@@ -80,6 +80,44 @@ namespace Engine
                 }
             }
         }
+        public void Scan2()//TODO - check this against ScanIO
+        {
+            sysManager3.SetTargetNetId(amsNetId);
+            ITcSmTreeItem ioDevicesItem = sysManager.LookupTreeItem("TIID");
+            string scannedXml = ioDevicesItem.ProduceXml(false);
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(scannedXml);
+            XmlNodeList xmlDeviceList = xmlDoc.SelectNodes("TreeItem/DeviceGrpDef/FoundDevices/Device");
+            List<ITcSmTreeItem> devices = new List<ITcSmTreeItem>();
+
+            int deviceCount = 0;
+            foreach (XmlNode node in xmlDeviceList)
+            {
+                int itemSubType = int.Parse(node.SelectSingleNode("ItemSubType").InnerText);
+                string typeName = node.SelectSingleNode("ItemSubTypeName").InnerText;
+                XmlNode xmlAddress = node.SelectSingleNode("AddressInfo");
+                ITcSmTreeItem device = ioDevicesItem.CreateChild(string.Format("Device_{0}", ++deviceCount), itemSubType, string.Empty, null);
+                string xml = string.Format("<TreeItem><DeviceDef>{0}</DeviceDef></TreeItem>", xmlAddress.OuterXml);
+                device.ConsumeXml(xml);
+                devices.Add(device);
+            }
+            foreach (ITcSmTreeItem device in devices)
+            {
+                string xml = "<TreeItem><DeviceDef><ScanBoxes>1</ScanBoxes></DeviceDef></TreeItem>";
+                try
+                {
+                    device.ConsumeXml(xml);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Warning: {0}", ex.Message);
+                }
+                foreach (ITcSmTreeItem box in device)
+                {
+                    Console.WriteLine(box.Name);
+                }
+            }
+        }
         public void AddSyncUnit() //TODO check code function, pass string into function
         {
             ITcSmTreeItem ITrItm = _sysMan.LookupTreeItem("TIID^Device 1 (EtherCAT)^Term 1 (EK1100)^Term 4 (EL2008)");
