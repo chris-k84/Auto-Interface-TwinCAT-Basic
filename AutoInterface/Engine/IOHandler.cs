@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TCatSysManagerLib;
-using System.Windows.Forms;
 using System.Xml;
 
 namespace Engine
@@ -72,7 +67,7 @@ namespace Engine
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Warning: {0}", ex.Message);
+                    Console.WriteLine("Warning: {0}", ex.Message);
                 }
                 for (int i = 1; i < device.ChildCount; i++)
                 {
@@ -167,7 +162,7 @@ namespace Engine
                 templateDir = @"C:\Users\chrisk\Desktop\Box 1 (11 bit CAN Interface).xti";
             }
             ManipulateCanInterfaceXti(templateDir, NoOfMessages);
-            ITcSmTreeItem CanInterface = CANMaster.ImportChild(templateDir, "", true, "CAN Interface");                           
+            ITcSmTreeItem CanInterface = CANMaster.ImportChild(templateDir, "", true, "CAN Interface");
         }
         private void ManipulateCanInterfaceXti(string templateDir, int NoPdos)//todo can you get at GUIDs
         {
@@ -175,12 +170,12 @@ namespace Engine
             xmlDoc.Load(templateDir);
             XmlNodeList nodes = xmlDoc.GetElementsByTagName("Name");
             var guids = new List<string>();
-            foreach(XmlNode node in nodes)
-            { 
+            foreach (XmlNode node in nodes)
+            {
                 if ((node.Attributes.Count != 0) & (node.InnerText.Contains(NoPdos.ToString())))
                 {
                     guids.Add(node.Attributes["GUID"].Value);
-                }                
+                }
             }
             nodes = xmlDoc.GetElementsByTagName("Vars");
             foreach (XmlNode node in nodes)
@@ -192,7 +187,7 @@ namespace Engine
                 }
                 else
                 {
-                    if (NoPdos ==1)
+                    if (NoPdos == 1)
                     {
                         var.ChildNodes[1].Attributes["GUID"].Value = guids[2].ToString();
                     }
@@ -200,7 +195,7 @@ namespace Engine
                     {
                         var.ChildNodes[1].Attributes["GUID"].Value = guids[1].ToString();
                     }
-                }             
+                }
             }
             xmlDoc.Save(templateDir);
         }
@@ -211,7 +206,7 @@ namespace Engine
         public ITcSmTreeItem CreateChildDevice(ITcSmTreeItem device, string name, int type)
         {
             return device.CreateChild(name, type, null, null);
-            
+
         }
         public ITcSmTreeItem AddRtUdpModule(ITcSmTreeItem device, string name)
         {

@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TCatSysManagerLib;
-using System.Windows.Forms;
 
 namespace Engine
 {
@@ -79,7 +74,7 @@ namespace Engine
                 foreach (string slave in slaves)
                 {
                     _itcGvlList.DeclarationText = slave;
-                } 
+                }
             }
             catch (Exception e)
             {

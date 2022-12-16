@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Engine;
-using System.IO;
 using System.Xml;
-using System.Windows.Forms;
 using TCatSysManagerLib;
 
 namespace QuickTest
 {
-    class Program
+    internal class Program
     {
         static void Main(string[] args)
         {
@@ -21,7 +15,7 @@ namespace QuickTest
             if (false)
             {
                 Console.WriteLine("Started Creating......");
-                
+
                 newVisualStudio.CreateDirectory(@"C:\Users\ChrisK\Desktop\TestAI");
                 newVisualStudio.CreateSolution("Test");
 
@@ -77,7 +71,7 @@ namespace QuickTest
 
             xdoc.LoadXml(TcHandler.GetTreeItemXml(io));
             TcHandler.GetTreeItemXti(io, "Device 1 (EtherCAT)", @"D:\11 Development\_0004_C# Automation Interface\AutoInterface\QuickTest\bin\Debug\Test.txt");
-     
+
             Console.ReadLine();
         }
     }

@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using EnvDTE;
 using System.IO;
 using TCatSysManagerLib;
@@ -31,7 +26,7 @@ namespace Engine
         #endregion
 
         #region Properties
-        public ITcSysManager13 SysMan 
+        public ITcSysManager13 SysMan
         {
             get { return _sysMan; }
         }
@@ -42,15 +37,14 @@ namespace Engine
         {
             try
             {
-                List<Type> vsVer = GetInstalledVersions();   
-                _dte = (EnvDTE.DTE)System.Activator.CreateInstance(vsVer.Last());  
+                List<Type> vsVer = GetInstalledVersions();
+                _dte = (EnvDTE.DTE)System.Activator.CreateInstance(vsVer.Last());
             }
             catch (Exception e)
             {
-                MessageBox.Show("Process Error - Failed Environment Creation" + e.Message);
-            }      
+                Console.WriteLine("Process Error - Failed Environment Creation" + e.Message);
+            }
         }
-
         public void SetEnvVisability(bool UI, bool mainVisible)
         {
             if (_dte != null)
@@ -60,7 +54,6 @@ namespace Engine
                 _dte.UserControl = false;
             }
         }
-
         public void CreateDirectory(string path)
         {
             try
@@ -77,7 +70,6 @@ namespace Engine
                 MessageBox.Show("Process Error - Directory Path Creation - " + e.Message);
             }
         }
-
         public void CreateSolution(string name)
         {
             try
@@ -92,20 +84,18 @@ namespace Engine
                 MessageBox.Show("Process Error - Solution Creation - " + e.Message);
             }
         }
-
         public void Save()
         {
             if (_solution != null)
             {
                 _solution.SaveAs(Path.Combine(_dirPath, _solName));
             }
-            
+
             if (_tcProject != null)
             {
                 _tcProject.Save();
             }
-        } 
-
+        }
         public void CreateTCProj(string name)
         {
             try
@@ -119,7 +109,6 @@ namespace Engine
                 MessageBox.Show("Process Error - TC Project Creation - " + e.Message);
             }
         }
-
         public void LoadTcProject(string solutionPath)
         {
             _solution = _dte.Solution;
@@ -129,13 +118,12 @@ namespace Engine
             System.Threading.Thread.Sleep(2000);
             _sysMan = _tcProject.Object;
         }
-
         List<Type> GetInstalledVersions()
         {
             string[] vsVersions = { "11.0", "12.0", "14.0", "15.0", "16.0" };
-            
+
             List<Type> installedVers = new List<Type>();
-            
+
             for (int runs = 0; runs < vsVersions.Length; runs++)
             {
                 Type vsVer = System.Type.GetTypeFromProgID("VisualStudio.DTE." + vsVersions[runs]);
@@ -150,6 +138,7 @@ namespace Engine
             //Type VsVer = System.Type.GetTypeFromProgID("VisualStudio.DTE.12.0"); //VS2013
             //Type VsVer = System.Type.GetTypeFromProgID("VisualStudio.DTE.14.0"); //VS2015
             //Type VsVer = System.Type.GetTypeFromProgID("VisualStudio.DTE.15.0"); //VS2017
+            //Type VsVer = System.Type.GetTypeFromProgID("VisualStudio.DTE.16.0"); //VS2019
             //Type VsVer = System.Type.GetTypeFromProgID("TcXaeShell.DTE.15.0"); //allows to set shell
         }
         #endregion
