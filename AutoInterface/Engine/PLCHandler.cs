@@ -27,7 +27,6 @@ namespace Engine
             _sysMan = sysManager;
         }
         #endregion
-
         #region Methods
         public void CreatePLCProj(string name)
         {
@@ -38,7 +37,7 @@ namespace Engine
             }
             catch (Exception e)
             {
-                MessageBox.Show("Process Error - PLC Creation - " + e.Message);
+                
             }
         }
         public void AddPLCProj(string pathToProjectFile, string name)
@@ -50,7 +49,7 @@ namespace Engine
             }
             catch (Exception e)
             {
-                MessageBox.Show("Process Error - PLC project failed to add - " + e.Message);
+                
             }
         }
         public void CreateGVL()
@@ -63,7 +62,7 @@ namespace Engine
             }
             catch (Exception e)
             {
-                MessageBox.Show("Process Error - GVL Creation" + e.Message);
+                
             }
 
         }
@@ -78,7 +77,7 @@ namespace Engine
             }
             catch (Exception e)
             {
-                MessageBox.Show("Process Error - Writing GVL failed - " + e.Message);
+                
             }
         }
         #endregion

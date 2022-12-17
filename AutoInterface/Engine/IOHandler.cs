@@ -67,7 +67,7 @@ namespace Engine
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Warning: {0}", ex.Message);
+                    
                 }
                 for (int i = 1; i < device.ChildCount; i++)
                 {
@@ -105,12 +105,12 @@ namespace Engine
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Warning: {0}", ex.Message);
+                    
                 }
-                foreach (ITcSmTreeItem box in device)
-                {
-                    Console.WriteLine(box.Name);
-                }
+                //foreach (ITcSmTreeItem box in device)
+                //{
+                //    Console.WriteLine(box.Name);
+                //}
             }
         }
         public void AddSyncUnit() //TODO check code function, pass string into function

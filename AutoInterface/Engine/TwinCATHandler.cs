@@ -7,29 +7,15 @@ namespace Engine
     public interface ITwinCATHandler
     {
         void CreateTask(string taskName);
-
         void CreateTask(string taskName, int taskPriority);
-
         void CreateTask(string taskName, int taskPriority, int taskCycleTime);
-
         void AssignCores();
-
         void SetAMSNET(string amsNetId);
-
         string ScanADSDevices();
-
-
         void CreateLink(string source, string destination);
-
-
         void GetMappings();
-
-
         void LoadMappings(string mappingInfo);
-
-
         void SetIsolatedCores();
-
         void ActivateSolution();
     }
     public class TwinCATHandler : ITwinCATHandler
@@ -64,7 +50,7 @@ namespace Engine
             }
             catch (Exception c)
             {
-                Console.WriteLine(c.Message);
+               
             }
         }
         public void CreateTask(string taskName, int taskPriority)
@@ -78,7 +64,7 @@ namespace Engine
             }
             catch (Exception c)
             {
-                Console.WriteLine(c.Message);
+                
             }
         }
         public void CreateTask(string taskName, int taskPriority, int taskCycleTime)
@@ -94,7 +80,7 @@ namespace Engine
             }
             catch (Exception c)
             {
-                Console.WriteLine(c.Message);
+               
             }
         }
         public void AssignCores() //TODO add code for this function
@@ -109,7 +95,7 @@ namespace Engine
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                
             }
         }
         public string ScanADSDevices()
@@ -130,7 +116,6 @@ namespace Engine
             }
             catch (Exception e)
             {
-                Console.WriteLine("Process Error - ADS Error - " + e.Message);
                 _routes = "";
             }
             return _routes;
@@ -143,7 +128,7 @@ namespace Engine
             }
             catch (Exception e)
             {
-                Console.WriteLine("Process error - Link error" + e.Message);
+                
             }
         }
         public void GetMappings()
@@ -154,7 +139,7 @@ namespace Engine
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                
             }
         }
         public void LoadMappings(string mappingInfo)
@@ -166,7 +151,7 @@ namespace Engine
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+               
             }
         }
         public void SetIsolatedCores()
@@ -193,7 +178,7 @@ namespace Engine
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                
             }
         }
         public void AddTcCOM(string Module, ITcSmTreeItem TcCom)
@@ -205,7 +190,7 @@ namespace Engine
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                
             }
 
         }

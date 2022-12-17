@@ -42,7 +42,7 @@ namespace Engine
             }
             catch (Exception e)
             {
-                Console.WriteLine("Process Error - Failed Environment Creation" + e.Message);
+               
             }
         }
         public void SetEnvVisability(bool UI, bool mainVisible)
@@ -67,7 +67,7 @@ namespace Engine
             }
             catch (Exception e)
             {
-                MessageBox.Show("Process Error - Directory Path Creation - " + e.Message);
+               
             }
         }
         public void CreateSolution(string name)
@@ -81,7 +81,7 @@ namespace Engine
             }
             catch (Exception e)
             {
-                MessageBox.Show("Process Error - Solution Creation - " + e.Message);
+               
             }
         }
         public void Save()
@@ -106,7 +106,7 @@ namespace Engine
             }
             catch (Exception e)
             {
-                MessageBox.Show("Process Error - TC Project Creation - " + e.Message);
+                
             }
         }
         public void LoadTcProject(string solutionPath)
