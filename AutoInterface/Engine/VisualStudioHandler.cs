@@ -132,6 +132,14 @@ namespace Engine
                     installedVers.Add(vsVer);
                 }
             }
+            if (installedVers.Count == 0)
+            {
+                Type vsVer = System.Type.GetTypeFromProgID("TcXaeShell.DTE.15.0");
+                if (vsVer != null)
+                {
+                    installedVers.Add(vsVer);
+                }
+            }
 
             return installedVers;
             //Type VsVer = System.Type.GetTypeFromProgID("VisualStudio.DTE.11.0"); //VS2012

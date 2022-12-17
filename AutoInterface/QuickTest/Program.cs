@@ -12,11 +12,11 @@ namespace QuickTest
             VisualStudioHandler newVisualStudio = new VisualStudioHandler();
             TwinCATHandler TcHandler;
             newVisualStudio.InitialiseVSEnv();
-            if (false)
+            if (true)
             {
                 Console.WriteLine("Started Creating......");
 
-                newVisualStudio.CreateDirectory(@"C:\Users\ChrisK\Desktop\TestAI");
+                newVisualStudio.CreateDirectory(@"C:\Users\Chris\Desktop\TestProject");
                 newVisualStudio.CreateSolution("Test");
 
                 newVisualStudio.CreateTCProj("Test");
@@ -52,25 +52,24 @@ namespace QuickTest
 
             //ITcSmTreeItem RealTime = TcHandler.LookUpNode("TIRS");
 
-            XmlDocument xdoc = new XmlDocument();
+            //XmlDocument xdoc = new XmlDocument();
             //xdoc.Load(@"D:\11 Development\_0004_C# Automation Interface\AutoInterface\QuickTest\bin\Debug\myTest.xml");
             //string RTSettings = xdoc.InnerXml;
 
             //TcHandler.DeployTreeItemXml(RealTime, RTSettings);
 
-            TCatSysManagerLib.ITcSmTreeItem9 objects;
-            ITcSmTreeItem EthMaster = TcHandler.LookUpNode("TIID^Device 1 (EtherCAT)");
+            //ITcSmTreeItem EthMaster = TcHandler.LookUpNode("TIID^Device 1 (EtherCAT)");
 
-            xdoc.LoadXml(TcHandler.GetTreeItemXml(EthMaster));
-            xdoc.Save("myCheck.xml");
+            //xdoc.LoadXml(TcHandler.GetTreeItemXml(EthMaster));
+            //xdoc.Save("myCheck.xml");
 
 
-            XmlDocument xdoc1 = new XmlDocument();
+            //XmlDocument xdoc1 = new XmlDocument();
 
-            ITcSmTreeItem io = TcHandler.LookUpNode("TIID");
+            //ITcSmTreeItem io = TcHandler.LookUpNode("TIID");
 
-            xdoc.LoadXml(TcHandler.GetTreeItemXml(io));
-            TcHandler.GetTreeItemXti(io, "Device 1 (EtherCAT)", @"D:\11 Development\_0004_C# Automation Interface\AutoInterface\QuickTest\bin\Debug\Test.txt");
+            //xdoc.LoadXml(TcHandler.GetTreeItemXml(io));
+            //TcHandler.GetTreeItemXti(io, "Device 1 (EtherCAT)", @"D:\11 Development\_0004_C# Automation Interface\AutoInterface\QuickTest\bin\Debug\Test.txt");
 
             Console.ReadLine();
         }
