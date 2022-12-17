@@ -8,8 +8,8 @@
   <ItemGroup>
     <COMReference Include="TCatSysManagerLib">
       <WrapperTool>tlbimp</WrapperTool>
-      <VersionMinor>1</VersionMinor>
-      <VersionMajor>2</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <VersionMajor>3</VersionMajor>
       <Guid>3c49d6c3-93dc-11d0-b162-00a0248c244b</Guid>
       <Lcid>0</Lcid>
       <Isolated>false</Isolated>
