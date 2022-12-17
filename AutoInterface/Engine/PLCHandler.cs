@@ -13,7 +13,7 @@ namespace Engine
     public class PLCHandler : IPLCHandler
     {
         #region Fields
-        ITcSysManager13 _sysMan;
+        ITcSysManager15 _sysMan;
         ITcSmTreeItem _plcProj;
         ITcSmTreeItem _gvlFolder;
         ITcSmTreeItem _gvlList;
@@ -22,7 +22,7 @@ namespace Engine
         #region Constructor
         public PLCHandler()
         { }
-        public PLCHandler(ITcSysManager13 sysManager)
+        public PLCHandler(ITcSysManager15 sysManager)
         {
             _sysMan = sysManager;
         }

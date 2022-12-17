@@ -22,11 +22,11 @@ namespace Engine
         string _solName;
         Project _tcProject;
         string _tcTemplate = @"C:\TwinCAT\3.1\Components\Base\PrjTemplate\TwinCAT Project.tsproj";
-        ITcSysManager13 _sysMan;
+        ITcSysManager15 _sysMan;
         #endregion
 
         #region Properties
-        public ITcSysManager13 SysMan
+        public ITcSysManager15 SysMan
         {
             get { return _sysMan; }
         }
@@ -42,7 +42,7 @@ namespace Engine
             }
             catch (Exception e)
             {
-               
+                
             }
         }
         public void SetEnvVisability(bool UI, bool mainVisible)

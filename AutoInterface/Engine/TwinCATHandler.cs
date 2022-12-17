@@ -21,7 +21,7 @@ namespace Engine
     public class TwinCATHandler : ITwinCATHandler
     {
         #region Fields
-        ITcSysManager13 _sysMan;
+        ITcSysManager15 _sysMan;
         string _xmlRouteString = "<TreeItem><RoutePrj><TargetList><BroadcastSearch>true</BroadcastSearch></TargetList></RoutePrj></TreeItem>";
         string _routes;
         XmlDocument _routeXml = new XmlDocument();
@@ -34,7 +34,7 @@ namespace Engine
         {
 
         }
-        public TwinCATHandler(ITcSysManager13 sysManager)
+        public TwinCATHandler(ITcSysManager15 sysManager)
         {
             _sysMan = sysManager;
         }

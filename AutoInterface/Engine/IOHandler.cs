@@ -14,14 +14,14 @@ namespace Engine
         #region Fields
         List<ITcSmTreeItem> _devices;
         List<String> _slaveDevicePaths = new List<string>();
-        ITcSysManager13 _sysMan;
+        ITcSysManager15 _sysMan;
         #endregion
         #region Constructors
         public IOHandler()
         {
 
         }
-        public IOHandler(ITcSysManager13 sysManager)
+        public IOHandler(ITcSysManager15 sysManager)
         {
             _sysMan = sysManager;
         }
