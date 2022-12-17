@@ -58,7 +58,7 @@ namespace QuickTest
 
             //TcHandler.DeployTreeItemXml(RealTime, RTSettings);
 
-
+            TCatSysManagerLib.ITcSmTreeItem9 objects;
             ITcSmTreeItem EthMaster = TcHandler.LookUpNode("TIID^Device 1 (EtherCAT)");
 
             xdoc.LoadXml(TcHandler.GetTreeItemXml(EthMaster));

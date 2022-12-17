@@ -77,8 +77,7 @@ namespace Engine
         }
         public void Scan2()//TODO - check this against ScanIO
         {
-            sysManager3.SetTargetNetId(amsNetId);
-            ITcSmTreeItem ioDevicesItem = sysManager.LookupTreeItem("TIID");
+            ITcSmTreeItem ioDevicesItem = _sysMan.LookupTreeItem("TIID");
             string scannedXml = ioDevicesItem.ProduceXml(false);
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.LoadXml(scannedXml);
