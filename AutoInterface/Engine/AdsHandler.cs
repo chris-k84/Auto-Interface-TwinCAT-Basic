@@ -12,7 +12,7 @@ namespace Engine
     {
         string ScanADSDevices();
     }
-    internal class AdsHandler : IAdsHandler
+    public class AdsHandler : IAdsHandler
     {
         private ITcSysManager15 _sysMan { get; set; }
         public ITcSysManager15 SysManager15 { get; set; }
