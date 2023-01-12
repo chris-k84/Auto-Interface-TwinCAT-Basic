@@ -10,7 +10,7 @@ namespace Engine
 {
     public interface IAdsHandler
     {
-        string ScanADSDevices();
+        List<XmlNode> ScanADSDevices();
     }
     public class AdsHandler : IAdsHandler
     {
@@ -24,10 +24,12 @@ namespace Engine
         {
             this._sysMan = sysman;
         }
-        public string ScanADSDevices()
+        public List<XmlNode> ScanADSDevices()
         {
+            List<XmlNode> routeXmls = new List<XmlNode>();
             try
             {
+                
                 ITcSmTreeItem routes = _sysMan.LookupTreeItem("TIRR");
                 routes.ConsumeXml(_xmlRouteString);
                 _routes = routes.ProduceXml();
@@ -37,14 +39,15 @@ namespace Engine
                 XmlNodeList xmlDeviceList = _routeXml.SelectNodes("TreeItem/RoutePrj/TargetList/Target");
                 foreach (XmlNode node in xmlDeviceList) //TODO handle choosing the right target
                 {
-                    return node.SelectSingleNode("NetId").InnerText;
+                    //return node.SelectSingleNode("NetId").InnerText;
+                    routeXmls.Add(node);
                 }
             }
             catch (Exception e)
             {
-                _routes = "";
+                routeXmls = null;
             }
-            return _routes;
+            return routeXmls;
         }
     }
 }

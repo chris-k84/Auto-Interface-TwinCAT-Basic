@@ -2,6 +2,7 @@
 using Engine;
 using System.Xml;
 using TCatSysManagerLib;
+using System.Collections.Generic;
 
 namespace QuickTest
 {
@@ -17,7 +18,7 @@ namespace QuickTest
             {
                 Console.WriteLine("Started Creating......");
 
-                newVisualStudio.CreateDirectory(@"C:\Users\Chris\Desktop\TestProject");
+                newVisualStudio.CreateDirectory(@"C:\Users\ChrisK\Documents\TcXaeShell\TestProject");
                 newVisualStudio.CreateSolution("Test");
 
                 newVisualStudio.CreateTCProj("Test");
@@ -69,7 +70,7 @@ namespace QuickTest
             //TcHandler.GetTreeItemXti(io, "Device 1 (EtherCAT)", @"D:\11 Development\_0004_C# Automation Interface\AutoInterface\QuickTest\bin\Debug\Test.txt");
 
             //////////////Checking Scan ADS function///////////////////
-            string test =  AdsHandler.ScanADSDevices();
+            List<XmlNode> test =  AdsHandler.ScanADSDevices();
 
             Console.ReadLine();
         }
