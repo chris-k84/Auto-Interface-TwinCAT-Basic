@@ -11,7 +11,6 @@ namespace Engine
         void CreateTask(string taskName, int taskPriority, int taskCycleTime);
         void AssignCores();
         void SetAMSNET(string amsNetId);
-        string ScanADSDevices();
         void CreateLink(string source, string destination);
         void GetMappings();
         void LoadMappings(string mappingInfo);
@@ -22,9 +21,6 @@ namespace Engine
     {
         #region Fields
         ITcSysManager15 _sysMan;
-        string _xmlRouteString = "<TreeItem><RoutePrj><TargetList><BroadcastSearch>true</BroadcastSearch></TargetList></RoutePrj></TreeItem>";
-        string _routes;
-        XmlDocument _routeXml = new XmlDocument();
         Dictionary<string, Guid> _tcomModuleTable = new Dictionary<string, Guid>();
 
         #endregion
@@ -97,28 +93,6 @@ namespace Engine
             {
                 
             }
-        }
-        public string ScanADSDevices()
-        {
-            try
-            {
-                ITcSmTreeItem routes = _sysMan.LookupTreeItem("TIRR");
-                routes.ConsumeXml(_xmlRouteString);
-                _routes = routes.ProduceXml();
-
-                _routeXml.LoadXml(_routes);
-
-                XmlNodeList xmlDeviceList = _routeXml.SelectNodes("TreeItem/RoutePrj/TargetList/Target");
-                foreach (XmlNode node in xmlDeviceList) //TODO handle choosing the right target
-                {
-                    return node.SelectSingleNode("NetId").InnerText;
-                }
-            }
-            catch (Exception e)
-            {
-                _routes = "";
-            }
-            return _routes;
         }
         public void CreateLink(string source, string destination)
         {
