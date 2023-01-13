@@ -37,9 +37,9 @@ namespace Engine
         #region Constructors
         public AdsHandler()
         { }
-        public AdsHandler(ITcSysManager15 sysman )
+        public AdsHandler(ISystemManager systemManager)
         {
-            this._sysMan = sysman;
+            this._sysMan = systemManager.SysMan;
         }
         #endregion
 
