@@ -3,6 +3,7 @@ using Engine;
 using System.Xml;
 using TCatSysManagerLib;
 using System.Collections.Generic;
+using System.Xml.Linq;
 
 namespace QuickTest
 {
@@ -72,6 +73,10 @@ namespace QuickTest
             //////////////Checking Scan ADS function///////////////////
             List<XmlNode> test =  AdsHandler.ScanADSDevices();
 
+            string route = (AdsHandler.CreateRouteString(test[0]));
+
+            AdsHandler.CreateRoute(route);
+           
             Console.ReadLine();
         }
     }

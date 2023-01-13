@@ -26,7 +26,6 @@ namespace Engine
             _sysMan = sysManager;
         }
         #endregion
-
         #region Properties
         public List<string> SlaveDevicePaths
         {
