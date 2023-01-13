@@ -7,13 +7,15 @@ namespace Engine
 {
     public interface IVisualStudioHandler
     {
-        void SetVSDevEnv();
-        void CreateDirectory(string path);
-        void CreateSolution(string name);
-        void SaveAll();
-        void CreateTCProj();
+        void Save();
+        void LoadTcProject(string solutionPath);
     }
-    public class VisualStudioHandler
+    public interface ISystemManager
+    {
+        public ITcSysManager15 SysMan { get; }
+    }
+
+    public class VisualStudioHandler : ISystemManager, IVisualStudioHandler
     {
         #region Fields
         private DTE _dte;

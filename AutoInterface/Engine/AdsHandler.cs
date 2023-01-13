@@ -18,7 +18,6 @@ namespace Engine
         #region Fields
         private ITcSysManager15 _sysMan { get; set; }
         private string _xmlRouteString = "<TreeItem><RoutePrj><TargetList><BroadcastSearch>true</BroadcastSearch></TargetList></RoutePrj></TreeItem>";
-        private string _routeString = "<TreeItem><ItemName>Route Settings</ItemName><PathName>TIRR</PathName><RoutePrj><TargetList><BroadcastSearch>true</BroadcastSearch></TargetList><AddRoute><RemoteName>{0}</RemoteName><RemoteNetId>{1}</RemoteNetId><RemoteIpAddr>{2}</RemoteIpAddr><UserName>{3}</UserName><Password>{4}</Password><NoEncryption></NoEncryption><LocalName>{5}</LocalName></AddRoute></RoutePrj></TreeItem>";
         #endregion
 
         #region Properties
@@ -33,6 +32,9 @@ namespace Engine
                 _sysMan = value;
             }
         }
+        #endregion
+
+        #region Constructors
         public AdsHandler()
         { }
         public AdsHandler(ITcSysManager15 sysman )
@@ -67,7 +69,6 @@ namespace Engine
             }
             return routeXmls;
         }
-
         public string CreateRouteString(XmlNode route)
         {
              
@@ -81,7 +82,6 @@ namespace Engine
             return string.Format("<TreeItem><ItemName>Route Settings</ItemName><PathName>TIRR</PathName><RoutePrj><TargetList><BroadcastSearch>true</BroadcastSearch></TargetList><AddRoute><RemoteName>{0}</RemoteName><RemoteNetId>{1}</RemoteNetId><RemoteIpAddr>{2}</RemoteIpAddr><UserName>{3}</UserName><Password>{4}</Password><NoEncryption></NoEncryption><LocalName>{5}</LocalName></AddRoute></RoutePrj></TreeItem>",
                                     remotename, netid, ipaddr, username, password, localname);
         }
-
         public void CreateRoute(string route)
         {
             ITcSmTreeItem routes = _sysMan.LookupTreeItem("TIRR");

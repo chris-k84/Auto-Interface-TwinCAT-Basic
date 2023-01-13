@@ -71,11 +71,9 @@ namespace QuickTest
             //TcHandler.GetTreeItemXti(io, "Device 1 (EtherCAT)", @"D:\11 Development\_0004_C# Automation Interface\AutoInterface\QuickTest\bin\Debug\Test.txt");
 
             //////////////Checking Scan ADS function///////////////////
-            List<XmlNode> test =  AdsHandler.ScanADSDevices();
-
-            string route = (AdsHandler.CreateRouteString(test[0]));
-
-            AdsHandler.CreateRoute(route);
+            //List<XmlNode> test =  AdsHandler.ScanADSDevices();
+            //string route = (AdsHandler.CreateRouteString(test[0]));
+            //AdsHandler.CreateRoute(route);
            
             Console.ReadLine();
         }
