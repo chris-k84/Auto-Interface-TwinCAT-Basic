@@ -16,13 +16,13 @@ namespace Engine
     public class VisualStudioHandler
     {
         #region Fields
-        DTE _dte;
-        string _dirPath;
-        Solution _solution;
-        string _solName;
-        Project _tcProject;
-        string _tcTemplate = @"C:\TwinCAT\3.1\Components\Base\PrjTemplate\TwinCAT Project.tsproj";
-        ITcSysManager15 _sysMan;
+        private DTE _dte;
+        private string _dirPath;
+        private Solution _solution;
+        private string _solName;
+        private Project _tcProject;
+        private string _tcTemplate = @"C:\TwinCAT\3.1\Components\Base\PrjTemplate\TwinCAT Project.tsproj";
+        private ITcSysManager15 _sysMan;
         #endregion
 
         #region Properties
@@ -118,7 +118,7 @@ namespace Engine
             System.Threading.Thread.Sleep(2000);
             _sysMan = _tcProject.Object;
         }
-        List<Type> GetInstalledVersions()
+        private List<Type> GetInstalledVersions()
         {
             string[] vsVersions = { "11.0", "12.0", "14.0", "15.0", "16.0" };
 

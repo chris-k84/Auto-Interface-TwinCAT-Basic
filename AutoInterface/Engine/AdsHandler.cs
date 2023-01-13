@@ -14,26 +14,42 @@ namespace Engine
     }
     public class AdsHandler : IAdsHandler
     {
+        #region Fields
         private ITcSysManager15 _sysMan { get; set; }
-        public ITcSysManager15 SysManager15 { get; set; }
+        private string _xmlRouteString = "<TreeItem><RoutePrj><TargetList><BroadcastSearch>true</BroadcastSearch></TargetList></RoutePrj></TreeItem>";        
+        #endregion
 
-        private string _xmlRouteString = "<TreeItem><RoutePrj><TargetList><BroadcastSearch>true</BroadcastSearch></TargetList></RoutePrj></TreeItem>";
-        string _routes;
-        XmlDocument _routeXml = new XmlDocument();
+        #region Properties
+        public ITcSysManager15 SysManager 
+        {
+            get
+            {
+                return _sysMan;
+            }
+            set 
+            {
+                _sysMan = value;
+            }
+        }
+        public AdsHandler()
+        { }
         public AdsHandler(ITcSysManager15 sysman )
         {
             this._sysMan = sysman;
         }
+        #endregion
+
+        #region Methods
         public List<XmlNode> ScanADSDevices()
         {
             List<XmlNode> routeXmls = new List<XmlNode>();
+            XmlDocument _routeXml = new XmlDocument();
             try
             {
-                
+                string _routes;
                 ITcSmTreeItem routes = _sysMan.LookupTreeItem("TIRR");
                 routes.ConsumeXml(_xmlRouteString);
                 _routes = routes.ProduceXml();
-
                 _routeXml.LoadXml(_routes);
 
                 XmlNodeList xmlDeviceList = _routeXml.SelectNodes("TreeItem/RoutePrj/TargetList/Target");
@@ -49,5 +65,6 @@ namespace Engine
             }
             return routeXmls;
         }
+        #endregion
     }
 }

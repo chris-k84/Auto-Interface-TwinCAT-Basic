@@ -20,7 +20,7 @@ namespace Engine
     public class TwinCATHandler : ITwinCATHandler
     {
         #region Fields
-        ITcSysManager15 _sysMan;
+        private ITcSysManager15 _sysMan;
         Dictionary<string, Guid> _tcomModuleTable = new Dictionary<string, Guid>();
 
         #endregion
