@@ -85,7 +85,7 @@ namespace Engine
         public void CreateRoute(string route)
         {
             ITcSmTreeItem routes = _sysMan.LookupTreeItem("TIRR");
-            routes.ConsumeXml(_xmlRouteString);
+            routes.ConsumeXml(route);
         }
         #endregion
     }
