@@ -18,6 +18,7 @@ namespace Engine
         #region Fields
         private ITcSysManager15 _sysMan { get; set; }
         private string _xmlRouteString = "<TreeItem><RoutePrj><TargetList><BroadcastSearch>true</BroadcastSearch></TargetList></RoutePrj></TreeItem>";
+        private ISystemManager _systemManager;
         #endregion
 
         #region Properties
@@ -30,6 +31,18 @@ namespace Engine
             set 
             {
                 _sysMan = value;
+            }
+        }
+        public ISystemManager systemManager 
+        {
+            get
+            {
+                return _systemManager;
+            }
+            set 
+            {
+                _systemManager = value;
+                _sysMan = value.SysMan;
             }
         }
         #endregion

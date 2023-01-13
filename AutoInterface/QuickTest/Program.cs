@@ -27,7 +27,7 @@ namespace QuickTest
                 Console.WriteLine("Finished Creating......");
 
                 TcHandler = new TwinCATHandler(newVisualStudio.SysMan);
-                AdsHandler = new AdsHandler(newVisualStudio.SysMan);
+                AdsHandler = new AdsHandler(newVisualStudio);
 
                 newVisualStudio.Save();
                 Console.WriteLine("Saving......");
