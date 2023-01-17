@@ -26,7 +26,7 @@ namespace QuickTest
 
                 Console.WriteLine("Finished Creating......");
 
-                TcHandler = new TwinCATHandler(newVisualStudio.SysMan);
+                TcHandler = new TwinCATHandler(newVisualStudio);
                 AdsHandler = new AdsHandler(newVisualStudio);
 
                 newVisualStudio.Save();
@@ -37,7 +37,7 @@ namespace QuickTest
                 Console.WriteLine("LoadingProject");
                 newVisualStudio.LoadTcProject(@"C:\Users\ChrisK\Documents\TcXaeShell\RandomShit\RandomShit.sln");
 
-                TcHandler = new TwinCATHandler(newVisualStudio.SysMan);
+                TcHandler = new TwinCATHandler(newVisualStudio);
                 Console.WriteLine("Finished Loading");
             }
 
