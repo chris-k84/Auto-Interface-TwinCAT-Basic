@@ -14,7 +14,8 @@ namespace Engine
         #region Fields
         List<ITcSmTreeItem> _devices;
         List<String> _slaveDevicePaths = new List<string>();
-        ITcSysManager15 _sysMan;
+        private ITcSysManager15 _sysMan;
+        private ISystemManager _systemManager;
         #endregion
         #region Constructors
         public IOHandler()
@@ -31,6 +32,19 @@ namespace Engine
         {
             get { return _slaveDevicePaths; }
         }
+        public ISystemManager systemManager
+        {
+            get
+            {
+                return _systemManager;
+            }
+            set
+            {
+                _systemManager = value;
+                _sysMan = value.SysMan;
+            }
+        }
+
         #endregion
         #region Methods
         public void ScanIO() //TODO - refactor this code

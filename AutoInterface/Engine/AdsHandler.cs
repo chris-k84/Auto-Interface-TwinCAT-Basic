@@ -22,17 +22,6 @@ namespace Engine
         #endregion
 
         #region Properties
-        public ITcSysManager15 SysManager 
-        {
-            get
-            {
-                return _sysMan;
-            }
-            set 
-            {
-                _sysMan = value;
-            }
-        }
         public ISystemManager systemManager 
         {
             get

@@ -22,17 +22,30 @@ namespace Engine
         #region Fields
         private ITcSysManager15 _sysMan;
         Dictionary<string, Guid> _tcomModuleTable = new Dictionary<string, Guid>();
-
+        private ISystemManager _systemManager;
         #endregion
-
+        #region Properties
+        public ISystemManager systemManager
+        {
+            get
+            {
+                return _systemManager;
+            }
+            set
+            {
+                _systemManager = value;
+                _sysMan = value.SysMan;
+            }
+        }
+        #endregion
         #region Constructors
         public TwinCATHandler()
         {
 
         }
-        public TwinCATHandler(ITcSysManager15 sysManager)
+        public TwinCATHandler(ISystemManager systemManager)
         {
-            _sysMan = sysManager;
+            this._sysMan = systemManager.SysMan;
         }
         #endregion
 

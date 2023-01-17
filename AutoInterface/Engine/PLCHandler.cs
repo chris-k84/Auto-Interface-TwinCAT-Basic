@@ -13,18 +13,33 @@ namespace Engine
     public class PLCHandler : IPLCHandler
     {
         #region Fields
-        ITcSysManager15 _sysMan;
+        private ITcSysManager15 _sysMan;
+        private ISystemManager _systemManager;
         ITcSmTreeItem _plcProj;
         ITcSmTreeItem _gvlFolder;
         ITcSmTreeItem _gvlList;
         ITcPlcDeclaration _itcGvlList;
         #endregion
+        #region Properties
+        public ISystemManager systemManager
+        {
+            get
+            {
+                return _systemManager;
+            }
+            set
+            {
+                _systemManager = value;
+                _sysMan = value.SysMan;
+            }
+        }
+        #endregion
         #region Constructor
         public PLCHandler()
         { }
-        public PLCHandler(ITcSysManager15 sysManager)
+        public PLCHandler(ISystemManager systemManager)
         {
-            _sysMan = sysManager;
+            this._sysMan = systemManager.SysMan;
         }
         #endregion
         #region Methods
