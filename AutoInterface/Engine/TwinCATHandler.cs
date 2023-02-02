@@ -153,9 +153,17 @@ namespace Engine
             _sysMan.ActivateConfiguration();
             _sysMan.StartRestartTwinCAT();
         }
-        public ITcSmTreeItem LookUpTcCOM()
+        public ITcSmTreeItem LookUpTcCOMNode()
         {
             return _sysMan.LookupTreeItem("TIRC^TcCOM Objects");
+        }
+        public ITcSmTreeItem LookUpTaskNode()
+        {
+            return _sysMan.LookupTreeItem("TIRT");
+        }
+        public ITcSmTreeItem LookUpRealTimeNode()
+        {
+            return _sysMan.LookupTreeItem("TIRS");
         }
         public void LoadTcCOMToStore(string modelName, string guid)
         {
@@ -179,7 +187,6 @@ namespace Engine
                 
             }
         }
-
         public void AddTcCOM(string Module, string guid, ITcSmTreeItem TcCom) 
         {
             try
@@ -191,7 +198,6 @@ namespace Engine
 
             }
         }
-
         public ITcSmTreeItem LookUpNode(string node)
         {
             return _sysMan.LookupTreeItem(node);
@@ -208,96 +214,6 @@ namespace Engine
         {
             node.ExportChild(child, file);
         }
-
-        //public void BroadcastSearch()
-        //{
-        //    ///BROADCAST SEARCH AND FILTER
-        //    //Search EtherNET at a specific IP Address for a TwinCAT installation
-        //    //string xmlString = "<TreeItem><RoutePrj><TargetList><Search>"+textBox2.Text+"</Search></TargetList></RoutePrj></TreeItem>";
-        //    string xmlString = "<TreeItem><RoutePrj><TargetList><BroadcastSearch>true</BroadcastSearch></TargetList></RoutePrj></TreeItem>";
-        //    ITcSmTreeItem routes = sysManager.LookupTreeItem("TIRR");
-        //    routes.ConsumeXml(xmlString);
-        //    //"result" will contain the XML information required to create the route
-        //    string result = routes.ProduceXml();
-        //    System.Windows.Forms.MessageBox.Show(result);
-
-        //    //Extract required information from the Previous search results
-        //    XmlDocument xmlDocument = new XmlDocument();
-        //    xmlDocument.LoadXml(result);
-        //    //xmlDocument.Load();
-        //    //string amsNetId = xmlDocument.SelectSingleNode("//TreeItem/RoutePrj/ActualRoutes/Route/IpAddr[text()=\"" + textBox2.Text + "\"]/../NetId").InnerText;
-
-        //    string remoteName = "no remote name found";
-        //    //string amsNetId = "no remote AmsNetId Found";
-        //    string IpAddr = "No IP Address Found";
-        //    int i = 0;
-
-        //    do
-        //    {
-        //        remoteName = xmlDocument.GetElementsByTagName("Name")[i].InnerText;
-        //        if (remoteName.Contains(textBox6.Text))
-        //        {
-        //            amsNetId = xmlDocument.GetElementsByTagName("NetId")[i].InnerText;
-        //            IpAddr = xmlDocument.GetElementsByTagName("IpAddr")[i].InnerText;
-        //        }
-        //        i++;
-
-        //    } while ((amsNetId == "no remote AmsNetId Found") && (i < 10));
-
-        //    if (amsNetId == "no remote AmsNetId Found") //set failed tickbox on 
-        //    {
-        //        checkBox8.Checked = true;
-        //    }
-        //    //System.Windows.Forms.MessageBox.Show(amsNetId);
-        //    //string name = xmlDocument.SelectSingleNode("//TreeItem/RoutePrj/TargetList/Target/IpAddr[text()=\"" + textBox2.Text + "\"]/../Name").InnerText;
-
-        //    //Create the route on the remote device
-        //    xmlString = "<TreeItem><ItemName>Route Settings</ItemName><PathName>TIRR</PathName><RoutePrj><TargetList><BroadcastSearch>true</BroadcastSearch></TargetList><AddRoute><RemoteName>" + textBox5.Text + "</RemoteName><RemoteNetId>" + amsNetId + "</RemoteNetId><RemoteIpAddr>" + IpAddr + "</RemoteIpAddr><UserName>" + textBox3.Text + "</UserName><Password>" + textBox4.Text + "</Password><NoEncryption></NoEncryption></AddRoute></RoutePrj></TreeItem>";
-        //    //xmlString = "< TreeItem >< ItemName > Route Settings </ ItemName >< PathName > TIRR </ PathName >< RoutePrj >< TargetList >< BroadcastSearch > true </ BroadcastSearch ></ TargetList >< AddRoute >< RemoteName >" + textBox5.Text + "</ RemoteName >< RemoteNetId >"+amsNetId+ "</ RemoteNetId >< RemoteIpAddr >" + textBox2.Text + "</ RemoteIpAddr >< UserName >" + textBox3.Text + "</ UserName >< Password >" + textBox4.Text + "</ Password >< NoEncryption ></ NoEncryption >< LocalName >"+localName+"</ LocalName ></ AddRoute ></ RoutePrj ></ TreeItem >";
-        //    routes = sysManager.LookupTreeItem("TIRR");
-        //    System.Windows.Forms.MessageBox.Show(remoteName);
-        //    routes.ConsumeXml(xmlString);
-
-        //    //Point o the TwinCAT runtime we are going to activate the configuration on
-        //    sysManager2.SetTargetNetId(amsNetId);
-
-        //}
-
-        //public void AddRoute()
-        //{
-        //    string xmlString = "<TreeItem><RoutePrj><TargetList><Search>" + textBox2.Text + "</Search></TargetList></RoutePrj></TreeItem>";
-        //    ITcSmTreeItem routes = sysManager.LookupTreeItem("TIRR");
-        //    routes.ConsumeXml(xmlString);
-        //    //"result" will contain the XML information required to create the route
-        //    string result = routes.ProduceXml();
-        //    //System.Windows.Forms.MessageBox.Show(result);
-        //    //Extract required information from the Previous search results
-        //    XmlDocument xmlDocument = new XmlDocument();
-        //    xmlDocument.LoadXml(result);
-        //    XmlNodeList nodeList;
-        //    XmlNode root = xmlDocument.DocumentElement;
-        //    nodeList = root.SelectNodes("descendant::TargetList[Target/IpAddr='" + textBox2.Text + "']");
-        //    foreach (XmlNode Target in nodeList)
-        //    {
-        //        XmlNode example = Target.SelectSingleNode("Target");
-        //        if (example != null)
-        //        {
-        //            amsNetId = example["NetId"].InnerText;
-        //        }
-        //    }
-        //    if (amsNetId == "no remote AmsNetId Found") //set failed tickbox on 
-        //    {
-        //        checkBox8.Checked = true;
-        //    }
-        //    xmlString = "<TreeItem><ItemName>Route Settings</ItemName><PathName>TIRR</PathName><RoutePrj><TargetList><BroadcastSearch>true</BroadcastSearch></TargetList><AddRoute><RemoteName>" + textBox5.Text + "</RemoteName><RemoteNetId>" + amsNetId + "</RemoteNetId><RemoteIpAddr>" + textBox2.Text + "</RemoteIpAddr><UserName>" + textBox3.Text + "</UserName><Password>" + textBox4.Text + "</Password><NoEncryption></NoEncryption></AddRoute></RoutePrj></TreeItem>";
-        //    //xmlString = "< TreeItem >< ItemName > Route Settings </ ItemName >< PathName > TIRR </ PathName >< RoutePrj >< TargetList >< BroadcastSearch > true </ BroadcastSearch ></ TargetList >< AddRoute >< RemoteName >" + textBox5.Text + "</ RemoteName >< RemoteNetId >"+amsNetId+ "</ RemoteNetId >< RemoteIpAddr >" + textBox2.Text + "</ RemoteIpAddr >< UserName >" + textBox3.Text + "</ UserName >< Password >" + textBox4.Text + "</ Password >< NoEncryption ></ NoEncryption >< LocalName >"+localName+"</ LocalName ></ AddRoute ></ RoutePrj ></ TreeItem >";
-        //    routes = sysManager.LookupTreeItem("TIRR");
-        //    routes.ConsumeXml(xmlString);
-
-        //    //Point o the TwinCAT runtime we are going to activate the configuration on
-        //    sysManager2.SetTargetNetId(amsNetId);
-        //}
-
         #endregion
     }
 }

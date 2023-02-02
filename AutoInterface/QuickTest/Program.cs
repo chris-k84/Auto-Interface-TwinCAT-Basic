@@ -62,7 +62,7 @@ namespace QuickTest
             //TcHandler.DeployTreeItemXml(RealTime, RTSettings);
 
             ///////////Section to retireive time context form node///////////////
-            ITcSmTreeItem RealTime = TcHandler.LookUpTcCOM();
+            ITcSmTreeItem RealTime = TcHandler.LookUpTcCOMNode();
             TcHandler.LoadTcCOMToStore("MyTestModel", "{D5A06A5D-4755-C5CA-1A95-2DDA29310065}");
             TcHandler.AddTcCOM("MyTestModel",RealTime);
             TcHandler.AddTcCOM("MyTestModel2", "{D5A06A5D-4755-C5CA-1A95-2DDA29310065}", RealTime);
