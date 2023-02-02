@@ -1,18 +1,25 @@
-Project: This project is to create a wrapper class to help simplify the Automation Interface for use deploying TwinCAT projects to targets. It also contains a set of samples for implementing these features as a base guideline for new users.
+# Automation Interface Basic Implementation
 
-Requirements: TwinCAT 3 4022 or higher
+## Project: 
+This project is to create a set of classes that capture the functionality of the [Automation Interface](https://infosys.beckhoff.com/content/1033/tc3_automationinterface/index.html?id=3954232867334285510). The project is designed to give you a set of classes which can be used as the basis of your own implementations or simply provide a set of examples for how to perform different tasks.
 
-Creator: ChrisK
+## Requirements: 
+TwinCAT 3 4022 or higher
 
-Contributors: ChrisK
+## Creator: 
+ChrisK
 
-Comments:
-a set of wrapper classes to allow the easy implementation of the Automation Interface.
-IO Handler class deals with Fieldbus IO handling
-PLC Handler class deals with the PLC elements and level 2 interfaces
-TwinCAT Handler class deals with the level 1 interface for system set up
-Visual Studio Handler class deals with the DTE Visual Studio interaction
+## Contributors: 
+ChrisK - LOL All by myself!
 
-Details:
+## Comments:
 
-Notice:
+## Details:
+The set of wrapper classes to allow the easy implementation of the Automation Interface.
+- IO Handler class deals with Fieldbus IO handling
+- PLC Handler class deals with the PLC elements, creating PLC projects and elements also level 2 interfaces which allow code modification, library control etc.
+- TwinCAT Handler class deals with the level 1 interface for system set up, creating tasks, core assignment, linking etc.
+- Visual Studio Handler class deals with the DTE Visual Studio interaction
+- ADS Handler class deals with ADS comms, including target detection and route creation.
+
+## Notice:

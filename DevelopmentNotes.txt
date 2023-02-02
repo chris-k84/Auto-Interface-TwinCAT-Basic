@@ -10,7 +10,7 @@ Methods Implemented
 -Create a TC project					//Done
 -Save Solution						//Under modification
 -Create PLC project					//Done
--Scan ADS devices					//under modification
+-Scan ADS devices					//Done
 -Add GVL list to PLC					//Under modification
 -Scan IO 						//Under Test
 -Create PD links					//Done
@@ -18,4 +18,4 @@ Methods Implemented
 -Set an AMS net id as target device			//Done
 -get current mappings					//Done
 -load mapping set					//Done
--create task						//under mods
+-create task						//Done
