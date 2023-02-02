@@ -18,6 +18,7 @@ namespace QuickTest
             if (true)
             {
                 Console.WriteLine("Started Creating......");
+                newVisualStudio.SetEnvVisability(true, true);
 
                 newVisualStudio.CreateDirectory(@"C:\Users\ChrisK\Documents\TcXaeShell\TestProject");
                 newVisualStudio.CreateSolution("Test");
@@ -60,6 +61,14 @@ namespace QuickTest
             //string RTSettings = xdoc.InnerXml;
             //TcHandler.DeployTreeItemXml(RealTime, RTSettings);
 
+            ///////////Section to retireive time context form node///////////////
+            ITcSmTreeItem RealTime = TcHandler.LookUpTcCOM();
+            TcHandler.LoadTcCOMToStore("MyTestModel", "{D5A06A5D-4755-C5CA-1A95-2DDA29310065}");
+            TcHandler.AddTcCOM("MyTestModel",RealTime);
+            TcHandler.AddTcCOM("MyTestModel2", "{D5A06A5D-4755-C5CA-1A95-2DDA29310065}", RealTime);
+
+            
+            
 
             /////////Section getting the XTI vs ItemXml of a device for comparison/////////////
             //ITcSmTreeItem EthMaster = TcHandler.LookUpNode("TIID^Device 1 (EtherCAT)");

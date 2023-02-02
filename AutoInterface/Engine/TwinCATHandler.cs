@@ -21,7 +21,7 @@ namespace Engine
     {
         #region Fields
         private ITcSysManager15 _sysMan;
-        Dictionary<string, Guid> _tcomModuleTable = new Dictionary<string, Guid>();
+        Dictionary<string, string> _tcomModuleTable = new Dictionary<string, string>();
         private ISystemManager _systemManager;
         #endregion
         #region Properties
@@ -157,11 +157,11 @@ namespace Engine
         {
             return _sysMan.LookupTreeItem("TIRC^TcCOM Objects");
         }
-        public void LoadTcCOM(string tcCOM)
+        public void LoadTcCOMToStore(string modelName, string guid)
         {
             try
             {
-                _tcomModuleTable.Add("TctSmplTempCtrl", Guid.Parse("{2462082a-5901-4cf0-b10d-4f472a5918d4}"));
+                _tcomModuleTable.Add(modelName, guid);
             }
             catch (Exception e)
             {
@@ -172,15 +172,26 @@ namespace Engine
         {
             try
             {
-                ITcSmTreeItem tempController = TcCom.CreateChild(Module, 0, "", _tcomModuleTable["TctSmplTempCtrl"]);
-                tempController.Name = "Onat";
+                ITcSmTreeItem tempController = TcCom.CreateChild(Module, 0, "", _tcomModuleTable[Module]);
             }
             catch (Exception e)
             {
                 
             }
-
         }
+
+        public void AddTcCOM(string Module, string guid, ITcSmTreeItem TcCom) 
+        {
+            try
+            {
+                ITcSmTreeItem tempController = TcCom.CreateChild(Module, 0, "", guid);
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
+
         public ITcSmTreeItem LookUpNode(string node)
         {
             return _sysMan.LookupTreeItem(node);
