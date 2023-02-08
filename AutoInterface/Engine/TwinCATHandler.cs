@@ -198,6 +198,32 @@ namespace Engine
 
             }
         }
+        public ITcModuleManager2 GetModuleManager()
+        {
+            return (ITcModuleManager2)_sysMan.GetModuleManager();
+        }
+        public IList<ITcModuleInstance2> GetModules(ITcModuleManager2 ModuleManager)
+        {
+            List<ITcModuleInstance2> modules = new List<ITcModuleInstance2>();  
+            foreach (ITcModuleInstance2 module in ModuleManager)
+            {
+                modules.Add(module);
+            }
+            return modules;
+        }
+        public void SetModuleContext(uint index, uint Oid, ITcModuleInstance2 module)
+        {
+            ITcModuleManager2 moduleManager = (ITcModuleManager2)_sysMan.GetModuleManager();
+            module.SetModuleContext(index, Oid);
+        }
+        public Tuple<uint, uint> GetModuleContext(ITcModuleInstance2 module)
+        {
+            uint index = 0;
+            uint Oid = 0;
+            ITcModuleManager2 moduleManager = (ITcModuleManager2)_sysMan.GetModuleManager();
+            module.GetModuleContext(index, ref Oid);
+            return Tuple.Create(index, Oid);
+        }
         public ITcSmTreeItem LookUpNode(string node)
         {
             return _sysMan.LookupTreeItem(node);

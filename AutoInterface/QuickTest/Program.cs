@@ -67,8 +67,22 @@ namespace QuickTest
             TcHandler.AddTcCOM("MyTestModel",RealTime);
             TcHandler.AddTcCOM("MyTestModel2", "{D5A06A5D-4755-C5CA-1A95-2DDA29310065}", RealTime);
 
+            TcHandler.CreateTask("NewTask", 12, 10000);
+       
+            XmlDocument someTaskDoc = new XmlDocument();
+            string someTaskXml = TcHandler.GetTreeItemXml(TcHandler.LookUpNode("TIRT^NewTask"));
+            someTaskDoc.LoadXml(someTaskXml);
             
-            
+            uint index = 0;
+            uint Oid = 33620000;
+
+            IList<ITcModuleInstance2> modules = TcHandler.GetModules(TcHandler.GetModuleManager());
+
+            TcHandler.SetModuleContext(index, Oid, modules[0]);
+
+            Tuple<uint, uint> module; 
+
+            module = TcHandler.GetModuleContext(modules[0]);
 
             /////////Section getting the XTI vs ItemXml of a device for comparison/////////////
             //ITcSmTreeItem EthMaster = TcHandler.LookUpNode("TIID^Device 1 (EtherCAT)");
@@ -83,7 +97,7 @@ namespace QuickTest
             //List<XmlNode> test =  AdsHandler.ScanADSDevices();
             //string route = (AdsHandler.CreateRouteString(test[0]));
             //AdsHandler.CreateRoute(route);
-           
+
             Console.ReadLine();
         }
     }
