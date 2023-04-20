@@ -1,6 +1,8 @@
 ﻿using TCatSysManagerLib;
 using System.Xml;
 using System.Windows;
+using System.Collections.Generic;
+using System;
 
 namespace Engine
 {
@@ -20,7 +22,7 @@ namespace Engine
     public class TwinCATHandler : ITwinCATHandler
     {
         #region Fields
-        private ITcSysManager15 _sysMan;
+        private ITcSysManager8 _sysMan;
         Dictionary<string, string> _tcomModuleTable = new Dictionary<string, string>();
         private ISystemManager _systemManager;
         #endregion

@@ -62,22 +62,23 @@ namespace QuickTest
             //TcHandler.DeployTreeItemXml(RealTime, RTSettings);
 
             ///////////Section to retireive time context form node///////////////
-            //ITcSmTreeItem RealTime = TcHandler.LookUpTcCOMNode();
-            //TcHandler.LoadTcCOMToStore("MyTestModel", "{D5A06A5D-4755-C5CA-1A95-2DDA29310065}");
-            //TcHandler.AddTcCOM("MyTestModel",RealTime);
-            //TcHandler.AddTcCOM("MyTestModel2", "{D5A06A5D-4755-C5CA-1A95-2DDA29310065}", RealTime);
-            TcHandler.CreateTask("NewTask", 12, 10000);
+            ITcSmTreeItem RealTime = TcHandler.LookUpTcCOMNode();
+            
+            TcHandler.LoadTcCOMToStore("SimulinkPositionControl", "{5479AD7B-8B2A-FCB2-6CB8-AE49C415C898}");
+            TcHandler.AddTcCOM("SimulinkPositionControl", RealTime);
+            //TcHandler.AddTcCOM("SimulinkPositionControl", "{5479AD7B-8B2A-FCB2-6CB8-AE49C415C898}", RealTime);
+            //TcHandler.CreateTask("NewTask", 12, 10000);
             //uint index = 0;
             //uint Oid = 33620000;
             //IList<ITcModuleInstance2> modules = TcHandler.GetModules(TcHandler.GetModuleManager());
             //TcHandler.SetModuleContext(index, Oid, modules[0]);
-            //Tuple<uint, uint> module; 
+            //Tuple<uint, uint> module;
             //module = TcHandler.GetModuleContext(modules[0]);
 
             /////////Section getting the XTI vs ItemXml of a device for comparison/////////////
-            XmlDocument xdoc = new XmlDocument();
-            ITcSmTreeItem EthMaster = TcHandler.LookUpNode("TIRT^NewTask");
-            xdoc.LoadXml(TcHandler.GetTreeItemXml(EthMaster));
+            //XmlDocument xdoc = new XmlDocument();
+            //ITcSmTreeItem EthMaster = TcHandler.LookUpNode("TIRT^NewTask");
+            //xdoc.LoadXml(TcHandler.GetTreeItemXml(EthMaster));
             //xdoc.Save("myCheck.xml");
             //XmlDocument xdoc1 = new XmlDocument();
             //ITcSmTreeItem io = TcHandler.LookUpNode("TIID");
