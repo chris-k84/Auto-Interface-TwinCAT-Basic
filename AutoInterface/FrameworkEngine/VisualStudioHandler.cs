@@ -38,16 +38,10 @@ namespace Engine
         #region Methods
         public void InitialiseVSEnv()
         {
-            try
-            {
                 List<Type> vsVer = GetInstalledVersions();
                 int count = vsVer.Count;
-                _dte = (EnvDTE.DTE)System.Activator.CreateInstance(vsVer[count]);
-            }
-            catch (Exception e)
-            {
-                
-            }
+                _dte = (EnvDTE.DTE)System.Activator.CreateInstance(vsVer[count-1]);
+
         }
         public void SetEnvVisability(bool UI, bool mainVisible)
         {
@@ -60,33 +54,19 @@ namespace Engine
         }
         public void CreateDirectory(string path)
         {
-            try
-            {
                 if (Directory.Exists(path))
                 {
                     Directory.Delete(path, true);
                 }
                 Directory.CreateDirectory(path);
                 _dirPath = path;
-            }
-            catch (Exception e)
-            {
-               
-            }
         }
         public void CreateSolution(string name)
         {
-            try
-            {
                 Directory.CreateDirectory(Path.Combine(_dirPath, name));
                 _solution = _dte.Solution;
                 _solution.Create(_dirPath, name);
-                _solName = name + ".sln"; ;
-            }
-            catch (Exception e)
-            {
-               
-            }
+                _solName = name + ".sln"; 
         }
         public void Save()
         {

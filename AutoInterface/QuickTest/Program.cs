@@ -62,10 +62,10 @@ namespace QuickTest
             //TcHandler.DeployTreeItemXml(RealTime, RTSettings);
 
             ///////////Section to retireive time context form node///////////////
-            ITcSmTreeItem RealTime = TcHandler.LookUpTcCOMNode();
+            //ITcSmTreeItem RealTime = TcHandler.LookUpTcCOMNode();
             
-            TcHandler.LoadTcCOMToStore("SimulinkPositionControl", "{5479AD7B-8B2A-FCB2-6CB8-AE49C415C898}");
-            TcHandler.AddTcCOM("SimulinkPositionControl", RealTime);
+            //TcHandler.LoadTcCOMToStore("SimulinkPositionControl", "{5479AD7B-8B2A-FCB2-6CB8-AE49C415C898}");
+            //TcHandler.AddTcCOM("SimulinkPositionControl", RealTime);
             //TcHandler.AddTcCOM("SimulinkPositionControl", "{5479AD7B-8B2A-FCB2-6CB8-AE49C415C898}", RealTime);
             //TcHandler.CreateTask("NewTask", 12, 10000);
             //uint index = 0;
