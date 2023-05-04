@@ -89,6 +89,17 @@ namespace Engine
             ITcSmTreeItem routes = _sysMan.LookupTreeItem("TIRR");
             routes.ConsumeXml(route);
         }
+        public void SetAMSNET(string amsNetId)
+        {
+            try
+            {
+                _sysMan.SetTargetNetId(amsNetId);
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
         #endregion
     }
 }

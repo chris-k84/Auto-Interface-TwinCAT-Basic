@@ -98,17 +98,6 @@ namespace Engine
         {
 
         }
-        public void SetAMSNET(string amsNetId)
-        {
-            try
-            {
-                _sysMan.SetTargetNetId(amsNetId);
-            }
-            catch (Exception e)
-            {
-                
-            }
-        }
         public void CreateLink(string source, string destination)
         {
             try

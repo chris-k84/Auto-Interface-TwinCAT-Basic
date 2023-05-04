@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using TCatSysManagerLib;
 using System.Xml;
@@ -24,9 +23,9 @@ namespace Engine
         {
 
         }
-        public IOHandler(ITcSysManager15 sysManager)
+        public IOHandler(ISystemManager systemManager)
         {
-            _sysMan = sysManager;
+            this._sysMan = systemManager.SysMan;
         }
         #endregion
         #region Properties
