@@ -12,7 +12,6 @@ namespace Engine
         void CreateTask(string taskName, int taskPriority);
         void CreateTask(string taskName, int taskPriority, int taskCycleTime);
         void AssignCores();
-        void SetAMSNET(string amsNetId);
         void CreateLink(string source, string destination);
         void GetMappings();
         void LoadMappings(string mappingInfo);
