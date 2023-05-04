@@ -10,7 +10,6 @@ namespace Engine
         void CreateTask(string taskName, int taskPriority);
         void CreateTask(string taskName, int taskPriority, int taskCycleTime);
         void AssignCores();
-        void SetAMSNET(string amsNetId);
         void CreateLink(string source, string destination);
         void GetMappings();
         void LoadMappings(string mappingInfo);
@@ -95,17 +94,6 @@ namespace Engine
         public void AssignCores() //TODO add code for this function
         {
 
-        }
-        public void SetAMSNET(string amsNetId)
-        {
-            try
-            {
-                _sysMan.SetTargetNetId(amsNetId);
-            }
-            catch (Exception e)
-            {
-                
-            }
         }
         public void CreateLink(string source, string destination)
         {
