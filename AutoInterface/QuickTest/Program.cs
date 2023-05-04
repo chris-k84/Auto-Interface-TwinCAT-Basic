@@ -42,6 +42,10 @@ namespace QuickTest
                 Console.WriteLine("Finished Loading");
             }
 
+            ////////////Creating PDOs on task with image//////////////////////
+            TcHandler.CreateTask("MyTask");
+            TcHandler.CreatePDOonTask("TIRT^MyTask", "driver", "BOOL");
+
             ////////////Sectuion adding EtherCAT Master to project/////////
             //Console.WriteLine("Creating Ec MAster......");
             //ITcSmTreeItem devices = TcHandler.LookUpNode("TIID");

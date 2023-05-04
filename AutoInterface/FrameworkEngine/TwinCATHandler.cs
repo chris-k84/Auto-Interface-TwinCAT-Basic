@@ -93,6 +93,11 @@ namespace Engine
                
             }
         }
+        public void CreatePDOonTask(string task, string name, string type)
+        {
+            ITcSmTreeItem task1 = _sysMan.LookupTreeItem(task);
+            task1.CreateChild(name, 0, null, null);
+        }
         public void AssignCores() //TODO add code for this function
         {
 
