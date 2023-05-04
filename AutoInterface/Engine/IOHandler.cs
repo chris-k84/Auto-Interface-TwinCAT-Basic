@@ -226,6 +226,14 @@ namespace Engine
             tcomModuleTable.Add("TCP/UDP RT", Guid.Parse("{080D0399-6A65-408D-80E1-18D8F699496A}"));
             return device.CreateChild(name, 0, "", tcomModuleTable["TCP/UDP RT"]);
         }
+        public void EnableADSOnEtherCATMaster(string master)
+        {
+            ITcSmTreeItem EcMaster = _sysMan.LookupTreeItem(master);
+            string port = String.Format("<TreeItem><ImageDef><AdsServer><Port>{0}</Port></AdsServer></ImageDef></TreeItem>", "27908");
+            string setADSSymbols = String.Format("<TreeItem><ImageDef><AdsServer><CreateSymbols>{0}</CreateSymbols></AdsServer></ImageDef></TreeItem>", "TRUE");
+            EcMaster.ConsumeXml(port);
+            EcMaster.ConsumeXml(setADSSymbols);
+        }
         #endregion
     }
 }
