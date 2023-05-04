@@ -43,8 +43,8 @@ namespace QuickTest
             }
 
             ////////////Creating PDOs on task with image//////////////////////
-            TcHandler.CreateTask("MyTask");
-            TcHandler.CreatePDOonTask("TIRT^MyTask", "driver", "BOOL");
+            //TcHandler.CreateTask("MyTask");
+            //TcHandler.CreatePDOonTask("TIRT^MyTask^Inputs", "driver", "BOOL");
 
             ////////////Sectuion adding EtherCAT Master to project/////////
             //Console.WriteLine("Creating Ec MAster......");
