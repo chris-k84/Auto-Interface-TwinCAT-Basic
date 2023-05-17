@@ -46,7 +46,7 @@ namespace QuickTest
             //TcHandler.CreateTask("MyTask");
             //TcHandler.CreatePDOonTask("TIRT^MyTask^Inputs", "driver", "BOOL");
 
-            ////////////Sectuion adding EtherCAT Master to project/////////
+            ////////////Section adding EtherCAT Master to project/////////
             //Console.WriteLine("Creating Ec MAster......");
             //ITcSmTreeItem devices = TcHandler.LookUpNode("TIID");
             //IOHandler io = new IOHandler(newVisualStudio.SysMan);
@@ -67,7 +67,6 @@ namespace QuickTest
 
             ///////////Section to retireive time context form node///////////////
             //ITcSmTreeItem RealTime = TcHandler.LookUpTcCOMNode();
-            
             //TcHandler.LoadTcCOMToStore("SimulinkPositionControl", "{5479AD7B-8B2A-FCB2-6CB8-AE49C415C898}");
             //TcHandler.AddTcCOM("SimulinkPositionControl", RealTime);
             //TcHandler.AddTcCOM("SimulinkPositionControl", "{5479AD7B-8B2A-FCB2-6CB8-AE49C415C898}", RealTime);
@@ -93,6 +92,20 @@ namespace QuickTest
             //List<XmlNode> test =  AdsHandler.ScanADSDevices();
             //string route = (AdsHandler.CreateRouteString(test[0]));
             //AdsHandler.CreateRoute(route);
+
+            //////////////Checking Produce/Consumne Update/////////////////////////////
+            XmlDocument firstCheck = new XmlDocument();
+            IOHandler io = new IOHandler(newVisualStudio.SysMan);
+            io.CreateCanInterface(10, 9);
+            ITcSmTreeItem CAN = TcHandler.LookUpNode("TIID^CanDevice");
+            firstCheck.LoadXml(TcHandler.GetTreeItemXml(CAN));
+            //int taskPriority = 13;
+            string xml = string.Format("<TreeItem><DeviceDef><Fcxxxx><Baudrate>{0}</Baudrate></Fcxxxx></DeviceDef></TreeItem>", "CAN 10k");
+            //string xmlPriority = String.Format("<TreeItem><TaskDef><Priority>{0}</Priority></TaskDef></TreeItem>", taskPriority.ToString());
+            CAN.ConsumeXml(xml);
+            XmlDocument secondCheck = new XmlDocument();
+            secondCheck.LoadXml(TcHandler.GetTreeItemXml(CAN));
+
 
             Console.ReadLine();
         }

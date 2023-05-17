@@ -167,11 +167,15 @@ namespace Engine
             string templateDir;
             if (CobIdLength == 29)
             {
-                templateDir = @"C:\Users\chrisk\Desktop\Box 1 (29 bit CAN Interface).xti";
+                templateDir = @"D:\11 Development\_0004_C# Automation Interface\Box 1 (29 bit CAN Interface).xti";
+            }
+            else if(CobIdLength ==11)
+            {
+                templateDir = @"D:\11 Development\_0004_C# Automation Interface\Box 1 (11 bit CAN Interface).xti";
             }
             else
             {
-                templateDir = @"C:\Users\chrisk\Desktop\Box 1 (11 bit CAN Interface).xti";
+                templateDir = @"D:\11 Development\_0004_C# Automation Interface\Box 1 (CAN Interface).xti";
             }
             ManipulateCanInterfaceXti(templateDir, NoOfMessages);
             ITcSmTreeItem CanInterface = CANMaster.ImportChild(templateDir, "", true, "CAN Interface");
