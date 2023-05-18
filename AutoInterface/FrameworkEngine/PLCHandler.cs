@@ -61,7 +61,7 @@ namespace Engine
             try
             {
                 ITcSmTreeItem plc = _sysMan.LookupTreeItem("TIPC");
-                ITcSmTreeItem newProject = plc.CreateChild("NameOfProject", 0, "", pathToProjectFile);
+                ITcSmTreeItem newProject = plc.CreateChild(name, 0, "", pathToProjectFile);
             }
             catch (Exception e)
             {

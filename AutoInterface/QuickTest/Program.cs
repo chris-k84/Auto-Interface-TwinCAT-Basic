@@ -94,18 +94,18 @@ namespace QuickTest
             //AdsHandler.CreateRoute(route);
 
             //////////////Checking Produce/Consumne Update/////////////////////////////
-            XmlDocument firstCheck = new XmlDocument();
-            IOHandler io = new IOHandler(newVisualStudio.SysMan);
-            io.CreateCanInterface(10, 9);
-            ITcSmTreeItem CAN = TcHandler.LookUpNode("TIID^CanDevice");
-            firstCheck.LoadXml(TcHandler.GetTreeItemXml(CAN));
-            //int taskPriority = 13;
-            string xml = string.Format("<TreeItem><DeviceDef><Fcxxxx><Baudrate>{0}</Baudrate></Fcxxxx></DeviceDef></TreeItem>", "CAN 10k");
-            //string xmlPriority = String.Format("<TreeItem><TaskDef><Priority>{0}</Priority></TaskDef></TreeItem>", taskPriority.ToString());
-            CAN.ConsumeXml(xml);
-            XmlDocument secondCheck = new XmlDocument();
-            secondCheck.LoadXml(TcHandler.GetTreeItemXml(CAN));
+            //XmlDocument firstCheck = new XmlDocument();
+            //IOHandler io = new IOHandler(newVisualStudio.SysMan);
+            //io.CreateCanInterface(10, 9);
+            //ITcSmTreeItem CAN = TcHandler.LookUpNode("TIID^CanDevice");
+            //firstCheck.LoadXml(TcHandler.GetTreeItemXml(CAN));
+            //string xml = string.Format("<TreeItem><DeviceDef><Fcxxxx><Baudrate>{0}</Baudrate></Fcxxxx></DeviceDef></TreeItem>", "CAN 10k");
+            //CAN.ConsumeXml(xml);
+            //XmlDocument secondCheck = new XmlDocument();
+            //secondCheck.LoadXml(TcHandler.GetTreeItemXml(CAN));
 
+            ///////////Adding a Existing PLC project////////////////////////
+            PLCHandler plc = new PLCHandler(newVisualStudio.SysMan);
 
             Console.ReadLine();
         }
