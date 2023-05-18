@@ -14,25 +14,12 @@ namespace Engine
     {
         #region Fields
         private ITcSysManager15 _sysMan;
-        private ISystemManager _systemManager;
         ITcSmTreeItem _plcProj;
         ITcSmTreeItem _gvlFolder;
         ITcSmTreeItem _gvlList;
         ITcPlcDeclaration _itcGvlList;
         #endregion
         #region Properties
-        public ISystemManager systemManager
-        {
-            get
-            {
-                return _systemManager;
-            }
-            set
-            {
-                _systemManager = value;
-                _sysMan = value.SysMan;
-            }
-        }
         #endregion
         #region Constructor
         public PLCHandler()
@@ -60,11 +47,11 @@ namespace Engine
             try
             {
                 ITcSmTreeItem plc = _sysMan.LookupTreeItem("TIPC");
-                ITcSmTreeItem newProject = plc.CreateChild(name, 0, "", pathToProjectFile);
+                plc.CreateChild(name, 0, "", pathToProjectFile);
             }
             catch (Exception e)
             {
-                
+                Console.WriteLine(e.ToString());
             }
         }
         public void CreateGVL()

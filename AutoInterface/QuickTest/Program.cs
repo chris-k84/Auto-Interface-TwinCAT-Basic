@@ -95,7 +95,7 @@ namespace QuickTest
 
             //////////////Checking Produce/Consumne Update/////////////////////////////
             //XmlDocument firstCheck = new XmlDocument();
-            //IOHandler io = new IOHandler(newVisualStudio.SysMan);
+            //IOHandler io = new IOHandler(newVisualStudio);
             //io.CreateCanInterface(10, 9);
             //ITcSmTreeItem CAN = TcHandler.LookUpNode("TIID^CanDevice");
             //firstCheck.LoadXml(TcHandler.GetTreeItemXml(CAN));
@@ -105,7 +105,9 @@ namespace QuickTest
             //secondCheck.LoadXml(TcHandler.GetTreeItemXml(CAN));
 
             ///////////Adding a Existing PLC project////////////////////////
-            PLCHandler plc = new PLCHandler(newVisualStudio.SysMan);
+            PLCHandler plc = new PLCHandler(newVisualStudio);
+            plc.AddPLCProj(@"D:\03 TwinCAT Functions\11 Labview\LabviewVIs\portableTrainingRig.tpzip", "Test");
+
 
             Console.ReadLine();
         }
