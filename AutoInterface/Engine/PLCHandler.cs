@@ -82,6 +82,13 @@ namespace Engine
                 
             }
         }
+        public void AutoStartBoot(string PlcName)
+        {
+            ITcSmTreeItem plcProjectRoot = _sysMan.LookupTreeItem(string.Format("TIPC^{0}",PlcName));
+            ITcPlcProject plcProjectRootIec = (ITcPlcProject)plcProjectRoot;
+            plcProjectRootIec.BootProjectAutostart = true;
+            plcProjectRootIec.GenerateBootProject(true);
+        }
         #endregion
     }
 }
