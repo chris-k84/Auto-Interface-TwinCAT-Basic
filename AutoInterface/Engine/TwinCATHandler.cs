@@ -198,7 +198,24 @@ namespace Engine
                     }
                     writer.WriteElementString("Affinity", affinityString);
                     writer.WriteStartElement("CPUs");
-                    EnableACore(writer, 0, 10, 10000, 200);
+                    switch (core)
+                    {
+                        case 1:
+                            EnableACore(writer, 0, 80, 10000, 1000);
+                            break;
+                        case 2:
+                            EnableACore(writer, 1, 80, 10000, 1000);
+                            break;
+                        case 3:
+                            EnableACore(writer, 2, 80, 10000, 1000);
+                            break;
+                        case 4:
+                            EnableACore(writer, 3, 80, 10000, 1000);
+                            break;
+                        default:
+                            EnableACore(writer, 0, 80, 10000, 1000);
+                            break;
+                    }
                     writer.WriteEndElement();     // CPUs     
                     writer.WriteEndElement();     // RTimeSetDef     
                     writer.WriteEndElement();     // TreeItem 
