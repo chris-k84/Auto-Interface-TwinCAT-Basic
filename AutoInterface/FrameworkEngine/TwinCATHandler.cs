@@ -247,7 +247,8 @@ namespace Engine
         {
             ITcSmTreeItem ITrItm = _sysMan.LookupTreeItem("TIRS");
             string sCpuConfig = ITrItm.ProduceXml();
-            sCpuConfig = sCpuConfig.Replace("<MaxCPUs NonWindowsCPUs=\"2\">5</MaxCPUs>", "<MaxCPUs NonWindowsCPUs=\"4\">5</MaxCPUs>");
+            //sCpuConfig = sCpuConfig.Replace("<MaxCPUs NonWindowsCPUs=\"2\">5</MaxCPUs>", "<MaxCPUs NonWindowsCPUs=\"4\">5</MaxCPUs>");
+            sCpuConfig = sCpuConfig.Replace("<MaxCPUs>4</MaxCPUs>", "<MaxCPUs NonWindowsCPUs=\"1\">4</MaxCPUs>");
             ITrItm.ConsumeXml(sCpuConfig);
         }
         public void ActivateSolution()

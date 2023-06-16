@@ -109,9 +109,10 @@ namespace QuickTest
             //plc.AddPLCProj(@"D:\03 TwinCAT Functions\11 Labview\LabviewVIs\portableTrainingRig.tpzip", "Test");
 
             ///////////////Enable 2 Cores and Assign a Task to core 2////////////////
-            //TcHandler.EnableSingleCoreForRT(4);
-            //TcHandler.CreateTask("TestTask");
-            //TcHandler.AssignCores("TestTask", 4);
+            TcHandler.EnableSingleCoreForRT(4);
+            TcHandler.CreateTask("TestTask");
+            TcHandler.AssignCores("TestTask", 4);
+            TcHandler.SetIsolatedCores();
 
 
             Console.ReadLine();
