@@ -105,10 +105,15 @@ namespace QuickTest
             //secondCheck.LoadXml(TcHandler.GetTreeItemXml(CAN));
 
             ///////////Adding a Existing PLC project////////////////////////
-            PLCHandler plc = new PLCHandler(newVisualStudio);
-            plc.AddPLCProj(@"D:\03 TwinCAT Functions\11 Labview\LabviewVIs\portableTrainingRig.tpzip", "Test");
+            //PLCHandler plc = new PLCHandler(newVisualStudio);
+            //plc.AddPLCProj(@"D:\03 TwinCAT Functions\11 Labview\LabviewVIs\portableTrainingRig.tpzip", "Test");
 
+            ///////////////Enable 2 Cores and Assign a Task to core 2////////////////
+            //TcHandler.EnableCoresForRT(2);
+            //TcHandler.CreateTask("TestTask");
+            //TcHandler.AssignCores("TestTask", 2);
 
+            
             Console.ReadLine();
         }
     }

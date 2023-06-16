@@ -3,15 +3,34 @@ using System.Xml;
 using System.Windows;
 using System.Collections.Generic;
 using System;
+using System.IO;
 
 namespace Engine
 {
+    public enum CpuAffinity : ulong
+    {
+        CPU1 = 0x0000000000000001,
+        CPU2 = 0x0000000000000002,
+        CPU3 = 0x0000000000000004,
+        CPU4 = 0x0000000000000008,
+        CPU5 = 0x0000000000000010,
+        CPU6 = 0x0000000000000020,
+        CPU7 = 0x0000000000000040,
+        CPU8 = 0x0000000000000080,
+        None = 0x0000000000000000,
+        MaskSingle = CPU1,
+        MaskDual = CPU1 | CPU2,
+        MaskQuad = MaskDual | CPU3 | CPU4,
+        MaskHexa = MaskQuad | CPU5 | CPU6,
+        MaskOct = MaskHexa | CPU7 | CPU8,
+        MaskAll = 0xFFFFFFFFFFFFFFFF
+    }
     public interface ITwinCATHandler
     {
         void CreateTask(string taskName);
         void CreateTask(string taskName, int taskPriority);
         void CreateTask(string taskName, int taskPriority, int taskCycleTime);
-        void AssignCores();
+        void AssignCores(string taskName, int core);
         void CreateLink(string source, string destination);
         void GetMappings();
         void LoadMappings(string mappingInfo);
@@ -49,7 +68,6 @@ namespace Engine
             this._sysMan = systemManager.SysMan;
         }
         #endregion
-
         #region Methods
         public void CreateTask(string taskName)
         {
@@ -98,9 +116,81 @@ namespace Engine
             ITcSmTreeItem task1 = _sysMan.LookupTreeItem(task);
             task1.CreateChild(name, 0, null, null);
         }
-        public void AssignCores() //TODO add code for this function
+        public void EnableSingleCoreForRT(int core)
         {
+            ITcSmTreeItem realtimeSettings = _sysMan.LookupTreeItem("TIRS");
+            using (StringWriter stringWriter = new StringWriter())
+            {
+                using (XmlWriter writer = XmlTextWriter.Create(stringWriter))
+                {
+                    writer.WriteStartElement("TreeItem");
+                    writer.WriteStartElement("RTimeSetDef");
+                    writer.WriteElementString("MaxCPUs", "4");
+                    string affinityString = "";
+                    switch (core)
+                    {
+                        case 1:
+                            affinityString = string.Format("#x{0}", ((ulong)CpuAffinity.CPU1).ToString("x16"));
+                            break;
+                        case 2:
+                            affinityString = string.Format("#x{0}", ((ulong)CpuAffinity.CPU2).ToString("x16"));
+                            break;
+                        case 3:
+                            affinityString = string.Format("#x{0}", ((ulong)CpuAffinity.CPU3).ToString("x16"));
+                            break;
+                        case 4:
+                            affinityString = string.Format("#x{0}", ((ulong)CpuAffinity.CPU4).ToString("x16"));
+                            break;
+                        default:
+                            affinityString = string.Format("#x{0}", ((ulong)CpuAffinity.CPU1).ToString("x16"));
+                            break;
+                    }
+                    writer.WriteElementString("Affinity", affinityString);
+                    writer.WriteStartElement("CPUs");
+                    EnableACore(writer, 0, 10, 10000, 200);
+                    writer.WriteEndElement();     // CPUs     
+                    writer.WriteEndElement();     // RTimeSetDef     
+                    writer.WriteEndElement();     // TreeItem 
+                }
+                string xml = stringWriter.ToString();
+                realtimeSettings.ConsumeXml(xml);
+            }
+        }
+        private void EnableACore(XmlWriter writer, int id, int loadLimit, int baseTime, int latencyWarning)
+        {
+            writer.WriteStartElement("CPU");
+            writer.WriteAttributeString("id", id.ToString());
+            writer.WriteElementString("LoadLimit", loadLimit.ToString());
+            writer.WriteElementString("BaseTime", baseTime.ToString());
+            writer.WriteElementString("LatencyWarning", latencyWarning.ToString());
+            writer.WriteEndElement();
+        }
+        public void AssignCores(string taskName, int core)
+        {
+            String path = string.Format("TIRT^{0}", taskName);
+            ITcSmTreeItem tasks = _sysMan.LookupTreeItem(path);
+            string coreAssignment = null;
+            switch (core)
+            {
+                case 1:
+                    coreAssignment = string.Format("0x{0:X}", CpuAffinity.CPU1);
+                    break;
+                case 2:
+                    coreAssignment = string.Format("0x{0:X}", CpuAffinity.CPU2);
+                    break;
+                case 3:
+                    coreAssignment = string.Format("0x{0:X}", CpuAffinity.CPU3);
+                    break;
+                case 4:
+                    coreAssignment = string.Format("0x{0:X}", CpuAffinity.CPU4);
+                    break;
+                default:
+                    coreAssignment = string.Format("0x{0:X}", CpuAffinity.CPU1);
+                    break;
+            }
 
+            string xmlCore = String.Format("<TreeItem><TaskDef><CpuAffinity>{0}</CpuAffinity></TaskDef></TreeItem>", coreAssignment);
+            tasks.ConsumeXml(xmlCore);
         }
         public void CreateLink(string source, string destination)
         {
