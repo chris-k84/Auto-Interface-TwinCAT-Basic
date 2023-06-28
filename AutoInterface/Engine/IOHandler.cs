@@ -215,13 +215,13 @@ namespace Engine
             }
             xmlDoc.Save(templateDir);
         }
-        public ITcSmTreeItem CreateEcMaster(ITcSmTreeItem devices)
+        public ITcSmTreeItem CreateEcMaster(ITcSmTreeItem devices)  
         {
-            return devices.CreateChild("EtherCAT Masrter", 111, null, null);
+            return devices.CreateChild("EtherCAT Master", 111, null, null);
         }
         public ITcSmTreeItem CreateChildDevice(ITcSmTreeItem device, string name, int type)
         {
-            return device.CreateChild(name, type, null, null);
+            return device.CreateChild(name, type, null, name);
 
         }
         public ITcSmTreeItem AddRtUdpModule(ITcSmTreeItem device, string name)

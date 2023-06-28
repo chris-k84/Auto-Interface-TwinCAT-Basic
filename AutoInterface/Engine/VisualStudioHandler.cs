@@ -92,7 +92,7 @@ namespace Engine
             {
                 _solution.SaveAs(Path.Combine(_dirPath, _solName));
             }
-
+            
             if (_tcProject != null)
             {
                 _tcProject.Save();
@@ -105,6 +105,7 @@ namespace Engine
                 _tcProject = _solution.AddFromTemplate(_tcTemplate, Path.Combine(_dirPath, name), name);
                 System.Threading.Thread.Sleep(2000);
                 _sysMan = _tcProject.Object;
+                
             }
             catch (Exception e)
             {

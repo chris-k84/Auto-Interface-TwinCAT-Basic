@@ -15,7 +15,7 @@ namespace QuickTest
             TwinCATHandler TcHandler;
             AdsHandler AdsHandler;
             newVisualStudio.InitialiseVSEnv();
-            if (true)
+            if (false)
             {
                 Console.WriteLine("Started Creating......");
                 newVisualStudio.SetEnvVisability(true, true);
@@ -36,7 +36,7 @@ namespace QuickTest
             else
             {
                 Console.WriteLine("LoadingProject");
-                newVisualStudio.LoadTcProject(@"C:\Users\ChrisK\Documents\TcXaeShell\RandomShit\RandomShit.sln");
+                newVisualStudio.LoadTcProject(@"C:\Users\ChrisK\Documents\TcXaeShell\RandomTesting\RandomTesting.sln");
 
                 TcHandler = new TwinCATHandler(newVisualStudio);
                 Console.WriteLine("Finished Loading");
@@ -109,12 +109,44 @@ namespace QuickTest
             //plc.AddPLCProj(@"D:\03 TwinCAT Functions\11 Labview\LabviewVIs\portableTrainingRig.tpzip", "Test");
 
             ///////////////Enable 2 Cores and Assign a Task to core 2////////////////
-            TcHandler.EnableSingleCoreForRT(4);
-            TcHandler.CreateTask("TestTask");
-            TcHandler.AssignCores("TestTask", 4);
-            TcHandler.SetIsolatedCores();
+            //TcHandler.EnableSingleCoreForRT(4);
+            //TcHandler.CreateTask("TestTask");
+            //TcHandler.AssignCores("TestTask", 4);
+            //TcHandler.SetIsolatedCores();
 
+            /////////////////Checking addressing of added IO///////////////////
+            //IOHandler io = new IOHandler(newVisualStudio);
+            //ITcSmTreeItem devices = TcHandler.LookUpNode("TIID");
+            //ITcSmTreeItem ec = io.CreateEcMaster(devices);
+            //ITcSmTreeItem ek1100 = io.CreateChildDevice(ec, "EK1100", 9099);
+            //io.CreateChildDevice(ek1100, "EL1008", 9099);
+            //io.CreateChildDevice(ek1100, "EL2008", 9099);
 
+            /////////////////Set EL7021 into DMC mode/////////////////////////
+            IOHandler io = new IOHandler(newVisualStudio);
+            ITcSmTreeItem devices = TcHandler.LookUpNode("TIID");
+            ITcSmTreeItem ec = io.CreateEcMaster(devices);
+            ITcSmTreeItem ek1100 = io.CreateChildDevice(ec, "EK1100", 9099);
+            ITcSmTreeItem el7201 = io.CreateChildDevice(ek1100, "EL7201-0010", 9099);
+
+            ///This DOES NOT WORK, TOO MANY CHANGES TO THE XML ARE MADE IN TC/////
+            //XmlDocument TreeItem = new XmlDocument();
+            //TreeItem.LoadXml(TcHandler.GetTreeItemXml(el7201));
+            //var oldElem = TreeItem.SelectSingleNode("./TreeItem/EtherCAT/Slave/ProcessData");
+            //XmlDocument SubXml = new XmlDocument();
+            //SubXml.Load(@"D:\11 Development\_0004_C# Automation Interface\test.xml");
+            //////Create a new title element.
+            //XmlElement elem = TreeItem.CreateElement("AlternativeSmMappings");
+            //elem.InnerXml = SubXml.FirstChild.InnerXml;
+            ////////Replace the title element.
+            //oldElem.ReplaceChild(elem, oldElem.LastChild);
+            //TcHandler.DeployTreeItemXml(el7201, TreeItem.OuterXml);
+
+            //XmlDocument real = new XmlDocument();
+            //real.Load(@"D:\11 Development\_0004_C# Automation Interface\el7201_dmc.xml");
+            //TcHandler.DeployTreeItemXml(el7201, real.OuterXml);
+
+            
             Console.ReadLine();
         }
     }
