@@ -221,7 +221,7 @@ namespace Engine
         }
         public ITcSmTreeItem CreateChildDevice(ITcSmTreeItem device, string name, int type)
         {
-            return device.CreateChild(name, type, null, name);
+            return device.CreateChild(name, type, null, null);
 
         }
         public ITcSmTreeItem AddRtUdpModule(ITcSmTreeItem device, string name)

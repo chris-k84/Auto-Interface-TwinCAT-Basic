@@ -4,6 +4,7 @@ using System.Xml;
 using TCatSysManagerLib;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using System.Threading.Tasks;
 
 namespace QuickTest
 {
@@ -15,7 +16,7 @@ namespace QuickTest
             TwinCATHandler TcHandler;
             AdsHandler AdsHandler;
             newVisualStudio.InitialiseVSEnv();
-            if (false)
+            if (true)
             {
                 Console.WriteLine("Started Creating......");
                 newVisualStudio.SetEnvVisability(true, true);
@@ -42,16 +43,24 @@ namespace QuickTest
                 Console.WriteLine("Finished Loading");
             }
 
+
+
             ////////////Creating PDOs on task with image//////////////////////
             //TcHandler.CreateTask("MyTask");
             //TcHandler.CreatePDOonTask("TIRT^MyTask^Inputs", "driver", "BOOL");
 
             ////////////Section adding EtherCAT Master to project/////////
-            //Console.WriteLine("Creating Ec MAster......");
-            //ITcSmTreeItem devices = TcHandler.LookUpNode("TIID");
-            //IOHandler io = new IOHandler(newVisualStudio.SysMan);
-            //ITcSmTreeItem Eth = io.CreateChildDevice(devices, "EtherNET", 109);
-            //Console.WriteLine("Eth Master Ready......");
+            Console.WriteLine("Creating Ec MAster......");
+            ITcSmTreeItem devices = TcHandler.LookUpNode("TIID");
+            IOHandler io = new IOHandler(newVisualStudio);
+            ITcSmTreeItem Eth = io.CreateChildDevice(devices, "EtherCAT", 111);
+            Console.WriteLine("Eth Master Ready......");
+
+            string master = TcHandler.GetTreeItemXml(Eth);
+            ////////////Set Ec Master into redundancy mode/////////////////////
+            string xml = string.Format("<Redundancy><Mode>2</Mode><PreviousPort Selected=\"true\"><Port>C</Port><PhysAddr>1019</PhysAddr></PreviousPort></Redundancy>");
+            string redundancy = master.Insert(2156, xml);
+            Eth.ConsumeXml(redundancy);
 
             /////////Section Adding RtUdp module to IO////////////////////
             //ITcSmTreeItem RT = io.AddRtUdpModule(Eth, "RTIO");
@@ -123,11 +132,11 @@ namespace QuickTest
             //io.CreateChildDevice(ek1100, "EL2008", 9099);
 
             /////////////////Set EL7021 into DMC mode/////////////////////////
-            IOHandler io = new IOHandler(newVisualStudio);
-            ITcSmTreeItem devices = TcHandler.LookUpNode("TIID");
-            ITcSmTreeItem ec = io.CreateEcMaster(devices);
-            ITcSmTreeItem ek1100 = io.CreateChildDevice(ec, "EK1100", 9099);
-            ITcSmTreeItem el7201 = io.CreateChildDevice(ek1100, "EL7201-0010", 9099);
+            //IOHandler io = new IOHandler(newVisualStudio);
+            //ITcSmTreeItem devices = TcHandler.LookUpNode("TIID");
+            //ITcSmTreeItem ec = io.CreateEcMaster(devices);
+            //ITcSmTreeItem ek1100 = io.CreateChildDevice(ec, "EK1100", 9099);
+            //ITcSmTreeItem el7201 = io.CreateChildDevice(ek1100, "EL7201-0010", 9099);
 
             ///This DOES NOT WORK, TOO MANY CHANGES TO THE XML ARE MADE IN TC/////
             //XmlDocument TreeItem = new XmlDocument();
@@ -146,7 +155,7 @@ namespace QuickTest
             //real.Load(@"D:\11 Development\_0004_C# Automation Interface\el7201_dmc.xml");
             //TcHandler.DeployTreeItemXml(el7201, real.OuterXml);
 
-            
+
             Console.ReadLine();
         }
     }
