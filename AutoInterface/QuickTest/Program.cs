@@ -3,9 +3,6 @@ using Engine;
 using System.Xml;
 using TCatSysManagerLib;
 using System.Collections.Generic;
-using System.Xml.Linq;
-using System.Threading.Tasks;
-using System.Runtime.InteropServices;
 
 namespace QuickTest
 {
@@ -61,81 +58,18 @@ namespace QuickTest
             //TcHandler.CreateLink(task.PathName + "^driver", el1008.PathName + "^Channel 1^Input");
 
             //SetRedundancyModeOnEtherCAT(TcHandler, IOHandler);
+
+            //AdsBroadcastSearchandRouteDemo(AdsHandler);
+
+            //SetEL7201IntoDMCModeDemo(TcHandler, IOHandler);
+
+            //AddExistingPLCDemo(PLCHandler);
+
+            //TreeItemProduceConsumeDemo(TcHandler, IOHandler);
             
+            //TreeItemProduceConsumeDemo(TcHandler, IOHandler);
 
-
-
-
-
-
-
-            
-
-            /////////Section getting the XTI vs ItemXml of a device for comparison/////////////
-            //XmlDocument xdoc = new XmlDocument();
-            //ITcSmTreeItem EthMaster = TcHandler.LookUpNode("TIRT^NewTask");
-            //xdoc.LoadXml(TcHandler.GetTreeItemXml(EthMaster));
-            //xdoc.Save("myCheck.xml");
-            //XmlDocument xdoc1 = new XmlDocument();
-            //ITcSmTreeItem io = TcHandler.LookUpNode("TIID");
-            //xdoc.LoadXml(TcHandler.GetTreeItemXml(io));
-            //TcHandler.GetTreeItemXti(io, "Device 1 (EtherCAT)", @"D:\11 Development\_0004_C# Automation Interface\AutoInterface\QuickTest\bin\Debug\Test.txt");
-
-            
-
-            //////////////Checking Produce/Consumne Update/////////////////////////////
-            //XmlDocument firstCheck = new XmlDocument();
-            //IOHandler io = new IOHandler(newVisualStudio);
-            //io.CreateCanInterface(10, 9);
-            //ITcSmTreeItem CAN = TcHandler.LookUpNode("TIID^CanDevice");
-            //firstCheck.LoadXml(TcHandler.GetTreeItemXml(CAN));
-            //string xml = string.Format("<TreeItem><DeviceDef><Fcxxxx><Baudrate>{0}</Baudrate></Fcxxxx></DeviceDef></TreeItem>", "CAN 10k");
-            //CAN.ConsumeXml(xml);
-            //XmlDocument secondCheck = new XmlDocument();
-            //secondCheck.LoadXml(TcHandler.GetTreeItemXml(CAN));
-
-            ///////////Adding a Existing PLC project////////////////////////
-            //PLCHandler plc = new PLCHandler(newVisualStudio);
-            //plc.AddPLCProj(@"D:\03 TwinCAT Functions\11 Labview\LabviewVIs\portableTrainingRig.tpzip", "Test");
-
-            ///////////////Enable 2 Cores and Assign a Task to core 2////////////////
-            //TcHandler.EnableSingleCoreForRT(4);
-            //TcHandler.CreateTask("TestTask");
-            //TcHandler.AssignCores("TestTask", 4);
-            //TcHandler.SetIsolatedCores();
-
-            /////////////////Checking addressing of added IO///////////////////
-            //IOHandler io = new IOHandler(newVisualStudio);
-            //ITcSmTreeItem devices = TcHandler.LookUpNode("TIID");
-            //ITcSmTreeItem ec = io.CreateEcMaster(devices);
-            //ITcSmTreeItem ek1100 = io.CreateChildDevice(ec, "EK1100", 9099);
-            //io.CreateChildDevice(ek1100, "EL1008", 9099);
-            //io.CreateChildDevice(ek1100, "EL2008", 9099);
-
-            /////////////////Set EL7021 into DMC mode/////////////////////////
-            //IOHandler io = new IOHandler(newVisualStudio);
-            //ITcSmTreeItem devices = TcHandler.LookUpNode("TIID");
-            //ITcSmTreeItem ec = io.CreateEcMaster(devices);
-            //ITcSmTreeItem ek1100 = io.CreateChildDevice(ec, "EK1100", 9099);
-            //ITcSmTreeItem el7201 = io.CreateChildDevice(ek1100, "EL7201-0010", 9099);
-
-            ///This DOES NOT WORK, TOO MANY CHANGES TO THE XML ARE MADE IN TC/////
-            //XmlDocument TreeItem = new XmlDocument();
-            //TreeItem.LoadXml(TcHandler.GetTreeItemXml(el7201));
-            //var oldElem = TreeItem.SelectSingleNode("./TreeItem/EtherCAT/Slave/ProcessData");
-            //XmlDocument SubXml = new XmlDocument();
-            //SubXml.Load(@"D:\11 Development\_0004_C# Automation Interface\test.xml");
-            //////Create a new title element.
-            //XmlElement elem = TreeItem.CreateElement("AlternativeSmMappings");
-            //elem.InnerXml = SubXml.FirstChild.InnerXml;
-            ////////Replace the title element.
-            //oldElem.ReplaceChild(elem, oldElem.LastChild);
-            //TcHandler.DeployTreeItemXml(el7201, TreeItem.OuterXml);
-
-            //XmlDocument real = new XmlDocument();
-            //real.Load(@"D:\11 Development\_0004_C# Automation Interface\el7201_dmc.xml");
-            //TcHandler.DeployTreeItemXml(el7201, real.OuterXml);
-
+            //SetTaskCoreAssignmentDemo(TcHandler);
 
             Console.ReadLine();
         }
@@ -228,6 +162,52 @@ namespace QuickTest
             List<XmlNode> test = AdsHandler.ScanADSDevices();
             string route = (AdsHandler.CreateRouteString(test[0]));
             AdsHandler.CreateRoute(route);
+        }
+        static public void SetEL7201IntoDMCModeDemo(ITwinCATHandler TcHandler, IIOHandler io)  // Do not try to edit XML, 100+ changes need to be made, use a template!
+        {
+            /////////////////Set EL7021 into DMC mode/////////////////////////
+            ITcSmTreeItem devices = TcHandler.LookUpNode("TIID");
+            ITcSmTreeItem ec = io.CreateEcMaster(devices);
+            ITcSmTreeItem ek1100 = io.CreateChildDevice(ec, "EK1100", 9099);
+            ITcSmTreeItem el7201 = io.CreateChildDevice(ek1100, "EL7201-0010", 9099);
+            XmlDocument real = new XmlDocument();
+            real.Load(@"D:\11 Development\_0004_C# Automation Interface\el7201_dmc.xml");
+            TcHandler.DeployTreeItemXml(el7201, real.OuterXml);
+        }
+        static public void AddExistingPLCDemo(IPLCHandler plc)
+        {
+            ///////////Adding a Existing PLC project////////////////////////
+            plc.AddPLCProj(@"D:\03 TwinCAT Functions\11 Labview\LabviewVIs\portableTrainingRig.tpzip", "Test");
+        }
+        static public void TreeItemProduceConsumeDemo(ITwinCATHandler TcHandler, IIOHandler io)
+        {
+            //////////////Checking Produce/Consumne Update/////////////////////////////
+            XmlDocument firstCheck = new XmlDocument();
+            io.CreateCanInterface(10, 9);
+            ITcSmTreeItem CAN = TcHandler.LookUpNode("TIID^CanDevice");
+            firstCheck.LoadXml(TcHandler.GetTreeItemXml(CAN));
+            string xml = string.Format("<TreeItem><DeviceDef><Fcxxxx><Baudrate>{0}</Baudrate></Fcxxxx></DeviceDef></TreeItem>", "CAN 10k");
+            CAN.ConsumeXml(xml);
+            XmlDocument secondCheck = new XmlDocument();
+            secondCheck.LoadXml(TcHandler.GetTreeItemXml(CAN));
+        }
+        static public void TreeItemVsXtiExportDemo(ITwinCATHandler TcHandler, IIOHandler io)
+        {
+            /////////Section getting the XTI vs ItemXml of a device for comparison/////////////
+            XmlDocument xdoc = new XmlDocument();
+            ITcSmTreeItem devices = TcHandler.LookUpNode("TIID");
+            ITcSmTreeItem EthMaster = io.CreateChildDevice(devices, "Device 1 (EtherCAT)", 111);
+            xdoc.LoadXml(TcHandler.GetTreeItemXml(EthMaster));
+            xdoc.Save("myCheck.xml");
+            TcHandler.GetTreeItemXti(devices, "Device 1 (EtherCAT)", @"D:\11 Development\_0004_C# Automation Interface\AutoInterface\QuickTest\bin\Debug\Test.txt");
+        }
+        static public void SetTaskCoreAssignmentDemo(ITwinCATHandler TcHandler)
+        {
+            ///////////////Enable 2 Cores and Assign a Task to core 2////////////////
+            TcHandler.EnableSingleCoreForRT(4);
+            TcHandler.CreateTask("TestTask");
+            TcHandler.AssignCores("TestTask", 4);
+            TcHandler.SetIsolatedCores();
         }
     }
 }

@@ -10,6 +10,7 @@ namespace Engine
         void AddSyncUnit();
         public ITcSmTreeItem CreateEcMaster(ITcSmTreeItem devices);
         public ITcSmTreeItem CreateChildDevice(ITcSmTreeItem device, string name, int type);
+        public void CreateCanInterface(int NoOfMessages, int CobIdLength);
     }
     public class IOHandler : IIOHandler
     {

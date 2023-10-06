@@ -49,6 +49,8 @@ namespace Engine
         public void SetModuleContext(uint index, uint Oid, ITcModuleInstance2 module);
         public Tuple<uint, uint> GetModuleContext(ITcModuleInstance2 module);
         public string GetTreeItemXml(ITcSmTreeItem node);
+        public void GetTreeItemXti(ITcSmTreeItem node, string child, string file);
+        public void EnableSingleCoreForRT(int core);
     }
     public class TwinCATHandler : ITwinCATHandler
     {
