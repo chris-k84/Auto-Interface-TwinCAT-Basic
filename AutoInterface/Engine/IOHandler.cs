@@ -8,6 +8,8 @@ namespace Engine
     {
         void ScanIO();
         void AddSyncUnit();
+        public ITcSmTreeItem CreateEcMaster(ITcSmTreeItem devices);
+        public ITcSmTreeItem CreateChildDevice(ITcSmTreeItem device, string name, int type);
     }
     public class IOHandler : IIOHandler
     {

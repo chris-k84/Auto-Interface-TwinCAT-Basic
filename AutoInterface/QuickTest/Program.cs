@@ -5,6 +5,7 @@ using TCatSysManagerLib;
 using System.Collections.Generic;
 using System.Xml.Linq;
 using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 
 namespace QuickTest
 {
@@ -15,13 +16,15 @@ namespace QuickTest
             VisualStudioHandler newVisualStudio = new VisualStudioHandler();
             TwinCATHandler TcHandler;
             AdsHandler AdsHandler;
+            IOHandler IOHandler;
+            PLCHandler PLCHandler;
             newVisualStudio.InitialiseVSEnv();
             if (true)
             {
                 Console.WriteLine("Started Creating......");
                 newVisualStudio.SetEnvVisability(true, true);
 
-                newVisualStudio.CreateDirectory(@"C:\Users\ChrisK\Documents\TcXaeShell\TestProject");
+                newVisualStudio.CreateDirectory(@"C:\Users\ChrisK\Documents\TcXaeShell\Test");
                 newVisualStudio.CreateSolution("Test");
 
                 newVisualStudio.CreateTCProj("Test");
@@ -30,6 +33,8 @@ namespace QuickTest
 
                 TcHandler = new TwinCATHandler(newVisualStudio);
                 AdsHandler = new AdsHandler(newVisualStudio);
+                IOHandler = new IOHandler(newVisualStudio);
+                PLCHandler = new PLCHandler(newVisualStudio);
 
                 newVisualStudio.Save();
                 Console.WriteLine("Saving......");
@@ -43,24 +48,43 @@ namespace QuickTest
                 Console.WriteLine("Finished Loading");
             }
 
+            AddTaskDemo(TcHandler);
+
+            AddTerminalToEtherCATNetworkDemo(TcHandler, IOHandler);
+            
+            //TcHandler.CreateLink(task.PathName + "^driver", el1008.PathName + "^Channel 1^Input");
 
 
-            ////////////Creating PDOs on task with image//////////////////////
-            //TcHandler.CreateTask("MyTask");
-            //TcHandler.CreatePDOonTask("TIRT^MyTask^Inputs", "driver", "BOOL");
-
-            ////////////Section adding EtherCAT Master to project/////////
-            Console.WriteLine("Creating Ec MAster......");
-            ITcSmTreeItem devices = TcHandler.LookUpNode("TIID");
-            IOHandler io = new IOHandler(newVisualStudio);
-            ITcSmTreeItem Eth = io.CreateChildDevice(devices, "EtherCAT", 111);
-            Console.WriteLine("Eth Master Ready......");
-
-            string master = TcHandler.GetTreeItemXml(Eth);
             ////////////Set Ec Master into redundancy mode/////////////////////
-            string xml = string.Format("<Redundancy><Mode>2</Mode><PreviousPort Selected=\"true\"><Port>C</Port><PhysAddr>1019</PhysAddr></PreviousPort></Redundancy>");
-            string redundancy = master.Insert(2156, xml);
-            Eth.ConsumeXml(redundancy);
+            //string master = TcHandler.GetTreeItemXml(Eth);
+            //string xml = string.Format("<Redundancy><Mode>2</Mode><PreviousPort Selected=\"true\"><Port>C</Port><PhysAddr>1019</PhysAddr></PreviousPort></Redundancy>");
+            //string xml = string.Format("<Redundancy><Mode>2</Mode></Redundancy>");
+            //string redundancy = master.Insert(2156, xml);
+            //try
+            //{
+            //    Eth.ConsumeXml(redundancy);
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine(ex.Message);
+            //    string error = Eth.GetLastXmlError();
+            //    Console.WriteLine(error);
+            //}
+            //XmlDocument SubXml = new XmlDocument();
+            //SubXml.Load(@"C:\Users\chrisk\Desktop\Ec.xml");
+
+            //try
+            //{
+            //    Eth.ConsumeXml(SubXml.InnerText);
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine(ex.Message);
+            //    string error = Eth.GetLastXmlError();
+            //    Console.WriteLine(error);
+            //}
+
+
 
             /////////Section Adding RtUdp module to IO////////////////////
             //ITcSmTreeItem RT = io.AddRtUdpModule(Eth, "RTIO");
@@ -157,6 +181,27 @@ namespace QuickTest
 
 
             Console.ReadLine();
+        }
+
+        static public void AddTaskDemo(ITwinCATHandler TcHandler)
+        {
+            ////////////Creating PDOs on task with image//////////////////////
+
+            TcHandler.CreateTask("MyTask");
+            ITcSmTreeItem task = TcHandler.CreatePDOonTask("TIRT^MyTask^Inputs", "driver", "BOOL");
+            Console.WriteLine(task.PathName);
+        }
+
+        static public void AddTerminalToEtherCATNetworkDemo(ITwinCATHandler TcHandler, IIOHandler io)
+        {
+            ////////////Section adding EtherCAT Master to project/////////
+            Console.WriteLine("Creating Ec MAster......");
+            ITcSmTreeItem devices = TcHandler.LookUpNode("TIID");
+            ITcSmTreeItem Eth = io.CreateChildDevice(devices, "EtherCAT", 111);
+            ITcSmTreeItem EK100 = Eth.CreateChild("EK1100", 9099, "", "EK1100-0000-0017");
+            ITcSmTreeItem el1008 = EK100.CreateChild("Term 2 - EL1008", 9099, "", "EL1008-0000-0017");
+            Console.WriteLine(el1008.PathName);
+            Console.WriteLine("Eth Master Ready......");
         }
     }
 }

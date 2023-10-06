@@ -31,12 +31,14 @@ namespace Engine
         void CreateTask(string taskName);
         void CreateTask(string taskName, int taskPriority);
         void CreateTask(string taskName, int taskPriority, int taskCycleTime);
+        public ITcSmTreeItem CreatePDOonTask(string task, string name, string type);
         void AssignCores(string taskName, int core);
         void CreateLink(string source, string destination);
         void GetMappings();
         void LoadMappings(string mappingInfo);
         void SetIsolatedCores();
         void ActivateSolution();
+        public ITcSmTreeItem LookUpNode(string node);
     }
     public class TwinCATHandler : ITwinCATHandler
     {
@@ -111,6 +113,12 @@ namespace Engine
             {
                
             }
+        }
+        public ITcSmTreeItem CreatePDOonTask(string task, string name, string type)
+        {
+            ITcSmTreeItem task1 = _sysMan.LookupTreeItem(task);
+            task1.CreateChild(name, 0, null, null);
+            return task1;
         }
         public void EnableCoresForRT(int cores)
         {
