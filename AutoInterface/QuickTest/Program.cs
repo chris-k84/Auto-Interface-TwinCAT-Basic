@@ -51,65 +51,25 @@ namespace QuickTest
             AddTaskDemo(TcHandler);
 
             AddTerminalToEtherCATNetworkDemo(TcHandler, IOHandler);
-            
+
+            //AddRtuModuleDemo(TcHandler, IOHandler);
+
+            //SetRTSettingsForProject(TcHandler);
+
+            //FindTheTaskTimeDemo(TcHandler);
+
             //TcHandler.CreateLink(task.PathName + "^driver", el1008.PathName + "^Channel 1^Input");
 
-
-            ////////////Set Ec Master into redundancy mode/////////////////////
-            //string master = TcHandler.GetTreeItemXml(Eth);
-            //string xml = string.Format("<Redundancy><Mode>2</Mode><PreviousPort Selected=\"true\"><Port>C</Port><PhysAddr>1019</PhysAddr></PreviousPort></Redundancy>");
-            //string xml = string.Format("<Redundancy><Mode>2</Mode></Redundancy>");
-            //string redundancy = master.Insert(2156, xml);
-            //try
-            //{
-            //    Eth.ConsumeXml(redundancy);
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine(ex.Message);
-            //    string error = Eth.GetLastXmlError();
-            //    Console.WriteLine(error);
-            //}
-            //XmlDocument SubXml = new XmlDocument();
-            //SubXml.Load(@"C:\Users\chrisk\Desktop\Ec.xml");
-
-            //try
-            //{
-            //    Eth.ConsumeXml(SubXml.InnerText);
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine(ex.Message);
-            //    string error = Eth.GetLastXmlError();
-            //    Console.WriteLine(error);
-            //}
+            //SetRedundancyModeOnEtherCAT(TcHandler, IOHandler);
+            
 
 
 
-            /////////Section Adding RtUdp module to IO////////////////////
-            //ITcSmTreeItem RT = io.AddRtUdpModule(Eth, "RTIO");
-            //Console.WriteLine("RTIO is Ready......");
-            //newVisualStudio.Save();
 
-            //////////Section setting the RT settings for a project
-            //ITcSmTreeItem RealTime = TcHandler.LookUpNode("TIRS");
-            //XmlDocument xdoc = new XmlDocument();
-            //xdoc.Load(@"D:\11 Development\_0004_C# Automation Interface\AutoInterface\QuickTest\bin\Debug\myTest.xml");
-            //string RTSettings = xdoc.InnerXml;
-            //TcHandler.DeployTreeItemXml(RealTime, RTSettings);
 
-            ///////////Section to retireive time context form node///////////////
-            //ITcSmTreeItem RealTime = TcHandler.LookUpTcCOMNode();
-            //TcHandler.LoadTcCOMToStore("SimulinkPositionControl", "{5479AD7B-8B2A-FCB2-6CB8-AE49C415C898}");
-            //TcHandler.AddTcCOM("SimulinkPositionControl", RealTime);
-            //TcHandler.AddTcCOM("SimulinkPositionControl", "{5479AD7B-8B2A-FCB2-6CB8-AE49C415C898}", RealTime);
-            //TcHandler.CreateTask("NewTask", 12, 10000);
-            //uint index = 0;
-            //uint Oid = 33620000;
-            //IList<ITcModuleInstance2> modules = TcHandler.GetModules(TcHandler.GetModuleManager());
-            //TcHandler.SetModuleContext(index, Oid, modules[0]);
-            //Tuple<uint, uint> module;
-            //module = TcHandler.GetModuleContext(modules[0]);
+
+
+            
 
             /////////Section getting the XTI vs ItemXml of a device for comparison/////////////
             //XmlDocument xdoc = new XmlDocument();
@@ -121,10 +81,7 @@ namespace QuickTest
             //xdoc.LoadXml(TcHandler.GetTreeItemXml(io));
             //TcHandler.GetTreeItemXti(io, "Device 1 (EtherCAT)", @"D:\11 Development\_0004_C# Automation Interface\AutoInterface\QuickTest\bin\Debug\Test.txt");
 
-            //////////////Checking Scan ADS function///////////////////
-            //List<XmlNode> test =  AdsHandler.ScanADSDevices();
-            //string route = (AdsHandler.CreateRouteString(test[0]));
-            //AdsHandler.CreateRoute(route);
+            
 
             //////////////Checking Produce/Consumne Update/////////////////////////////
             //XmlDocument firstCheck = new XmlDocument();
@@ -191,7 +148,6 @@ namespace QuickTest
             ITcSmTreeItem task = TcHandler.CreatePDOonTask("TIRT^MyTask^Inputs", "driver", "BOOL");
             Console.WriteLine(task.PathName);
         }
-
         static public void AddTerminalToEtherCATNetworkDemo(ITwinCATHandler TcHandler, IIOHandler io)
         {
             ////////////Section adding EtherCAT Master to project/////////
@@ -202,6 +158,76 @@ namespace QuickTest
             ITcSmTreeItem el1008 = EK100.CreateChild("Term 2 - EL1008", 9099, "", "EL1008-0000-0017");
             Console.WriteLine(el1008.PathName);
             Console.WriteLine("Eth Master Ready......");
+        }
+        static public void AddRtuModuleDemo(ITwinCATHandler TcHandler, IOHandler io)
+        {
+            /////////Section Adding RtUdp module to IO////////////////////
+            ITcSmTreeItem devices = TcHandler.LookUpNode("TIID");
+            ITcSmTreeItem RT = io.AddRtUdpModule(devices, "RTIO");
+        }
+        static public void SetRTSettingsForProject(ITwinCATHandler TcHandler)
+        {
+            //////////Section setting the RT settings for a project
+            ITcSmTreeItem RealTime = TcHandler.LookUpNode("TIRS");
+            XmlDocument xdoc = new XmlDocument();
+            xdoc.Load(@"D:\11 Development\_0004_C# Automation Interface\AutoInterface\QuickTest\bin\Debug\myTest.xml");
+            string RTSettings = xdoc.InnerXml;
+            TcHandler.DeployTreeItemXml(RealTime, RTSettings);
+        }
+        static public void FindTheTaskTimeDemo(ITwinCATHandler TcHandler)
+        {
+            ///////////Section to retireive time context form node///////////////
+            ITcSmTreeItem RealTime = TcHandler.LookUpTcCOMNode();
+            TcHandler.LoadTcCOMToStore("SimulinkPositionControl", "{5479AD7B-8B2A-FCB2-6CB8-AE49C415C898}");
+            TcHandler.AddTcCOM("SimulinkPositionControl", RealTime);
+            TcHandler.AddTcCOM("SimulinkPositionControl", "{5479AD7B-8B2A-FCB2-6CB8-AE49C415C898}", RealTime);
+            TcHandler.CreateTask("NewTask", 12, 10000);
+            uint index = 0;
+            uint Oid = 33620000;
+            IList<ITcModuleInstance2> modules = TcHandler.GetModules(TcHandler.GetModuleManager());
+            TcHandler.SetModuleContext(index, Oid, modules[0]);
+            Tuple<uint, uint> module;
+            module = TcHandler.GetModuleContext(modules[0]);
+        }
+        static public void SetRedundancyModeOnEtherCATDemo(ITwinCATHandler TcHandler, IIOHandler io)
+        {
+            ////////////Set Ec Master into redundancy mode/////////////////////
+            ITcSmTreeItem devices = TcHandler.LookUpNode("TIID");
+            ITcSmTreeItem Eth = io.CreateChildDevice(devices, "EtherCAT", 111);
+            string master = TcHandler.GetTreeItemXml(Eth);
+            string xml = string.Format("<Redundancy><Mode>2</Mode><PreviousPort Selected=\"true\"><Port>C</Port><PhysAddr>1019</PhysAddr></PreviousPort></Redundancy>");
+            //string xml = string.Format("<Redundancy><Mode>2</Mode></Redundancy>");
+            string redundancy = master.Insert(2156, xml);
+            try
+            {
+                Eth.ConsumeXml(redundancy);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                string error = Eth.GetLastXmlError();
+                Console.WriteLine(error);
+            }
+            XmlDocument SubXml = new XmlDocument();
+            SubXml.Load(@"C:\Users\chrisk\Desktop\Ec.xml");
+
+            try
+            {
+                Eth.ConsumeXml(SubXml.InnerText);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                string error = Eth.GetLastXmlError();
+                Console.WriteLine(error);
+            }
+        } //Currently Unsupported Do Not Use
+        static public void AdsBroadcastSearchandRouteDemo(IAdsHandler AdsHandler)
+        {
+            //////////////Checking Scan ADS function///////////////////
+            List<XmlNode> test = AdsHandler.ScanADSDevices();
+            string route = (AdsHandler.CreateRouteString(test[0]));
+            AdsHandler.CreateRoute(route);
         }
     }
 }

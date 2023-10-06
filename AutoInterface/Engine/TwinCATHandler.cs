@@ -39,6 +39,16 @@ namespace Engine
         void SetIsolatedCores();
         void ActivateSolution();
         public ITcSmTreeItem LookUpNode(string node);
+        public void LoadTcCOMToStore(string modelName, string guid);
+        public void DeployTreeItemXml(ITcSmTreeItem node, string xml);
+        public void AddTcCOM(string Module, ITcSmTreeItem TcCom);
+        public void AddTcCOM(string Module, string guid, ITcSmTreeItem TcCom);
+        public IList<ITcModuleInstance2> GetModules(ITcModuleManager2 ModuleManager);
+        public ITcModuleManager2 GetModuleManager();
+        public ITcSmTreeItem LookUpTcCOMNode();
+        public void SetModuleContext(uint index, uint Oid, ITcModuleInstance2 module);
+        public Tuple<uint, uint> GetModuleContext(ITcModuleInstance2 module);
+        public string GetTreeItemXml(ITcSmTreeItem node);
     }
     public class TwinCATHandler : ITwinCATHandler
     {

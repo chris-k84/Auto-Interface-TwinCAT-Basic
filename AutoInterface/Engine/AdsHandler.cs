@@ -12,6 +12,8 @@ namespace Engine
     public interface IAdsHandler
     {
         List<XmlNode> ScanADSDevices();
+        public string CreateRouteString(XmlNode route);
+        public void CreateRoute(string route);
     }
     public class AdsHandler : IAdsHandler
     {
