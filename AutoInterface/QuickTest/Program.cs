@@ -3,6 +3,7 @@ using Engine;
 using System.Xml;
 using TCatSysManagerLib;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace QuickTest
 {
@@ -15,6 +16,7 @@ namespace QuickTest
             AdsHandler AdsHandler;
             IOHandler IOHandler;
             PLCHandler PLCHandler;
+            CppHandler CppHandler;
             newVisualStudio.InitialiseVSEnv();
             if (true)
             {
@@ -32,6 +34,7 @@ namespace QuickTest
                 AdsHandler = new AdsHandler(newVisualStudio);
                 IOHandler = new IOHandler(newVisualStudio);
                 PLCHandler = new PLCHandler(newVisualStudio);
+                CppHandler = new CppHandler(newVisualStudio);   
 
                 newVisualStudio.Save();
                 Console.WriteLine("Saving......");
@@ -45,9 +48,9 @@ namespace QuickTest
                 Console.WriteLine("Finished Loading");
             }
 
-            AddTaskDemo(TcHandler);
+            //AddTaskDemo(TcHandler);
 
-            AddTerminalToEtherCATNetworkDemo(TcHandler, IOHandler);
+            //AddTerminalToEtherCATNetworkDemo(TcHandler, IOHandler);
 
             //AddRtuModuleDemo(TcHandler, IOHandler);
 
@@ -66,10 +69,14 @@ namespace QuickTest
             //AddExistingPLCDemo(PLCHandler);
 
             //TreeItemProduceConsumeDemo(TcHandler, IOHandler);
-            
+
             //TreeItemProduceConsumeDemo(TcHandler, IOHandler);
 
             //SetTaskCoreAssignmentDemo(TcHandler);
+
+            //TestAddTcCOMAfterProjDemo(TcHandler);
+
+            AddingCppModulesReloadDemo(TcHandler, CppHandler);
 
             Console.ReadLine();
         }
@@ -208,6 +215,31 @@ namespace QuickTest
             TcHandler.CreateTask("TestTask");
             TcHandler.AssignCores("TestTask", 4);
             TcHandler.SetIsolatedCores();
+        }
+        static public void TestAddTcCOMAfterProjDemo(ITwinCATHandler TcHandler)
+        {
+            ITcSmTreeItem RealTime = TcHandler.LookUpTcCOMNode();
+            Console.WriteLine("Enter module name");
+            string name = Console.ReadLine();
+            Console.WriteLine("GUID");
+            string guid = Console.ReadLine();
+            RealTime.ConsumeXml("<TreeItem><ReloadTmc Path=\"C:\\Users\\chrisk\\Documents\\TcXaeShell\\Test\\Test\\NewCppProject\\NewCppProject.tmc\" > true</ReloadTmc></TreeItem>");
+            TcHandler.AddTcCOM(name, guid, RealTime);
+        }
+        static public void AddingCppModulesReloadDemo(ITwinCATHandler TcHandler, ICppHandler cppHandler)
+        {
+            ITcSmTreeItem RealTime = TcHandler.LookUpTcCOMNode();
+            cppHandler.AddCppTemplate();
+            Console.WriteLine("Enter module name");
+            string name = Console.ReadLine();
+            Console.WriteLine("GUID");
+            string guid = Console.ReadLine();
+            TcHandler.AddTcCOM(name, guid, RealTime);
+            Console.WriteLine("Enter module name");
+            name = Console.ReadLine();
+            Console.WriteLine("GUID");
+            guid = Console.ReadLine();
+            TcHandler.AddTcCOM(name, guid, RealTime);
         }
     }
 }

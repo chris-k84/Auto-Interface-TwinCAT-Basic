@@ -365,11 +365,11 @@ namespace Engine
         {
             try
             {
-                ITcSmTreeItem tempController = TcCom.CreateChild(Module, 0, "Test^", guid);
+                ITcSmTreeItem tempController = TcCom.CreateChild(Module, 0, "", guid);
             }
             catch (Exception e)
             {
-
+                Console.WriteLine(e.Message);
             }
         }
         public ITcModuleManager2 GetModuleManager()

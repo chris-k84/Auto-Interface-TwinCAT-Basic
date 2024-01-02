@@ -1,5 +1,6 @@
 ﻿using System;
 using EnvDTE;
+using EnvDTE80;
 using System.IO;
 using TCatSysManagerLib;
 
