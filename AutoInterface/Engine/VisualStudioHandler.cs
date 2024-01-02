@@ -20,6 +20,7 @@ namespace Engine
     {
         #region Fields
         private DTE _dte;
+        private DTE2 _dte2;
         private string _dirPath;
         private Solution _solution;
         private string _solName;
