@@ -14,6 +14,7 @@ namespace Engine
         List<XmlNode> ScanADSDevices();
         public string CreateRouteString(XmlNode route);
         public void CreateRoute(string route);
+        public void SetAMSNET(string amsNetId);
     }
     public class AdsHandler : IAdsHandler
     {

@@ -76,7 +76,7 @@ namespace QuickTest
 
             //TestAddTcCOMAfterProjDemo(TcHandler);
 
-            AddingCppModulesReloadDemo(TcHandler, CppHandler);
+            //AddingCppModulesReloadDemo(TcHandler, CppHandler);
 
             Console.ReadLine();
         }
@@ -240,6 +240,10 @@ namespace QuickTest
             Console.WriteLine("GUID");
             guid = Console.ReadLine();
             TcHandler.AddTcCOM(name, guid, RealTime);
+        }
+        static public void SettingConfigModeDemo(IAdsHandler adsHandler, IVisualStudioHandler vboHandler)
+        {
+            adsHandler.
         }
     }
 }
