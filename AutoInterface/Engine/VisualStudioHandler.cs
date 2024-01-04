@@ -10,7 +10,8 @@ namespace Engine
     {
         void Save();
         void LoadTcProject(string solutionPath);
-        void ExecuteCommand(string command);
+        void SetTargetConfigMode();
+        void RestartTwinCATInRunMode();
     }
     public interface ISystemManager
     {
@@ -134,6 +135,14 @@ namespace Engine
             {
 
             }
+        }
+        public void SetTargetConfigMode()
+        {
+            _dte.ExecuteCommand("TwinCAT.RestartTwinCATConfigMode");
+        }
+        public void RestartTwinCATInRunMode()
+        {
+            _dte.ExecuteCommand("TwinCAT.RestartTwinCATSystem");
         }
         private List<Type> GetInstalledVersions()
         {

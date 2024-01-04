@@ -80,6 +80,8 @@ namespace QuickTest
 
             SettingConfigModeDemo(AdsHandler, newVisualStudio);
 
+
+
             Console.ReadLine();
 
         }
@@ -249,11 +251,10 @@ namespace QuickTest
             adsHandler.SetAMSNET("10.112.0.23.1.1");
 
             Console.ReadLine();
-            vboHandler.ExecuteCommand("TwinCAT.RestartTwinCATConfigMode");
-            //
-            //vboHandler.ExecuteCommand("TwinCAT.AboutTwinCAT");
+            vboHandler.SetTargetConfigMode();
+
             Console.ReadLine();
-            vboHandler.ExecuteCommand("TwinCAT.RestartTwinCATSystem");
+            vboHandler.RestartTwinCATInRunMode();
         }
     }
 }
