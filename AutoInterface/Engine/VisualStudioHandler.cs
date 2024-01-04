@@ -10,6 +10,7 @@ namespace Engine
     {
         void Save();
         void LoadTcProject(string solutionPath);
+        void ExecuteCommand(string command);
     }
     public interface ISystemManager
     {
@@ -122,6 +123,17 @@ namespace Engine
             _tcProject = _solution.Projects.Item(1);
             System.Threading.Thread.Sleep(2000);
             _sysMan = _tcProject.Object;
+        }
+        public void ExecuteCommand(string command)
+        {
+            try
+            {
+                _dte.ExecuteCommand(command);
+            }
+            catch (Exception e)
+            {
+
+            }
         }
         private List<Type> GetInstalledVersions()
         {
