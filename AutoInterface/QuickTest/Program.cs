@@ -78,7 +78,10 @@ namespace QuickTest
 
             //AddingCppModulesReloadDemo(TcHandler, CppHandler);
 
+            SettingConfigModeDemo(AdsHandler, newVisualStudio);
+
             Console.ReadLine();
+
         }
 
         static public void AddTaskDemo(ITwinCATHandler TcHandler)
@@ -243,7 +246,15 @@ namespace QuickTest
         }
         static public void SettingConfigModeDemo(IAdsHandler adsHandler, IVisualStudioHandler vboHandler)
         {
-            adsHandler.
+            adsHandler.SetAMSNET("10.112.0.23.1.1");
+
+            Console.ReadLine();
+            vboHandler.ExecuteCommand("TwinCAT.RestartTwinCATConfigMode");
+            //
+            //vboHandler.ExecuteCommand("TwinCAT.AboutTwinCAT");
+            Console.ReadLine();
+            vboHandler.ExecuteCommand("TwinCAT.RestartTwinCATSystem");
         }
     }
 }
+
