@@ -3,6 +3,7 @@ using EnvDTE;
 using EnvDTE80;
 using System.IO;
 using TCatSysManagerLib;
+using System.ComponentModel.Design;
 
 namespace Engine
 {
@@ -143,6 +144,10 @@ namespace Engine
         public void RestartTwinCATInRunMode()
         {
             _dte.ExecuteCommand("TwinCAT.RestartTwinCATSystem");
+        }
+        public void ReloadDevices()
+        {
+            _dte.ExecuteCommand("TwinCAT.ReloadDevices");
         }
         private List<Type> GetInstalledVersions()
         {
