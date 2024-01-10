@@ -149,6 +149,10 @@ namespace Engine
         {
             _dte.ExecuteCommand("TwinCAT.ReloadDevices");
         }
+        public void ReloadDeviceDescriptions()
+        {
+            _dte.ExecuteCommand("TwinCAT.ReloadDeviceDescriptions");
+        }
         private List<Type> GetInstalledVersions()
         {
             string[] vsVersions = { "11.0", "12.0", "14.0", "15.0", "16.0" };
