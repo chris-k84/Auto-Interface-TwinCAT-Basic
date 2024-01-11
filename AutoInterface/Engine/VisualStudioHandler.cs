@@ -13,6 +13,7 @@ namespace Engine
         void LoadTcProject(string solutionPath);
         void SetTargetConfigMode();
         void RestartTwinCATInRunMode();
+        void ReloadTMCFiles();
     }
     public interface ISystemManager
     {
@@ -152,6 +153,10 @@ namespace Engine
         public void ReloadDeviceDescriptions()
         {
             _dte.ExecuteCommand("TwinCAT.ReloadDeviceDescriptions");
+        }
+        public void ReloadTMCFiles()
+        {
+            _dte.ExecuteCommand("OtherContextMenus.TComGrp.ReloadSystemTMCFiles");
         }
         private List<Type> GetInstalledVersions()
         {
