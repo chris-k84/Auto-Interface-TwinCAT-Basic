@@ -4,6 +4,7 @@ using System.Xml;
 using TCatSysManagerLib;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Data;
 
 namespace QuickTest
 {
@@ -79,7 +80,6 @@ namespace QuickTest
             //AddingCppModulesReloadDemo(TcHandler, CppHandler);
 
             SettingConfigModeDemo(AdsHandler, newVisualStudio);
-
 
 
             Console.ReadLine();
@@ -250,7 +250,7 @@ namespace QuickTest
         {
             adsHandler.SetAMSNET("10.112.0.23.1.1");
 
-            Console.ReadLine();
+            Console.ReadLine(); //Add a delay to allow the AMS net id to set
             vboHandler.SetTargetConfigMode();
 
             Console.ReadLine();
