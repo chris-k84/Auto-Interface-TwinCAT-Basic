@@ -79,8 +79,10 @@ namespace QuickTest
 
             //AddingCppModulesReloadDemo(TcHandler, CppHandler);
 
-            SettingConfigModeDemo(AdsHandler, newVisualStudio);
+            //SettingConfigModeDemo(AdsHandler, newVisualStudio);
 
+            Console.ReadLine();
+            ReloadTMCFileDemo(newVisualStudio);
 
             Console.ReadLine();
 
@@ -255,6 +257,10 @@ namespace QuickTest
 
             Console.ReadLine();
             vboHandler.RestartTwinCATInRunMode();
+        }
+        static public void ReloadTMCFileDemo(IVisualStudioHandler vsHandler)
+        {
+            vsHandler.ReloadTMCFiles();
         }
     }
 }
