@@ -158,6 +158,10 @@ namespace Engine
         {
             _dte.ExecuteCommand("OtherContextMenus.TComGrp.ReloadSystemTMCFiles");
         }
+        public void OpenTargetBrowser()
+        {
+            _dte.ExecuteCommand("TwinCAT.TargetBrowser");
+        }
         private List<Type> GetInstalledVersions()
         {
             string[] vsVersions = { "11.0", "12.0", "14.0", "15.0", "16.0" };
