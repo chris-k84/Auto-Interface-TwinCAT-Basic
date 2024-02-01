@@ -40,6 +40,11 @@ namespace Engine
         {
             get { return _sysMan; }
         }
+
+        public ErrorItems BuildErrors
+        {
+            get { return _errors;}
+        }
         #endregion
 
         #region Methods
@@ -197,7 +202,6 @@ namespace Engine
             _solution.SolutionBuild.BuildProject("Release|TwinCAT RT (x64)", _tcProject.FullName, true);
             _errors = GetErrorList();
         }
-
         private ErrorItems GetErrorList()
         {
             return _dte2.ToolWindows.ErrorList.ErrorItems;    
