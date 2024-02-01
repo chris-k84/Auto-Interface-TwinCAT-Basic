@@ -9,6 +9,8 @@ namespace Engine
         void AddPLCProj(string pathToProjectFile, string name);
         void CreateGVL();
         void AddDeclarationToGVL(List<string> slaves);
+        public void RunCheckAllObjects(string PlcName);
+        public void RunStaticAnalysis(string PlcName);
     }
     public class PLCHandler : IPLCHandler
     {
@@ -88,6 +90,18 @@ namespace Engine
             ITcPlcProject plcProjectRootIec = (ITcPlcProject)plcProjectRoot;
             plcProjectRootIec.BootProjectAutostart = true;
             plcProjectRootIec.GenerateBootProject(true);
+        }
+        public void RunCheckAllObjects(string PlcName)
+        {
+            ITcSmTreeItem plcProject = _sysMan.LookupTreeItem(string.Format("TIPC^{0}", PlcName));
+            ITcPlcIECProject2 iecProject = (ITcPlcIECProject2)plcProject;
+            iecProject.CheckAllObjects();
+        }
+        public void RunStaticAnalysis(string PlcName)
+        {
+            ITcSmTreeItem plcProject = _sysMan.LookupTreeItem(string.Format("TIPC^{0}", PlcName));
+            ITcPlcIECProject3 iecProject = (ITcPlcIECProject3)plcProject;
+            iecProject.RunStaticAnalysis(true);
         }
         #endregion
     }

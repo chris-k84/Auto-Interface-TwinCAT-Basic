@@ -45,7 +45,7 @@ namespace QuickTest
                 Console.WriteLine("LoadingProject");
                 newVisualStudio.LoadTcProject(@"C:\Users\chrisk\Documents\TcXaeShell\TwinCAT Project1\TwinCAT Project1.sln");
 
-                TcHandler = new TwinCATHandler(newVisualStudio);
+                PLCHandler = new PLCHandler(newVisualStudio);
                 Console.WriteLine("Finished Loading");
             }
 
@@ -84,9 +84,17 @@ namespace QuickTest
 
             //ReloadTMCFileDemo(newVisualStudio);
 
-            Console.WriteLine("Starting Build");
-            BuildProject(newVisualStudio);
-            Console.WriteLine("Build Done");
+            //Console.WriteLine("Starting Build");
+            //BuildProject(newVisualStudio);
+            //Console.WriteLine("Build Done");
+
+            //Console.WriteLine("Starting Check");
+            //RunCheckAllObjectOnPLC(PLCHandler, newVisualStudio);
+            //Console.WriteLine("Check Done");
+
+            Console.WriteLine("Starting static analysis");
+            RunStaticAnalysis(PLCHandler, newVisualStudio);
+            Console.WriteLine("static analysis Done");
 
             Console.ReadLine();
 
@@ -276,6 +284,26 @@ namespace QuickTest
                 Console.WriteLine(error.line + " " + error.file + " " + error.description + " " + error.errorlevel);
             }
             
+        }
+        static public void RunCheckAllObjectOnPLC(IPLCHandler pLCHandler, IVisualStudioHandler vsHandler)
+        {
+            pLCHandler.RunCheckAllObjects("Untitled1 Project");
+            List<BuildError> errors = new List<BuildError>();
+            errors = vsHandler.BuildErrors;
+            foreach (BuildError error in errors)
+            {
+                Console.WriteLine(error.line + " " + error.file + " " + error.description + " " + error.errorlevel);
+            }
+        }
+        static public void RunStaticAnalysis(IPLCHandler pLCHandler, VisualStudioHandler vsHandler)
+        {
+            pLCHandler.RunStaticAnalysis("Untitled1 Project");
+            List<BuildError> errors = new List<BuildError>();
+            errors = vsHandler.BuildErrors;
+            foreach (BuildError error in errors)
+            {
+                Console.WriteLine(error.line + " " + error.file + " " + error.description + " " + error.errorlevel);
+            }
         }
     }
 }

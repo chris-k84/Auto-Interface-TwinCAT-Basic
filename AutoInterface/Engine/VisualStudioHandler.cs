@@ -50,7 +50,8 @@ namespace Engine
         public List<BuildError> BuildErrors
         {
             get
-            { 
+            {
+                _errors = _dte2.ToolWindows.ErrorList.ErrorItems;
                 List<BuildError> errors = new List<BuildError>();
                 for (int i = 1; i < _errors.Count; i++)
                 {
@@ -220,7 +221,7 @@ namespace Engine
         public void BuildProject()
         {
             _solution.SolutionBuild.BuildProject("Release|TwinCAT RT (x64)", _tcProject.FullName, true);
-            _errors = GetErrorList();
+            //_errors = GetErrorList();
         }
         private ErrorItems GetErrorList()
         {
