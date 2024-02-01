@@ -269,6 +269,13 @@ namespace QuickTest
         static public void BuildProject(IVisualStudioHandler vsHandler)
         {
             vsHandler.BuildProject();
+            List<BuildError> errors = new List<BuildError>();
+            errors = vsHandler.BuildErrors;
+            foreach (BuildError error in errors)
+            {
+                Console.WriteLine(error.line + " " + error.file + " " + error.description);
+            }
+            
         }
     }
 }

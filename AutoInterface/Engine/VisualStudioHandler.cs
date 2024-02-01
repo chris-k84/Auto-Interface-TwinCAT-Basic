@@ -7,6 +7,12 @@ using System.ComponentModel.Design;
 
 namespace Engine
 {
+    public struct BuildError
+    {
+        public int line;
+        public string file;
+        public string description;
+    }
     public interface IVisualStudioHandler
     {
         void Save();
@@ -15,12 +21,12 @@ namespace Engine
         void RestartTwinCATInRunMode();
         void ReloadTMCFiles();
         public void BuildProject();
+        public List<BuildError> BuildErrors { get; }
     }
     public interface ISystemManager
     {
         public ITcSysManager15 SysMan { get; }
     }
-
     public class VisualStudioHandler : ISystemManager, IVisualStudioHandler
     {
         #region Fields
@@ -40,10 +46,22 @@ namespace Engine
         {
             get { return _sysMan; }
         }
-
-        public ErrorItems BuildErrors
+        public List<BuildError> BuildErrors
         {
-            get { return _errors;}
+            get
+            { 
+                List<BuildError> errors = new List<BuildError>();
+                for (int i = 1; i < _errors.Count; i++)
+                {
+                    ErrorItem item = _errors.Item(i);
+                    BuildError error = new BuildError();
+                    error.file = item.FileName;
+                    error.line = item.Line;
+                    error.description = item.Description;
+                    errors.Add(error);
+                }
+                return errors;
+            }
         }
         #endregion
 
