@@ -273,7 +273,7 @@ namespace QuickTest
             errors = vsHandler.BuildErrors;
             foreach (BuildError error in errors)
             {
-                Console.WriteLine(error.line + " " + error.file + " " + error.description);
+                Console.WriteLine(error.line + " " + error.file + " " + error.description + " " + error.errorlevel);
             }
             
         }

@@ -12,6 +12,7 @@ namespace Engine
         public int line;
         public string file;
         public string description;
+        public string errorlevel;
     }
     public interface IVisualStudioHandler
     {
@@ -58,6 +59,7 @@ namespace Engine
                     error.file = item.FileName;
                     error.line = item.Line;
                     error.description = item.Description;
+                    error.errorlevel = item.ErrorLevel.ToString();
                     errors.Add(error);
                 }
                 return errors;
