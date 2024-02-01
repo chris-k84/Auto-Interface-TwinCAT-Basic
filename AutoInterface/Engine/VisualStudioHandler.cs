@@ -32,6 +32,7 @@ namespace Engine
         private Project _tcProject;
         private string _tcTemplate = @"C:\TwinCAT\3.1\Components\Base\PrjTemplate\TwinCAT Project.tsproj";
         private ITcSysManager15 _sysMan;
+        private ErrorItems _errors;
         #endregion
 
         #region Properties
@@ -194,15 +195,12 @@ namespace Engine
         public void BuildProject()
         {
             _solution.SolutionBuild.BuildProject("Release|TwinCAT RT (x64)", _tcProject.FullName, true);
-            ErrorItems errors = _dte2.ToolWindows.ErrorList.ErrorItems;
-            for (int i = 1; i < errors.Count; i++)
-            {
-                ErrorItem item = errors.Item(i);
-                Console.WriteLine(item.Line);
-                Console.WriteLine(item.ErrorLevel);
-                Console.WriteLine(item.FileName);
-                Console.WriteLine(item.Description);
-            }
+            _errors = GetErrorList();
+        }
+
+        private ErrorItems GetErrorList()
+        {
+            return _dte2.ToolWindows.ErrorList.ErrorItems;    
         }
         #endregion
     }
