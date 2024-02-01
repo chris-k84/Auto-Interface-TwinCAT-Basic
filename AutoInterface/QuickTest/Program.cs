@@ -19,7 +19,7 @@ namespace QuickTest
             PLCHandler PLCHandler;
             CppHandler CppHandler;
             newVisualStudio.InitialiseVSEnv();
-            if (true)
+            if (false)
             {
                 Console.WriteLine("Started Creating......");
                 newVisualStudio.SetEnvVisability(true, true);
@@ -43,7 +43,7 @@ namespace QuickTest
             else
             {
                 Console.WriteLine("LoadingProject");
-                newVisualStudio.LoadTcProject(@"C:\Users\ChrisK\Documents\TcXaeShell\RandomTesting\RandomTesting.sln");
+                newVisualStudio.LoadTcProject(@"C:\Users\chrisk\Documents\TcXaeShell\TwinCAT Project1\TwinCAT Project1.sln");
 
                 TcHandler = new TwinCATHandler(newVisualStudio);
                 Console.WriteLine("Finished Loading");
@@ -81,8 +81,12 @@ namespace QuickTest
 
             //SettingConfigModeDemo(AdsHandler, newVisualStudio);
 
-            Console.ReadLine();
-            ReloadTMCFileDemo(newVisualStudio);
+
+            //ReloadTMCFileDemo(newVisualStudio);
+
+            Console.WriteLine("Starting Build");
+            BuildProject(newVisualStudio);
+            Console.WriteLine("Build Done");
 
             Console.ReadLine();
 
@@ -261,6 +265,10 @@ namespace QuickTest
         static public void ReloadTMCFileDemo(IVisualStudioHandler vsHandler)
         {
             vsHandler.ReloadTMCFiles();
+        }
+        static public void BuildProject(IVisualStudioHandler vsHandler)
+        {
+            vsHandler.BuildProject();
         }
     }
 }

@@ -14,6 +14,7 @@ namespace Engine
         void SetTargetConfigMode();
         void RestartTwinCATInRunMode();
         void ReloadTMCFiles();
+        public void BuildProject();
     }
     public interface ISystemManager
     {
@@ -47,6 +48,7 @@ namespace Engine
             {
                 List<Type> vsVer = GetInstalledVersions();
                 _dte = (EnvDTE.DTE)System.Activator.CreateInstance(vsVer.Last());
+                _dte2 = (DTE2)_dte;
             }
             catch (Exception e)
             {
@@ -188,6 +190,19 @@ namespace Engine
             //Type VsVer = System.Type.GetTypeFromProgID("VisualStudio.DTE.15.0"); //VS2017
             //Type VsVer = System.Type.GetTypeFromProgID("VisualStudio.DTE.16.0"); //VS2019
             //Type VsVer = System.Type.GetTypeFromProgID("TcXaeShell.DTE.15.0"); //allows to set shell
+        }
+        public void BuildProject()
+        {
+            _solution.SolutionBuild.BuildProject("Release|TwinCAT RT (x64)", _tcProject.FullName, true);
+            ErrorItems errors = _dte2.ToolWindows.ErrorList.ErrorItems;
+            for (int i = 1; i < errors.Count; i++)
+            {
+                ErrorItem item = errors.Item(i);
+                Console.WriteLine(item.Line);
+                Console.WriteLine(item.ErrorLevel);
+                Console.WriteLine(item.FileName);
+                Console.WriteLine(item.Description);
+            }
         }
         #endregion
     }
