@@ -53,7 +53,7 @@ namespace Engine
             {
                 _errors = _dte2.ToolWindows.ErrorList.ErrorItems;
                 List<BuildError> errors = new List<BuildError>();
-                for (int i = 1; i < _errors.Count; i++)
+                for (int i = 1; i <= _errors.Count; i++)
                 {
                     ErrorItem item = _errors.Item(i);
                     BuildError error = new BuildError();

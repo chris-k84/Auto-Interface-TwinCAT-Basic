@@ -43,7 +43,7 @@ namespace QuickTest
             else
             {
                 Console.WriteLine("LoadingProject");
-                newVisualStudio.LoadTcProject(@"C:\Users\chrisk\Documents\TcXaeShell\TwinCAT Project1\TwinCAT Project1.sln");
+                newVisualStudio.LoadTcProject(@"C:\Users\chrisk\Desktop\TwinCAT Project1\TwinCAT Project1.sln");
 
                 PLCHandler = new PLCHandler(newVisualStudio);
                 Console.WriteLine("Finished Loading");
